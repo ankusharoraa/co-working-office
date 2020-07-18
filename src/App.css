@@ -49,7 +49,7 @@ input::-webkit-inner-spin-button {
     visibility: visible;
     transition: all .4s ease-in-out;
     padding: 30px 25px;
-    top: 130px;
+    top: 20%;
     background: -webkit-linear-gradient(-45deg, #FFFFE0,#FFFACD,yellow);
   background-size: 400% 400%;
   animation: grad 10s ease infinite;
@@ -68,7 +68,7 @@ input::-webkit-inner-spin-button {
 }
 @media (min-width: 300px){
 .mainMob{
-  
+  max-width: 100%;
   background: 
     linear-gradient(
       rgba(0, 0, 0, 0.5),
@@ -82,24 +82,37 @@ input::-webkit-inner-spin-button {
   /* text-align:center; */
   margin:auto;
   padding:0;
+  overflow: hidden;
 }
 .wrapperMob{
-  /* overflow: hidden; */
+    /* overflow: hidden; */
     width: 90vw;
     float: left;
     position: absolute;
-    /* box-shadow: 0 0 50px 3px rgba(0,0,0,.1); */
     border-radius: 5px;
     border: 0;
     visibility: visible;
     transition: all .4s ease-in-out;
-    padding: 20px;
-    margin: 38px;
-    top: 130px;
-    /* z-index: 999999; */
+    padding: 30px 25px;
+    margin: 9%;
+    top: 17%;
     background: white;
-
 }
+.ml16Mob {
+  color: white;
+  padding: 20px 0;
+  font-weight: 800;
+  font-size: 1.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  overflow: hidden;
+  
+}
+.ml16Mob .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
 }
 .footer{
 
@@ -131,6 +144,8 @@ input::-webkit-inner-spin-button {
       padding: 30px 25px;
       top: 130px;
 }
+
+
 /* .wrappertxt p {
   padding: 20px;
   color: white;
@@ -154,6 +169,7 @@ input::-webkit-inner-spin-button {
   line-height: 1em;
 }
 .ml3 {
+  font-style: italic;
   font-weight: 400;
   font-size: 1.5em;
 }

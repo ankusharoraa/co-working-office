@@ -6,6 +6,8 @@ import {
     Breadcrumb, BreadcrumbItem,
     Button, Form, FormGroup, Label, Input, Col, FormFeedback
 } from 'reactstrap';
+import history from './history';
+
 
 
 
@@ -17,7 +19,7 @@ export default class MainComponent extends Component {
             zipCode: '',
             date: '',
             agree: false,
-
+            showComponent: false,
             touched: {
                 zipCode: false,
                 date: false
@@ -81,20 +83,42 @@ export default class MainComponent extends Component {
         let textWrapper = document.getElementById('title');
         textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
+        let mobWrapper = document.getElementById('titleMob');
+        mobWrapper.innerHTML = mobWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+
+        setTimeout(() => {
+            anime.timeline({ loop: true })
+                .add({
+                    targets: '.ml16 .letter',
+                    translateY: [-100, 0],
+                    easing: "easeOutExpo",
+                    duration: 1400,
+                    delay: (el, i) => 30 * i
+                }).add({
+                    targets: '.ml16',
+                    opacity: 0,
+                    duration: 1000,
+                    easing: "easeOutExpo",
+                    delay: 10000
+                });
+        }, 24000);
+
         anime.timeline({ loop: true })
             .add({
-                targets: '.ml16 .letter',
+                targets: '.ml16Mob .letter',
                 translateY: [-100, 0],
                 easing: "easeOutExpo",
                 duration: 1400,
                 delay: (el, i) => 30 * i
             }).add({
-                targets: '.ml16',
+                targets: '.ml16Mob',
                 opacity: 0,
                 duration: 1000,
                 easing: "easeOutExpo",
-                delay: 12000
+                delay: 10000
             });
+
 
         let paraWrapper = document.getElementById('para');
         paraWrapper.innerHTML = paraWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
@@ -114,7 +138,12 @@ export default class MainComponent extends Component {
                 delay: 20000000000
             });
     }
-
+    toggleWorkspace = () => {
+        alert("Inside")
+        this.setState({
+            showComponent: !this.state.showComponent,
+        });
+    }
     render() {
         const errors = this.validate(this.state.zipCode, this.state.date);
         let isDisabled
@@ -133,14 +162,13 @@ export default class MainComponent extends Component {
 
         return (
             <>
-
                 <div className="container-fluid main p-0 d-none d-sm-block">
                     <div className="row row-content mx-0">
                         <div className="col-sm-6 wrappertxt">
                             <h1 className="ml16" id="title">Co-Working Office Space</h1>
                             <p className="ml3" id="para">With all the buzz around coworking spaces, we decided to provide you with a primer. We cover the coworking basics as well as implications for the traditional office and facility managers.</p>
                         </div>
-                        <div className="col-sm-6 offset-sm-8 wrapper">
+                        <div className="col-sm-4 offset-sm-8 wrapper">
                             <h4>Where do you want to find workspace?</h4>
                             <Form onSubmit={this.handleSubmit}>
                                 <FormGroup row>
@@ -158,7 +186,7 @@ export default class MainComponent extends Component {
                                 <h4>When do you want to move in?</h4>
                                 <FormGroup row>
                                     {/* <Label htmlFor="date" className="col-md-3 col-3">Date</Label> */}
-                                    <div className="col-md-8 col-8 mt-2">
+                                    <div className="col-sm-8 mt-2">
                                         <Input type="date" id="date" name="date" min={today}
                                             placeholder="Date" value={this.state.date}
                                             valid={errors.date === ''}
@@ -180,9 +208,10 @@ export default class MainComponent extends Component {
                                     </div>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <div className="col-md-12 col-12">
-                                        <Button className="btn btn-block" disabled={isDisabled} type="submit" color="btn btn-primary">
-                                            Next</Button>
+                                    <div className="col-sm-12 col-12">
+                                        <Button className="btn btn-block" disabled={isDisabled} type="submit" onClick={() => history.push('/workspaces')} color="btn btn-primary">
+                                            Find Workspace</Button>
+
                                     </div>
                                 </FormGroup>
                             </Form>
@@ -190,7 +219,12 @@ export default class MainComponent extends Component {
                     </div>
                 </div>
 
-                <div className="container-fluid mainMob d-block d-sm-none">
+                <div className="container mainMob d-block d-sm-none">
+                    <div className="row row-content">
+                        <div className="col-12">
+                            <h2 id="titleMob" className="ml16Mob ml-3">Co-Working Space</h2>
+                        </div>
+                    </div>
                     <div className="row row-content">
                         <div className="col-12 wrapperMob">
                             <h4>Where do you want to find workspace?</h4>
@@ -232,39 +266,15 @@ export default class MainComponent extends Component {
                                     </div>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <div className=" col-6">
-                                        <Button className="btn btn-block" disabled={isDisabled} type="submit" color="btn btn-primary">
-                                            Next</Button>
+                                    <div className=" col-12">
+                                        <Button className="btn btn-block" disabled={isDisabled} type="submit" onClick={() => history.push('/workspaces')} color="btn btn-primary">
+                                            Find Workspace</Button>
                                     </div>
                                 </FormGroup>
                             </Form>
                         </div>
                     </div>
                 </div>
-                {/* <div className="container-fluid p-0">
-                    <div className="row mx-0">
-                        <div className="col-sm-8 col-12 px-0">
-                            <h2>Co-Working Office Space</h2>
-                            <p>Find coworking space that gives you the freedom to focus, collaborate and grow. Offering total flexibility at an affordable price, working in a shared office is ideal for your dynamic business needs.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container-fluid p-0">
-                    <div class="row mx-0">
-                        <div className="col-md-12 col-12 px-0">
-                            <img className="img-fluid w-100" src={coWork} alt = "cowork"></img>
-                            </div>
-                            <div className = "col-sm-12 col-12">
-                            <ReCAPTCHA className="bottom-right"
-                                sitekey="6Lf4QrIZAAAAADu8cXAyrlUNdTlQ4wasosFATzmY"
-                                theme="light"
-                                onChange={this.onChange}
-                                onErrored={this.networkError}
-                            />
-                            </div>
-                    </div>
-                </div> */}
             </>
         )
     }
