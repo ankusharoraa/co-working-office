@@ -6,8 +6,9 @@ import Workspace from './Workspaces'
 import Landing from './LandingPage'
 import history from './history';
 import { Switch, Route, Router } from 'react-router-dom';
-
-
+import {WORKSPACEINFO} from '../shared/WorkspaceInfo'
+import SecuredRoute from './SecuredRoute';
+import {authentication} from './SecuredRoute';
 
 
 export default class MainComponent extends Component {
@@ -23,7 +24,8 @@ export default class MainComponent extends Component {
                 zipCode: false,
                 date: false
 
-            }
+            },
+            workspaceinfo : WORKSPACEINFO
         }
     }
     handInputChange = (event) => {
@@ -56,6 +58,8 @@ export default class MainComponent extends Component {
 
 
     toggleWorkspace = () => {
+        authentication.isLoggedIn = true;
+        console.log(authentication.isLoggedIn)
         alert(`Pincode is ${this.state.zipCode}`)
         history.push('/workspaces');
 
@@ -76,7 +80,9 @@ export default class MainComponent extends Component {
                             handleBlur={this.handleBlur}
                             toggleWorkspace={this.toggleWorkspace}
                             onChange={this.onChange} />} />
-                        <Route exact path='/workspaces' render={() => <Workspace zipCode={this.state.zipCode} />} />
+                        <SecuredRoute exact path='/workspaces' component={() => <Workspace 
+                        zipCode={this.state.zipCode}
+                        workspaceinfo = {this.state.workspaceinfo} />} />
                     </Switch>
 
                     <Footer />

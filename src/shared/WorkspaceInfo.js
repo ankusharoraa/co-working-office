@@ -8,7 +8,8 @@ export const WORKSPACEINFO =
         label:'',
         price:'1020',
         featured: true,
-        description:'0.5 miles away from'                    
+        distance : 0.5,
+        description:'miles away from'                    
         },
         {
         id: 1,
@@ -18,7 +19,8 @@ export const WORKSPACEINFO =
         label:'Hot',
         price:'1030',
         featured: false,
-        description:'1 miles away from'
+        distance : 1,
+        description:'miles away from'
         },
         {
         id: 2,
@@ -28,7 +30,8 @@ export const WORKSPACEINFO =
         label:'New',
         price:'1050',
         featured: false,
-        description:'5 miles away from'
+        distance : 3,
+        description:'miles away from'
         },
         {
         id: 3,
@@ -38,6 +41,7 @@ export const WORKSPACEINFO =
         label:'Hot',
         price:'1100',
         featured: false,
-        description:'3 miles away from'
+        distance : 5,
+        description:'miles away from'
         }
     ];

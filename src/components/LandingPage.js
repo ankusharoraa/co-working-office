@@ -5,6 +5,7 @@ import {
 import anime from 'animejs/lib/anime.es.js';
 import ReCAPTCHA from "react-google-recaptcha";
 
+
 export default class Landing extends Component{
 
 networkError = () => {
@@ -104,6 +105,7 @@ render(){
         let isDisabled
         if (this.props.isVerified === false) {
             isDisabled = true;
+            
         }
         else {
             isDisabled = Object.keys(errors).some(x => errors[x]);
@@ -221,7 +223,7 @@ render(){
                             </FormGroup>
                             <FormGroup row>
                                 <div className=" col-12">
-                                    <Button className="btn btn-block" disabled={isDisabled} type="submit" color="btn btn-primary">
+                                    <Button className="btn btn-block" disabled={isDisabled} type="submit" onClick={this.props.toggleWorkspace} color="btn btn-primary">
                                         Find Workspace</Button>
                                 </div>
                             </FormGroup>

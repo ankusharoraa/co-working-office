@@ -116,7 +116,7 @@ input::-webkit-inner-spin-button {
 }
 .footer{
 
-  right: 0;
+  /* right: 0;
   left: 0;
   color: wheat;
   text-align: center;
@@ -127,7 +127,12 @@ input::-webkit-inner-spin-button {
   height: 50px;
   bottom: 0;
   position: absolute;
-  margin-top: auto;
+  margin-top: auto; */
+  color: wheat;
+  text-align: center;
+  background-color: #081132;
+  margin:0px auto;
+  padding: 10px 0px 1px 0px;
 }
 
 .wrappertxt{
@@ -183,4 +188,7 @@ input::-webkit-inner-spin-button {
   letter-spacing: 0.1em;
   overflow: hidden;
   
+}
+.cardLink{
+  text-decoration: none;
 }

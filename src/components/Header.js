@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../images/logo.jpg';
+
 import {
     Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
     Button, Modal, ModalHeader, ModalBody,
@@ -27,6 +28,7 @@ export default class Header extends Component {
         Password : ${this.password.value} 
         Remember : ${this.remember.checked}
         `);
+        
         event.preventDefault();
 
 
