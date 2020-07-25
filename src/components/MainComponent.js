@@ -6,9 +6,9 @@ import Workspace from './Workspaces'
 import Landing from './LandingPage'
 import history from './history';
 import { Switch, Route, Router } from 'react-router-dom';
-import {WORKSPACEINFO} from '../shared/WorkspaceInfo'
+import { WORKSPACEINFO } from '../shared/WorkspaceInfo'
 import SecuredRoute from './SecuredRoute';
-import {authentication} from './SecuredRoute';
+import { authentication } from './SecuredRoute';
 
 
 export default class MainComponent extends Component {
@@ -19,13 +19,14 @@ export default class MainComponent extends Component {
             zipCode: '',
             date: '',
             agree: false,
-
+            people: 0,
             touched: {
                 zipCode: false,
-                date: false
+                date: false,
+                people: false
 
             },
-            workspaceinfo : WORKSPACEINFO
+            workspaceinfo: WORKSPACEINFO
         }
     }
     handInputChange = (event) => {
@@ -64,6 +65,19 @@ export default class MainComponent extends Component {
         history.push('/workspaces');
 
     }
+    increase = () => {
+        this.setState({
+            people: parseInt(this.state.people) + 1
+        })
+    }
+    decrease = () => {
+        if (this.state.people > 0) {
+            this.setState({
+                people: parseInt(this.state.people) - 1
+            })
+        }
+    }
+
     render() {
 
 
@@ -79,14 +93,18 @@ export default class MainComponent extends Component {
                             handInputChange={this.handInputChange}
                             handleBlur={this.handleBlur}
                             toggleWorkspace={this.toggleWorkspace}
-                            onChange={this.onChange} />} />
-                        <SecuredRoute exact path='/workspaces' component={() => <Workspace 
-                        zipCode={this.state.zipCode}
-                        workspaceinfo = {this.state.workspaceinfo} />} />
+                            onChange={this.onChange}
+                            people={this.state.people}
+                            increase={this.increase}
+                            decrease={this.decrease} />} />
+                        <SecuredRoute exact path='/workspaces' component={() => <Workspace
+                            zipCode={this.state.zipCode}
+                            workspaceinfo={this.state.workspaceinfo} />} />
                     </Switch>
 
-                    <Footer />
+                    
                 </Router>
+                <Footer />
             </>
         )
     }

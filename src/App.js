@@ -5,9 +5,9 @@ import MainComponent from './components/MainComponent';
 function App(props) {
   return (
     <div className="appjs">
-
-      <MainComponent />
-
+      
+        <MainComponent />
+      
     </div>
   );
 }

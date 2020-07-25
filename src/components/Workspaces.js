@@ -7,7 +7,7 @@ import { Link} from 'react-router-dom';
 function RenderWorkspace ({workObj,zipCode}){
     return (
         <Card>
-            <Link style = {{textDecoration : 'none'}} to ={`/menu/${workObj.id}`} >
+            <Link style = {{textDecoration : 'none'}} to ={`/workspace/${workObj.id}`} >
             <CardHeader>
                 <CardTitle>{workObj.name}</CardTitle>
             </CardHeader>
@@ -31,7 +31,7 @@ let floor = Math.floor(value);
 const Workspace = (props) => {
     const Work = props.workspaceinfo.map((workObj) => {
         return (
-            <div className="col-sm-5 mt-3 mb-2 m-sm-2 ml-sm-5 col-12" key={workObj.id}>
+            <div className="col-sm-5 mt-3 mb-2 col-12" key={workObj.id}>
                 <RenderWorkspace workObj={workObj} zipCode = {props.zipCode}/>
             </div>
         )
@@ -43,10 +43,20 @@ const Workspace = (props) => {
                 <div className="row mt-2">
                     <div className="col-sm-12">
                         <div className="text-center"></div>
-                        <Progress striped color="success" value={value}>{floor}%</Progress>
+                        <Progress animated = {true} striped color="primary" value={value}>{floor}%</Progress>
                     </div>
                 </div>
-                <div className="row ml-sm-5">
+                <div className = "row mt-2">
+                <div className="col-sm-12">
+                    <h2 style = {{fontFamily : "'Courgette', cursive",textAlign : "center",color : "blue"}}>Choose a preferred workspace</h2>
+                    </div>
+                </div>
+                <div className = "row mt-2 d-flex justify-content-center">
+                <div className="col-sm-12">
+                    <p>Showing results for</p>
+                    </div>
+                </div>
+                <div className="row d-flex justify-content-center">
                 
                 {Work}
               
