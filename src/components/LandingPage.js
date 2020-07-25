@@ -172,7 +172,7 @@ export default class Landing extends Component {
                                 <h4>How many people do you want to accommodate?</h4>
                                 <div className="form-inline">
                                     <FormGroup row>
-                                        <div className="col-sm-8 mt-2">
+                                        <div className="col-sm-12 mt-2">
 
                                             <button style={{ height: '40px', width: '40px' }} className="btn btn-danger" onClick={this.props.decrease}><i class="fa fa-minus" aria-hidden="true"></i></button>
 
