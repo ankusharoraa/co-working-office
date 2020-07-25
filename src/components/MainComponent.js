@@ -9,6 +9,7 @@ import { Switch, Route, Router } from 'react-router-dom';
 import { WORKSPACEINFO } from '../shared/WorkspaceInfo'
 import SecuredRoute from './SecuredRoute';
 import { authentication } from './SecuredRoute';
+import WorkspaceDetails from './WorkspaceDetails';
 
 
 export default class MainComponent extends Component {
@@ -79,7 +80,11 @@ export default class MainComponent extends Component {
     }
 
     render() {
-
+        const WorkspaceWithId = ({ match }) => {
+            return (
+                <WorkspaceDetails workspace={this.state.workspaceinfo.filter((workspace) => workspace.id === parseInt(match.params.workspaceId, 10))[0]} />
+            )
+        }
 
         return (
             <>
@@ -99,10 +104,13 @@ export default class MainComponent extends Component {
                             decrease={this.decrease} />} />
                         <SecuredRoute exact path='/workspaces' component={() => <Workspace
                             zipCode={this.state.zipCode}
-                            workspaceinfo={this.state.workspaceinfo} />} />
+                            workspaceinfo={this.state.workspaceinfo}
+                            date={this.state.date}
+                            people={this.state.people} />} />
+                        <Route path="/workspaces/:workspaceId" component={WorkspaceWithId} />
                     </Switch>
 
-                    
+
                 </Router>
                 <Footer />
             </>

@@ -230,7 +230,7 @@ export default class Landing extends Component {
                                 <FormGroup row>
                                     {/* <Label htmlFor="zipCode" className="col-md-3 col-3">Zip Code</Label> */}
                                     <div className="col-12 mt-2">
-                                        <Input type="number" name="zipCode"
+                                        <Input type="text" name="zipCode"
                                             placeholder="Zip Code" value={this.props.zipCode}
                                             valid={errors.zipCode === ''}
                                             invalid={errors.zipCode !== ''}
