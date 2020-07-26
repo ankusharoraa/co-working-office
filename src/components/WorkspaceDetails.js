@@ -30,7 +30,7 @@ const WorkspaceDetails = (props) => {
                 </div>
                 <div className="row">
                     <div className="col-sm-12 col-12">
-                        <h4 className="mt-1" style={{ textAlign: 'center' }}>Take a virtual tour <a href="">here</a> </h4>
+                        <p className="lead mt-1" style={{ textAlign: 'center' }}>Take a virtual tour <a href="">here</a> </p>
                     </div>
                 </div>
 
@@ -60,19 +60,21 @@ const WorkspaceDetails = (props) => {
                                         </li>
                                         <li className="list-group-item list-group-item-action">{props.workspace.facilities.station}
                                         </li>
+                                        <li className="list-group-item list-group-item-action">{props.workspace.facilities.access}
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div className = "row">
-                        <div className="col-sm-12">
-                            <p style={{textAlign:'center',fontSize:'20px'}} className = "lead">Package handling and printing facilities</p>
-                            <p style={{textAlign:'center'}}><mark><em>Compilant with <strong>COVID</strong> safety norms</em></mark></p>
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <p style={{ textAlign: 'center', fontSize: '25px' }} className="lead mt-2">Package handling and printing facilities</p>
+                                <p style={{ textAlign: 'center' }}><mark><em>Compilant with <strong>COVID</strong> safety norms</em></mark></p>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-sm-12 col-12">
-                            <p><em>Contact us <a href=''>here</a> to enquire about special facilities</em></p>
+                                <p><em>Contact us <a href=''>here</a> to enquire about special facilities</em></p>
                                 <button className="btn btn-block btn-primary mt-2">Lease This Workspace</button>
                             </div>
                         </div>
