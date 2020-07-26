@@ -1,5 +1,5 @@
 import React from 'react';
-import { UncontrolledCarousel, Progress } from 'reactstrap';
+import { UncontrolledCarousel, Progress, Button, Card, CardTitle, CardText, } from 'reactstrap';
 
 const WorkspaceDetails = (props) => {
 
@@ -27,17 +27,61 @@ const WorkspaceDetails = (props) => {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm-12 col-12">
+                        <h4 className="mt-1" style={{ textAlign: 'center' }}>Take a virtual tour <a href="">here</a> </h4>
                     </div>
-                    <div className="row">
-                        <div className="col-sm-12 col-12">
-                            <h4 className="mt-1" style={{textAlign:'center'}}>Take a virtual tour <a href="">here</a> </h4>
-                        </div>
-                    </div>
-               
-            </div>
-            <div className="jumbotron d-sm-block d-none">
+                </div>
 
             </div>
+            <div className="jumbotron">
+                <div className="container">
+
+                    <Card body>
+                        <div className="row">
+                            <div className="col-sm-5 col-12">
+                                <h4>Office details:</h4>
+                                <div>
+                                    <ul className="list-group list-group-flush">
+                                        <li className="list-group-item list-group-item-action">{props.workspace.details.capacity}
+                                        </li>
+                                        <li className="list-group-item list-group-item-action">{props.workspace.details.available}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div className="offset-sm-1 col-sm-6 col-12">
+                                <h4>Nearby Facilities:</h4>
+                                <div>
+                                    <ul className="list-group list-group-flush">
+                                        <li className="list-group-item list-group-item-action">{props.workspace.facilities.office}
+                                        </li>
+                                        <li className="list-group-item list-group-item-action">{props.workspace.facilities.station}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div className = "row">
+                        <div className="col-sm-12">
+                            <p style={{textAlign:'center',fontSize:'20px'}} className = "lead">Package handling and printing facilities</p>
+                            <p style={{textAlign:'center'}}><mark><em>Compilant with <strong>COVID</strong> safety norms</em></mark></p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-12 col-12">
+                            <p><em>Contact us <a href=''>here</a> to enquire about special facilities</em></p>
+                                <button className="btn btn-block btn-primary mt-2">Lease This Workspace</button>
+                            </div>
+                        </div>
+                    </Card>
+
+
+                </div>
+            </div>
+
         </>
 
     )

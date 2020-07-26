@@ -10,6 +10,15 @@ export const WORKSPACEINFO =
             featured: true,
             distance: 0.5,
             description: 'miles away from',
+            details : {
+                capacity : '10-person capacity',
+                available : '1st floor, fully-furnished'
+            },
+            facilities : {
+                office :"Postal Office",
+                station :"Fire Station",
+                access : '24- hours access'
+            },
             workImages: [{
                 src: '/assets/images/92Broad.jpg',
                 altText: '',
@@ -36,6 +45,15 @@ export const WORKSPACEINFO =
             featured: false,
             distance: 1,
             description: 'miles away from',
+            details : {
+                capacity : '35-person capacity',
+                available : '6th floor, fully-furnished'
+            },
+            facilities : {
+                office :"Postal Office",
+                station :"Fire Station",
+                access : '24- hours access'
+            },
             workImages: [{
                 src: '/assets/images/332Broadway.jpg',
                 altText: '',
@@ -62,6 +80,15 @@ export const WORKSPACEINFO =
             featured: false,
             distance: 3,
             description: 'miles away from',
+            details : {
+                capacity : '25-person capacity',
+                available : '2 floors, fully-furnished'
+            },
+            facilities : {
+                office :"Postal Office",
+                station :"Fire Station",
+                access : '24- hours access'
+            },
             workImages: [{
                 src: '/assets/images/54Montague.jpg',
                 altText: '',
@@ -88,6 +115,15 @@ export const WORKSPACEINFO =
             featured: false,
             distance: 5,
             description: 'miles away from',
+            details : {
+                capacity : '50-person capacity',
+                available : '2 floors fully-furnished'
+            },
+            facilities : {
+                office :"Postal Office",
+                station :"Fire Station",
+                access : '24- hours access'
+            },
             workImages: [{
                 src: '/assets/images/LibertyPlaza.jpeg',
                 altText: '',

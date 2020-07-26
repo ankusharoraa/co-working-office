@@ -68,8 +68,9 @@ input::-webkit-inner-spin-button {
 
 }
 .jumbotron{
-  margin-top: -260px;
-  height: 100vh;
+  /* margin-top: -96px; */
+  /* height: 100vh; */
+  margin-bottom: 0;
   
 }
 .carousel-caption{
@@ -102,7 +103,7 @@ input::-webkit-inner-spin-button {
   font-size: 55px;
   color: red;
 }
-input[type="text"],input[type="date"] {
+input[type="text"],input[type="date"],input[type="password"] {
   min-height: 45px;
   color: #707583;
   border-radius: 5px;
