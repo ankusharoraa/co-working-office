@@ -53,7 +53,7 @@ const Workspace = (props) => {
                 </div>
                 <div className="row mt-2">
                     <div className="col-sm-12">
-                        <h2 style={{ fontFamily: "'Courgette', cursive", textAlign: "center", color: "blue" }}>Choose a preferred workspace</h2>
+                        <p className = "lead" style={{ fontFamily: "'Courgette', cursive", textAlign: "center", color: "#007bff" }}>Choose a preferred workspace</p>
                     </div>
                 </div>
                 <div className="row mt-2 d-flex justify-content-center">

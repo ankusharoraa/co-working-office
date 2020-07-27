@@ -107,7 +107,7 @@ export default class MainComponent extends Component {
                             workspaceinfo={this.state.workspaceinfo}
                             date={this.state.date}
                             people={this.state.people} />} />
-                        <Route path="/workspaces/:workspaceId" component={WorkspaceWithId} />
+                        <SecuredRoute path="/workspaces/:workspaceId" component={WorkspaceWithId} />
                     </Switch>
 
 

@@ -35,11 +35,12 @@ export default class Header extends Component {
     render() {
         return (
             <>
-                <Navbar className="navbar-light bg-light" expand="sm">
+                <Navbar className="navbar-light bg-light p-0" expand="sm">
                     <div className="container-fluid">
                         <NavbarToggler onClick={() => this.toggleNav()} />
-                        <NavbarBrand className="mr-auto ml-sm-0 ml-2" href="/">
-                            <img src={logo} height="50" width="100" alt="logo" />
+                        <NavbarBrand className="mr-auto ml-sm-0" href="/">
+                            <img src={logo} height="50" width="100" style = {{borderRadius : "80px"}} alt="logo" />
+                            <span class="navbar-brand mb-0 lead ml-sm-2 ml-2">Co-Office Space</span>
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
 
