@@ -38,14 +38,11 @@ let outputValue = () => {
 
 const Workspace = (props) => {
     const [cityName, setValue] = useState('');
-    const api = 'b66AEKTkYi1s4mGeGzMsXTSKvuC1k72eX9K19LDNElcalA9MaULndGrxs3HsBQUw';
+    const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
      useEffect(() => {
          async function fetch(){
              let formatZip = props.zipCode.slice(0,5);
-             
-            //  console.log(formatZip);
             let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-            // let url = `https://us-zipcode.api.smartystreets.com/lookup?auth-id=4r08x9wRaGt5vXbNgAYv&zipcode=${formatZip}`
             const res = await axios.get(url);
             const city = res.data.city;
             const state = res.data.state

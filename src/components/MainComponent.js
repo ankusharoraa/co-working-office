@@ -63,7 +63,7 @@ export default class MainComponent extends Component {
     toggleWorkspace = () => {
         authentication.isLoggedIn = true;
         console.log(authentication.isLoggedIn)
-        alert(`Pincode is ${this.state.zipCode}`)
+        // alert(`Pincode is ${this.state.zipCode}`)
         history.push('/workspaces');
 
     }
@@ -104,12 +104,12 @@ export default class MainComponent extends Component {
                             people={this.state.people}
                             increase={this.increase}
                             decrease={this.decrease} />} />
-                        <Route exact path='/workspaces' component={() => <Workspace
+                        <SecuredRoute exact path='/workspaces' component={() => <Workspace
                             zipCode={this.state.zipCode}
                             workspaceinfo={this.state.workspaceinfo}
                             date={this.state.date}
                             people={this.state.people} />} />
-                        <Route path="/workspaces/:workspaceId" component={WorkspaceWithId} />
+                        <SecuredRoute path="/workspaces/:workspaceId" component={WorkspaceWithId} />
                     </Switch>
 
 
