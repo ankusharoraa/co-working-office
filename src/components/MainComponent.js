@@ -12,6 +12,7 @@ import { authentication } from './SecuredRoute';
 import WorkspaceDetails from './WorkspaceDetails';
 
 
+
 export default class MainComponent extends Component {
     constructor(props) {
         super(props);
@@ -78,6 +79,7 @@ export default class MainComponent extends Component {
             })
         }
     }
+   
 
     render() {
         const WorkspaceWithId = ({ match }) => {
@@ -102,12 +104,12 @@ export default class MainComponent extends Component {
                             people={this.state.people}
                             increase={this.increase}
                             decrease={this.decrease} />} />
-                        <SecuredRoute exact path='/workspaces' component={() => <Workspace
+                        <Route exact path='/workspaces' component={() => <Workspace
                             zipCode={this.state.zipCode}
                             workspaceinfo={this.state.workspaceinfo}
                             date={this.state.date}
                             people={this.state.people} />} />
-                        <SecuredRoute path="/workspaces/:workspaceId" component={WorkspaceWithId} />
+                        <Route path="/workspaces/:workspaceId" component={WorkspaceWithId} />
                     </Switch>
 
 

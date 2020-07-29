@@ -1,12 +1,14 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { Progress, CardImg, Card, CardTitle, CardBody, CardText, CardHeader } from 'reactstrap';
 import '../App.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // import { withRouter } from 'react-router';
 
 
 
-function RenderWorkspace({ workObj, zipCode }) {
+function RenderWorkspace({ workObj, zipCode, cityName }) {
+    
     return (
         <Card>
             <Link style={{ textDecoration: 'none' }} to={`/workspaces/${workObj.id}`} >
@@ -20,12 +22,13 @@ function RenderWorkspace({ workObj, zipCode }) {
                 <CardTitle>from ${workObj.price}/mo</CardTitle>
                 {/* <CardSubtitle>{workObj.distance} {workObj.description} {zipCode}</CardSubtitle> */}
                 <CardText>
-                    <small className="text-muted">{workObj.distance} {workObj.description} {zipCode}</small>
+                    <small className="text-muted">{workObj.distance} {workObj.description} {zipCode}({cityName})</small>
                 </CardText>
             </CardBody>
             </Link>
         </Card>
     );
+    
 }
 
 let outputValue = () => {
@@ -34,14 +37,32 @@ let outputValue = () => {
 }
 
 const Workspace = (props) => {
+    const [cityName, setValue] = useState('');
+    const api = 'b66AEKTkYi1s4mGeGzMsXTSKvuC1k72eX9K19LDNElcalA9MaULndGrxs3HsBQUw';
+     useEffect(() => {
+         async function fetch(){
+             let formatZip = props.zipCode.slice(0,5);
+             
+            //  console.log(formatZip);
+            let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
+            // let url = `https://us-zipcode.api.smartystreets.com/lookup?auth-id=4r08x9wRaGt5vXbNgAYv&zipcode=${formatZip}`
+            const res = await axios.get(url);
+            const city = res.data.city;
+            const state = res.data.state
+            setValue(`${city}, ${state}, U.S`);
+            console.log(JSON.stringify(res.data));
+         }
+      fetch();
+      });
     const Work = props.workspaceinfo.map((workObj) => {
         return (
             <div className="col-sm-5 mt-3 mb-2 col-12" key={workObj.id}>
-                <RenderWorkspace workObj={workObj} zipCode={props.zipCode} />
+                <RenderWorkspace workObj={workObj} zipCode={props.zipCode} cityName = {cityName} />
             </div>
         )
     })
-
+    
+     
     return (
         <>
             <div className="container-fluid">
