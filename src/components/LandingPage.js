@@ -19,12 +19,13 @@ export default class Landing extends Component {
 
     }
 
-    validate = (zipCode, date, people) => {
+    validate = (zipCode, date, people,location) => {
 
         const errors = {
             zipCode: '',
             date: '',
-            people: ''
+            people: '',
+            location : ''
 
         }
         // if (this.props.touched.zipCode && zipCode.length <= 3) {
@@ -34,25 +35,31 @@ export default class Landing extends Component {
         //     errors.zipCode = "Zip Code length should be less than 6"
         // }
         const reg = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
-        if (this.props.touched.zipCode && !reg.test(zipCode)){
+        if (this.props.touched.zipCode && !reg.test(zipCode)) {
             errors.zipCode = "Please enter the zip code in the US zip code format"
         }
         else if (zipCode === '') {
             errors.zipCode = "Please enter the zip code"
         }
 
-         if (date === '') {
+        if (date === '') {
             errors.date = "Please select the date"
         }
-         if (people === '0' || people === 0 || people === '') {
+        if (people === '0' || people === 0 || people === '') {
 
             errors.people = "There must be atleast 1 person to find workspace"
 
         }
-         if (people > '50' || people > 50) {
+        if (people > '50' || people > 50) {
 
             errors.people = "Maximum number of people can be 50 only"
 
+        }
+        if(location===''){
+            errors.location = 'Enter the zipCode to get the location'
+        }
+         if(zipCode.length>=5 && location===''){
+            errors.location = 'Incorrect ZipCode or This ZipCode does not exists in our database'
         }
         return errors;
     }
@@ -117,7 +124,7 @@ export default class Landing extends Component {
             });
     }
     render() {
-        const errors = this.validate(this.props.zipCode, this.props.date, this.props.people);
+        const errors = this.validate(this.props.zipCode, this.props.date, this.props.people,this.props.location);
         let isDisabled
         if (this.props.isVerified === false) {
             isDisabled = true;
@@ -134,7 +141,7 @@ export default class Landing extends Component {
         today = yyyy + '-' + mm + '-' + dd;
         return (
             <>
-    
+
                 <div className="container-fluid main p-0 d-none d-sm-block">
                     <div className="row row-content mx-0">
                         <div className="col-sm-6 wrappertxt">
@@ -145,20 +152,30 @@ export default class Landing extends Component {
                             <h4>Where do you want to find workspace?</h4>
                             <Form onSubmit={this.handleSubmit}>
                                 <FormGroup row>
-                                    
-                                    <div className="col-sm-8 mt-2">
-                                    <Input type="text" name="zipCode"
+
+                                    <div className="col-sm-4 mt-2">
+                                        <Input type="text" name="zipCode"
                                             placeholder="Zip Code" value={this.props.zipCode}
                                             valid={errors.zipCode === ''}
                                             invalid={errors.zipCode !== ''}
                                             onBlur={this.props.handleBlur('zipCode')}
                                             onChange={this.props.handInputChange} />
+
                                         <FormFeedback>{errors.zipCode}</FormFeedback>
+                                    </div>
+                                    <div className="col-sm-7 mt-2">
+                                        <Input name="location"
+                                            placeholder="Enter 5 or 9-digit Zip Code"
+                                            valid={errors.location === ''}
+                                            invalid={errors.location !== ''}
+                                            disabled={true}
+                                            value={this.props.location} />
+                                            <FormFeedback>{errors.location}</FormFeedback>
                                     </div>
                                 </FormGroup>
                                 <h4>When do you want to move in?</h4>
                                 <FormGroup row>
-                                    
+
                                     <div className="col-sm-8 mt-2">
                                         <Input type="date" id="date" name="date" min={today}
                                             placeholder="Date" value={this.props.date}
@@ -214,7 +231,7 @@ export default class Landing extends Component {
                             </Form>
                         </div>
                     </div>
-                   
+
                 </div>
 
                 <div className="container mainMob d-block d-sm-none p-0">
@@ -237,6 +254,15 @@ export default class Landing extends Component {
                                             onBlur={this.props.handleBlur('zipCode')}
                                             onChange={this.props.handInputChange} />
                                         <FormFeedback>{errors.zipCode}</FormFeedback>
+                                    </div>
+                                    <div className="col-12 mt-2">
+                                    <Input name="location"
+                                            placeholder="Enter 5 or 9-digit Zip Code"
+                                            valid={errors.location === ''}
+                                            invalid={errors.location !== ''}
+                                            disabled={true}
+                                            value={this.props.location} />
+                                            <FormFeedback>{errors.location}</FormFeedback>
                                     </div>
                                 </FormGroup>
                                 <h4>When do you want to move in?</h4>

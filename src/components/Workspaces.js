@@ -1,9 +1,8 @@
-import React,{useEffect,useState} from 'react'
+import React from 'react'
 import { Progress, CardImg, Card, CardTitle, CardBody, CardText, CardHeader } from 'reactstrap';
 import '../App.css'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-// import { withRouter } from 'react-router';
+
 
 
 
@@ -37,24 +36,27 @@ let outputValue = () => {
 }
 
 const Workspace = (props) => {
-    const [cityName, setValue] = useState('');
-    const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-     useEffect(() => {
-         async function fetch(){
-             let formatZip = props.zipCode.slice(0,5);
-            let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-            const res = await axios.get(url);
-            const city = res.data.city;
-            const state = res.data.state
-            setValue(`${city}, ${state}, U.S`);
-            console.log(JSON.stringify(res.data));
-         }
-      fetch();
-      });
+    // const [cityName, setValue] = useState('');
+    // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+    //  useEffect(() => {
+    //      async function fetch(){
+    //          let formatZip = props.zipCode.slice(0,5);
+    //         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
+    //         const res = await axios.get(url);
+            
+    //         const city = res.data.city;
+    //         const state = res.data.state
+    //         if(city && state!==undefined){
+    //         setValue(`${city}, ${state}, U.S`);
+    //         console.log(JSON.stringify(res.data));
+    //         }
+    //      }
+    //   fetch();
+    //   });
     const Work = props.workspaceinfo.map((workObj) => {
         return (
             <div className="col-sm-5 mt-3 mb-2 col-12" key={workObj.id}>
-                <RenderWorkspace workObj={workObj} zipCode={props.zipCode} cityName = {cityName} />
+                <RenderWorkspace workObj={workObj} zipCode={props.zipCode} cityName = {props.location} />
             </div>
         )
     })

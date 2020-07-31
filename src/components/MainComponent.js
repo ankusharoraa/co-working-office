@@ -9,6 +9,7 @@ import { Switch, Route, Router } from 'react-router-dom';
 import { WORKSPACEINFO } from '../shared/WorkspaceInfo'
 import SecuredRoute from './SecuredRoute';
 import { authentication } from './SecuredRoute';
+import axios from 'axios';
 import WorkspaceDetails from './WorkspaceDetails';
 
 
@@ -28,19 +29,47 @@ export default class MainComponent extends Component {
                 people: false
 
             },
-            workspaceinfo: WORKSPACEINFO
+            workspaceinfo: WORKSPACEINFO,
+            location : ''
         }
     }
-    handInputChange = (event) => {
+    
+    handInputChange = async(event) => {
 
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
 
-        this.setState({
+        await this.setState({
             [name]: value
         })
 
+        if(this.state.zipCode.length===5){
+            let zipCodeUs = this.state.zipCode; 
+            this.handleFetch(zipCodeUs);
+        }
+        else if(this.state.zipCode.length<=5){
+            this.setState({
+                location : ''
+            })
+        }
+    }
+
+     handleFetch = async(zipCodeUs)=>{
+        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        // const api = 'LeptzmnMR76qtyukJQFsprY1Y4RTJkZ2F18ykBkp1RyxmWriWsa39F8K2fcs2ZVT';
+        // let formatZip = this.state.zipCode.slice(0,5);
+            let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${zipCodeUs}/degrees`
+            const res = await axios.get(url);
+            const city = res.data.city;
+            const locState = res.data.state
+            if(city && locState!==undefined){
+                this.setState({
+                    location : `${city}, ${locState}, U.S`
+                })
+            // setValue(`${city}, ${state}, U.S`);
+            // console.log(JSON.stringify(res.data));
+            }
     }
 
     handleBlur = (field) => (evt) => {
@@ -103,12 +132,14 @@ export default class MainComponent extends Component {
                             onChange={this.onChange}
                             people={this.state.people}
                             increase={this.increase}
-                            decrease={this.decrease} />} />
+                            decrease={this.decrease}
+                            location = {this.state.location} />} />
                         <SecuredRoute exact path='/workspaces' component={() => <Workspace
                             zipCode={this.state.zipCode}
                             workspaceinfo={this.state.workspaceinfo}
                             date={this.state.date}
-                            people={this.state.people} />} />
+                            people={this.state.people}
+                            location = {this.state.location} />} />
                         <SecuredRoute path="/workspaces/:workspaceId" component={WorkspaceWithId} />
                     </Switch>
 
