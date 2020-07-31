@@ -40,7 +40,7 @@ export default class Header extends Component {
                         <NavbarToggler onClick={() => this.toggleNav()} />
                         <NavbarBrand className="mr-auto ml-sm-0" href="/">
                             <img src={logo} height="50" width="100" style = {{borderRadius : "80px"}} alt="logo" />
-                            <span class="navbar-brand mb-0 lead ml-sm-2 ml-2">Co-Office Space</span>
+                            <span className="navbar-brand mb-0 lead ml-sm-2 ml-2">Co-Office Space</span>
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
 

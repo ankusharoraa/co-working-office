@@ -1,5 +1,6 @@
 import React from 'react';
 import { UncontrolledCarousel, Progress, Button, Card, CardTitle, CardText, } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const WorkspaceDetails = (props) => {
 
@@ -75,7 +76,7 @@ const WorkspaceDetails = (props) => {
                         <div className="row">
                             <div className="col-sm-12 col-12">
                                 <p><em>Contact us <a href=''>here</a> to enquire about special facilities</em></p>
-                                <button className="btn btn-block btn-primary mt-2">Lease This Workspace</button>
+                                <Link style = {{textDecoration : "none"}} to = "/personalinfo"><button className="btn btn-block btn-primary mt-2">Lease This Workspace</button></Link>
                             </div>
                         </div>
                     </Card>

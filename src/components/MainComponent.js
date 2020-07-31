@@ -5,12 +5,13 @@ import '../App.css';
 import Workspace from './Workspaces'
 import Landing from './LandingPage'
 import history from './history';
-import { Switch, Route, Router } from 'react-router-dom';
+import { Switch, Route, Router, Redirect } from 'react-router-dom';
 import { WORKSPACEINFO } from '../shared/WorkspaceInfo'
 import SecuredRoute from './SecuredRoute';
 import { authentication } from './SecuredRoute';
 import axios from 'axios';
 import WorkspaceDetails from './WorkspaceDetails';
+import PersonalInfo from './PersonalInfo';
 
 
 
@@ -26,15 +27,21 @@ export default class MainComponent extends Component {
             touched: {
                 zipCode: false,
                 date: false,
-                people: false
+                people: false,
+                businessName: false,
+                personEmail: false,
+                personZipCode : false
 
             },
             workspaceinfo: WORKSPACEINFO,
-            location : ''
+            location: '',
+            businessName: '',
+            personEmail: '',
+            personZipCode : ''
         }
     }
-    
-    handInputChange = async(event) => {
+
+    handInputChange = async (event) => {
 
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -44,32 +51,32 @@ export default class MainComponent extends Component {
             [name]: value
         })
 
-        if(this.state.zipCode.length===5){
-            let zipCodeUs = this.state.zipCode; 
+        if (this.state.zipCode.length === 5) {
+            let zipCodeUs = this.state.zipCode;
             this.handleFetch(zipCodeUs);
         }
-        else if(this.state.zipCode.length<=5){
+        else if (this.state.zipCode.length <= 5) {
             this.setState({
-                location : ''
+                location: ''
             })
         }
     }
 
-     handleFetch = async(zipCodeUs)=>{
-        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-        // const api = 'LeptzmnMR76qtyukJQFsprY1Y4RTJkZ2F18ykBkp1RyxmWriWsa39F8K2fcs2ZVT';
+    handleFetch = async (zipCodeUs) => {
+        // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        const api = 'LeptzmnMR76qtyukJQFsprY1Y4RTJkZ2F18ykBkp1RyxmWriWsa39F8K2fcs2ZVT';
         // let formatZip = this.state.zipCode.slice(0,5);
-            let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${zipCodeUs}/degrees`
-            const res = await axios.get(url);
-            const city = res.data.city;
-            const locState = res.data.state
-            if(city && locState!==undefined){
-                this.setState({
-                    location : `${city}, ${locState}, U.S`
-                })
+        let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${zipCodeUs}/degrees`
+        const res = await axios.get(url);
+        const city = res.data.city;
+        const locState = res.data.state
+        if (city && locState !== undefined) {
+            this.setState({
+                location: `${city}, ${locState}, U.S`
+            })
             // setValue(`${city}, ${state}, U.S`);
             // console.log(JSON.stringify(res.data));
-            }
+        }
     }
 
     handleBlur = (field) => (evt) => {
@@ -100,6 +107,11 @@ export default class MainComponent extends Component {
         this.setState({
             people: parseInt(this.state.people) + 1
         })
+        if(this.state.people === ''){
+            this.setState({
+                people : 0
+            })
+        }
     }
     decrease = () => {
         if (this.state.people > 0) {
@@ -107,8 +119,28 @@ export default class MainComponent extends Component {
                 people: parseInt(this.state.people) - 1
             })
         }
+        if(this.state.people === ''){
+            this.setState({
+                people : 0
+            })
+        }
     }
-   
+
+    updatePersonDetails = () =>{
+        this.setState({
+            businessName : 'Spotlight',
+            personZipCode : '12345',
+            personEmail : 'business@spotlight.com'
+        })
+    }
+    
+    deletePersonDetails = () =>{
+        this.setState({
+            businessName : '',
+            personZipCode : '',
+            personEmail : ''
+        })
+    }
 
     render() {
         const WorkspaceWithId = ({ match }) => {
@@ -133,14 +165,24 @@ export default class MainComponent extends Component {
                             people={this.state.people}
                             increase={this.increase}
                             decrease={this.decrease}
-                            location = {this.state.location} />} />
+                            location={this.state.location} />} />
                         <SecuredRoute exact path='/workspaces' component={() => <Workspace
                             zipCode={this.state.zipCode}
                             workspaceinfo={this.state.workspaceinfo}
                             date={this.state.date}
                             people={this.state.people}
-                            location = {this.state.location} />} />
+                            location={this.state.location} />} />
                         <SecuredRoute path="/workspaces/:workspaceId" component={WorkspaceWithId} />
+                        <Route exact path="/personalinfo" render={() => <PersonalInfo
+                            handInputChange={this.handInputChange}
+                            handleBlur={this.handleBlur}
+                            onChange={this.onChange}
+                            personZipCode={this.state.personZipCode}
+                            businessName={this.state.businessName}
+                            personEmail={this.state.personEmail}
+                            updatePersonDetails = {this.updatePersonDetails}
+                            deletePersonDetails = {this.deletePersonDetails} />} />
+                        <Redirect to='/' />
                     </Switch>
 
 

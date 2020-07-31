@@ -101,7 +101,7 @@ input::-webkit-inner-spin-button {
   font-size: 55px;
   color: red;
 }
-input[type="text"],input[type="date"],input[type="password"] {
+input[type="text"],input[type="date"],input[type="password"],input[type="email"],input[type="number"] {
   min-height: 45px;
   color: #707583;
   border-radius: 5px;
@@ -196,6 +196,7 @@ input[type="text"],input[type="date"],input[type="password"] {
   /* margin:0px auto; */
   padding: 10px 0px 1px 0px;
   height: 50px;
+
 }
 
 .wrappertxt{
@@ -276,4 +277,14 @@ input[type='range']::-webkit-slider-thumb {
 .carousel .slide img {
     max-height: 450px;  
     width: 100%;
+}
+
+.personalDetails{
+  margin-top: 5%;
+  margin-bottom: 7%;
+}
+
+.required:after {
+  content:" *";
+  color: red;
 }

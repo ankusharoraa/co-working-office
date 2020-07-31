@@ -19,13 +19,13 @@ export default class Landing extends Component {
 
     }
 
-    validate = (zipCode, date, people,location) => {
+    validate = (zipCode, date, people, location) => {
 
         const errors = {
             zipCode: '',
             date: '',
             people: '',
-            location : ''
+            location: ''
 
         }
         // if (this.props.touched.zipCode && zipCode.length <= 3) {
@@ -45,6 +45,7 @@ export default class Landing extends Component {
         if (date === '') {
             errors.date = "Please select the date"
         }
+        
         if (people === '0' || people === 0 || people === '') {
 
             errors.people = "There must be atleast 1 person to find workspace"
@@ -55,10 +56,10 @@ export default class Landing extends Component {
             errors.people = "Maximum number of people can be 50 only"
 
         }
-        if(location===''){
+        if (location === '') {
             errors.location = 'Enter the zipCode to get the location'
         }
-         if(zipCode.length>=5 && location===''){
+        if (zipCode.length >= 5 && location === '') {
             errors.location = 'Incorrect ZipCode or This ZipCode does not exists in our database'
         }
         return errors;
@@ -124,7 +125,7 @@ export default class Landing extends Component {
             });
     }
     render() {
-        const errors = this.validate(this.props.zipCode, this.props.date, this.props.people,this.props.location);
+        const errors = this.validate(this.props.zipCode, this.props.date, this.props.people, this.props.location);
         let isDisabled
         if (this.props.isVerified === false) {
             isDisabled = true;
@@ -170,13 +171,13 @@ export default class Landing extends Component {
                                             invalid={errors.location !== ''}
                                             disabled={true}
                                             value={this.props.location} />
-                                            <FormFeedback>{errors.location}</FormFeedback>
+                                        <FormFeedback>{errors.location}</FormFeedback>
                                     </div>
                                 </FormGroup>
                                 <h4>When do you want to move in?</h4>
                                 <FormGroup row>
 
-                                    <div className="col-sm-8 mt-2">
+                                    <div className="col-sm-6 mt-2">
                                         <Input type="date" id="date" name="date" min={today}
                                             placeholder="Date" value={this.props.date}
                                             valid={errors.date === ''}
@@ -191,10 +192,10 @@ export default class Landing extends Component {
                                     <FormGroup row>
                                         <div className="col-sm-12 mt-2">
 
-                                            <button style={{ height: '40px', width: '40px' }} className="btn btn-danger" onClick={this.props.decrease}><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                            <button style={{ height: '40px', width: '40px',borderRadius : '50px' }} className="btn btn-primary" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
 
 
-                                            <Input name="people" id="people" style={{ height: '35px', width: '50px' }}
+                                            <Input name="people" id="people" style={{ width: '50px',textAlign: 'center' }}
                                                 className="ml-1 mr-1" type="number"
                                                 value={this.props.people}
                                                 valid={errors.people === ''}
@@ -203,7 +204,7 @@ export default class Landing extends Component {
                                                 onBlur={this.props.handleBlur('people')}
                                             />
 
-                                            <Button style={{ height: '40px', width: '40px' }} className="btn btn-primary" onClick={this.props.increase}><i class="fa fa-plus" aria-hidden="true"></i></Button>
+                                            <Button style={{ height: '40px', width: '40px',borderRadius : '50px' }} className="btn btn-dark" onClick={this.props.increase}><i className="fa fa-plus" aria-hidden="true"></i></Button>
                                             <FormFeedback>{errors.people}</FormFeedback>
                                         </div>
 
@@ -224,7 +225,7 @@ export default class Landing extends Component {
                                 <FormGroup row>
                                     <div className="col-sm-12 col-12">
                                         <Button className="btn btn-block" disabled={isDisabled} type="submit" onClick={this.props.toggleWorkspace} color="btn btn-primary">
-                                            Find Workspace <i class="fa fa-arrow-right" aria-hidden="true"></i></Button>
+                                            Find Workspace <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
 
                                     </div>
                                 </FormGroup>
@@ -256,13 +257,13 @@ export default class Landing extends Component {
                                         <FormFeedback>{errors.zipCode}</FormFeedback>
                                     </div>
                                     <div className="col-12 mt-2">
-                                    <Input name="location"
+                                        <Input name="location"
                                             placeholder="Enter 5 or 9-digit Zip Code"
                                             valid={errors.location === ''}
                                             invalid={errors.location !== ''}
                                             disabled={true}
                                             value={this.props.location} />
-                                            <FormFeedback>{errors.location}</FormFeedback>
+                                        <FormFeedback>{errors.location}</FormFeedback>
                                     </div>
                                 </FormGroup>
                                 <h4>When do you want to move in?</h4>
@@ -282,10 +283,10 @@ export default class Landing extends Component {
 
                                 <div className="row form-inline col-12 mt-2">
 
-                                    <button style={{ height: '40px', width: '40px' }} className="btn btn-danger" onClick={this.props.decrease}><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                    <button style={{ height: '40px', width: '40px',borderRadius : '50px' }} className="btn btn-danger" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
 
 
-                                    <Input name="people" id="people" style={{ height: '35px', width: '50px' }}
+                                    <Input name="people" id="people" style={{ width: '50px',textAlign: 'center' }}
                                         className="ml-1 mr-1" type="number"
                                         value={this.props.people}
                                         valid={errors.people === ''}
@@ -294,7 +295,7 @@ export default class Landing extends Component {
                                         onBlur={this.props.handleBlur('people')}
                                     />
 
-                                    <Button style={{ height: '40px', width: '40px' }} className="btn btn-primary" onClick={this.props.increase}><i class="fa fa-plus" aria-hidden="true"></i></Button>
+                                    <Button style={{ height: '40px', width: '40px',borderRadius : '50px' }} className="btn btn-primary" onClick={this.props.increase}><i className="fa fa-plus" aria-hidden="true"></i></Button>
                                     <FormFeedback>{errors.people}</FormFeedback>
                                 </div>
                                 <FormGroup row>
@@ -311,13 +312,13 @@ export default class Landing extends Component {
                                 <FormGroup row>
                                     <div className=" col-12">
                                         <Button className="btn btn-block" disabled={isDisabled} type="submit" onClick={this.props.toggleWorkspace} color="btn btn-primary">
-                                            Find Workspace <i class="fa fa-arrow-right" aria-hidden="true"></i></Button>
+                                            Find Workspace <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
                                     </div>
                                 </FormGroup>
                             </Form>
                         </div>
                     </div>
-                    <div class="push"></div>
+                    <div className="push"></div>
                 </div>
             </>
         )
