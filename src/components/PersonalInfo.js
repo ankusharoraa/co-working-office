@@ -1,6 +1,6 @@
 import React from 'react'
 import { CardHeader, CardBody, Form, FormGroup, Input, Label, Progress, Button, Card, CardTitle } from 'reactstrap';
-import { withRouter, Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 
@@ -156,4 +156,4 @@ const PersonalInfo = (props) => {
     )
 }
 
-export default withRouter(PersonalInfo)
+export default PersonalInfo
