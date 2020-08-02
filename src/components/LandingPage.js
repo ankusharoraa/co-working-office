@@ -151,7 +151,7 @@ export default class Landing extends Component {
                         </div>
                         <div className="col-sm-4 offset-sm-1 wrapper">
                             <h4>Where do you want to find workspace?</h4>
-                            <Form onSubmit={this.handleSubmit}>
+                            <Form onSubmit={this.handleSubmit} key = {'landing'}>
                                 <FormGroup row>
 
                                     <div className="col-sm-4 mt-2">

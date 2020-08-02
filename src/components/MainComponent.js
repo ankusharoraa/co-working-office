@@ -39,7 +39,9 @@ export default class MainComponent extends Component {
             businessName: '',
             personEmail: '',
             personZipCode : '',
-            personLocation : ''
+            personLocation : '',
+            personCity : '',
+            personState : ''
         }
     }
 
@@ -91,7 +93,9 @@ export default class MainComponent extends Component {
         }
          if (city && locState !== undefined && this.state.personZipCode >= 5) {
                 this.setState({
-                    personLocation: `${city}, ${locState}, U.S`
+                    personLocation: `${city}, ${locState}, U.S`,
+                    personCity : city,
+                    personState : locState 
                 })
             // setValue(`${city}, ${state}, U.S`);
             // console.log(JSON.stringify(res.data));
@@ -151,7 +155,9 @@ export default class MainComponent extends Component {
             businessName : 'Spotlight',
             personZipCode : '12345',
             personEmail : 'business@spotlight.com',
-            personLocation : 'Schenectady, NY, U.S'
+            personLocation : 'Schenectady, NY, U.S',
+            personCity : 'Schenectady',
+            personState : 'NY'
         })
     }
     
@@ -160,7 +166,9 @@ export default class MainComponent extends Component {
             businessName : '',
             personZipCode : '',
             personEmail : '',
-            personLocation : ''
+            personLocation : '',
+            personCity : '',
+            personState : ''
         })
     }
 
@@ -174,9 +182,9 @@ export default class MainComponent extends Component {
         return (
             <>
                 <Router history={history}>
-                    <Header />
+                    <Header/>
                     <Switch>
-                        <Route exact path='/' render={() => <Landing
+                        <Route exact path='/' render={() => <Landing key = {'landingComp'}
                             isVerified={this.state.isVerified}
                             zipCode={this.state.zipCode}
                             setDate={this.state.setDate} touched={this.state.touched}
@@ -195,7 +203,7 @@ export default class MainComponent extends Component {
                             people={this.state.people}
                             location={this.state.location} />} />
                         <SecuredRoute path="/workspaces/:workspaceId" component={WorkspaceWithId} />
-                        <Route exact path="/personalinfo" render={() => <PersonalInfo
+                        <Route exact path="/personalinfo" render={() => <PersonalInfo key = {'personalIn'}
                             handInputChange={this.handInputChange}
                             handleBlur={this.handleBlur}
                             onChange={this.onChange}
@@ -205,7 +213,11 @@ export default class MainComponent extends Component {
                             updatePersonDetails = {this.updatePersonDetails}
                             deletePersonDetails = {this.deletePersonDetails}
                             personLocation = {this.state.personLocation} />} />
-                        <Route exact path = "/confirmPerson" render = {()=><ConfirmPerson/>}/>
+                        <Route exact path = "/confirmPerson" render = {()=><ConfirmPerson
+                        personCity = {this.state.personCity}
+                        personState = {this.state.personState}
+                        personEmail = {this.state.personEmail}
+                        businessName = {this.state.businessName}/>}/>
                         <Redirect to='/' />
                     </Switch>
 

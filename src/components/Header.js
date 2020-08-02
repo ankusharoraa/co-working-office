@@ -35,7 +35,7 @@ export default class Header extends Component {
     render() {
         return (
             <>
-                <Navbar className="navbar-light bg-light p-0" expand="sm">
+                <Navbar key = {'navbarKey'} className="navbar-light bg-light p-0" expand="sm">
                     <div className="container-fluid">
                         <NavbarToggler onClick={() => this.toggleNav()} />
                         <NavbarBrand className="mr-auto ml-sm-0" href="/">

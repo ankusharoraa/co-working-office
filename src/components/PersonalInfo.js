@@ -67,7 +67,7 @@ const PersonalInfo = (props) => {
                                     <CardTitle className="lead">Let us get to know you...</CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                    <Form onSubmit={handleSubmit}>
+                                    <Form onSubmit={handleSubmit} key = {'ankuu'}>
                                         <FormGroup row>
 
 
