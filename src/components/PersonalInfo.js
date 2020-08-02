@@ -61,7 +61,7 @@ const PersonalInfo = (props) => {
             <div className="jumbotron py-3 mt-2">
                 <div className="container personalDetails py-3">
                     <div className="row">
-                        <div className="mx-auto col-sm-5">
+                        <div className="mx-auto col-sm-6 col-12">
                             <Card>
                                 <CardHeader>
                                     <CardTitle className="lead">Let us get to know you...</CardTitle>
@@ -125,7 +125,7 @@ const PersonalInfo = (props) => {
                                             <div className="col-sm-4 mt-2" id="edit" style={{ display: 'none' }}>
                                                 <button className="btn btn-dark">Edit Scanned Details</button>
                                             </div>
-                                            <div className="offset-sm-2 col-sm-4 mt-2" id="clear" style={{ display: 'none' }}>
+                                            <div className="offset-sm-3 col-sm-4 mt-2" id="clear" style={{ display: 'none' }}>
                                                 <button className="btn btn-secondary">Delete Scanned Card</button>
                                             </div>
                                         </FormGroup>
