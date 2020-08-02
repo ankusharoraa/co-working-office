@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Redirect, withRouter } from 'react-router';
 
 export const authentication = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     onAuthentication() {
         this.isLoggedIn = true
     },
