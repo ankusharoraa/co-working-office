@@ -11,7 +11,8 @@ import SecuredRoute from './SecuredRoute';
 import { authentication } from './SecuredRoute';
 import axios from 'axios';
 import WorkspaceDetails from './WorkspaceDetails';
-import PersonalInfo from './PersonalInfo';
+import PersonalInfo from './PersonalInfo'
+import ConfirmPerson from './ConfirmPerson';
 
 
 
@@ -21,12 +22,12 @@ export default class MainComponent extends Component {
         this.state = {
             isVerified: false,
             zipCode: '',
-            date: '',
+            setDate: '',
             agree: false,
             people: 0,
             touched: {
                 zipCode: false,
-                date: false,
+                setDate: false,
                 people: false,
                 businessName: false,
                 personEmail: false,
@@ -37,12 +38,13 @@ export default class MainComponent extends Component {
             location: '',
             businessName: '',
             personEmail: '',
-            personZipCode : ''
+            personZipCode : '',
+            personLocation : ''
         }
     }
 
     handInputChange = async (event) => {
-
+    
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -51,33 +53,51 @@ export default class MainComponent extends Component {
             [name]: value
         })
 
-        if (this.state.zipCode.length === 5) {
+        if (this.state.zipCode.length === 5 && this.state.location==='') {
+
             let zipCodeUs = this.state.zipCode;
             this.handleFetch(zipCodeUs);
         }
-        else if (this.state.zipCode.length <= 5) {
+        else if (this.state.zipCode.length < 5) {
             this.setState({
                 location: ''
+            })
+        }
+
+        if (this.state.personZipCode.length === 5 && this.state.personLocation === '') {
+            
+            let zipCodeUs = this.state.personZipCode;
+            this.handleFetch(zipCodeUs);
+        }
+        else if (this.state.personZipCode.length < 5) {
+            this.setState({
+                personLocation: ''
             })
         }
     }
 
     handleFetch = async (zipCodeUs) => {
-        // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-        const api = 'LeptzmnMR76qtyukJQFsprY1Y4RTJkZ2F18ykBkp1RyxmWriWsa39F8K2fcs2ZVT';
-        // let formatZip = this.state.zipCode.slice(0,5);
-        let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${zipCodeUs}/degrees`
+        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        // const api = 'GARVgdgRSwnEqoyd4SBmg3WGKtqu1lFgqDjPk8gCtjNDSz5oU5bVqGSkx5vJ8VWl';
+        let formatZip = zipCodeUs.slice(0,5);
+        let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
         const res = await axios.get(url);
-        const city = res.data.city;
-        const locState = res.data.state
-        if (city && locState !== undefined) {
+        let city = res.data.city;
+        let locState = res.data.state
+        if (city && locState !== undefined && this.state.zipCode >= 5) {
             this.setState({
                 location: `${city}, ${locState}, U.S`
             })
+        }
+         if (city && locState !== undefined && this.state.personZipCode >= 5) {
+                this.setState({
+                    personLocation: `${city}, ${locState}, U.S`
+                })
             // setValue(`${city}, ${state}, U.S`);
             // console.log(JSON.stringify(res.data));
         }
     }
+    
 
     handleBlur = (field) => (evt) => {
 
@@ -130,7 +150,8 @@ export default class MainComponent extends Component {
         this.setState({
             businessName : 'Spotlight',
             personZipCode : '12345',
-            personEmail : 'business@spotlight.com'
+            personEmail : 'business@spotlight.com',
+            personLocation : 'Schenectady, NY, U.S'
         })
     }
     
@@ -138,7 +159,8 @@ export default class MainComponent extends Component {
         this.setState({
             businessName : '',
             personZipCode : '',
-            personEmail : ''
+            personEmail : '',
+            personLocation : ''
         })
     }
 
@@ -157,7 +179,7 @@ export default class MainComponent extends Component {
                         <Route exact path='/' render={() => <Landing
                             isVerified={this.state.isVerified}
                             zipCode={this.state.zipCode}
-                            date={this.state.date} touched={this.state.touched}
+                            setDate={this.state.setDate} touched={this.state.touched}
                             handInputChange={this.handInputChange}
                             handleBlur={this.handleBlur}
                             toggleWorkspace={this.toggleWorkspace}
@@ -169,7 +191,7 @@ export default class MainComponent extends Component {
                         <SecuredRoute exact path='/workspaces' component={() => <Workspace
                             zipCode={this.state.zipCode}
                             workspaceinfo={this.state.workspaceinfo}
-                            date={this.state.date}
+                            setDate={this.state.setDate}
                             people={this.state.people}
                             location={this.state.location} />} />
                         <SecuredRoute path="/workspaces/:workspaceId" component={WorkspaceWithId} />
@@ -181,7 +203,9 @@ export default class MainComponent extends Component {
                             businessName={this.state.businessName}
                             personEmail={this.state.personEmail}
                             updatePersonDetails = {this.updatePersonDetails}
-                            deletePersonDetails = {this.deletePersonDetails} />} />
+                            deletePersonDetails = {this.deletePersonDetails}
+                            personLocation = {this.state.personLocation} />} />
+                        <Route exact path = "/confirmPerson" render = {()=><ConfirmPerson/>}/>
                         <Redirect to='/' />
                     </Switch>
 

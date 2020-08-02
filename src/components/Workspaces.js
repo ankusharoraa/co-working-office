@@ -36,23 +36,6 @@ let outputValue = () => {
 }
 
 const Workspace = (props) => {
-    // const [cityName, setValue] = useState('');
-    // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-    //  useEffect(() => {
-    //      async function fetch(){
-    //          let formatZip = props.zipCode.slice(0,5);
-    //         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-    //         const res = await axios.get(url);
-            
-    //         const city = res.data.city;
-    //         const state = res.data.state
-    //         if(city && state!==undefined){
-    //         setValue(`${city}, ${state}, U.S`);
-    //         console.log(JSON.stringify(res.data));
-    //         }
-    //      }
-    //   fetch();
-    //   });
     const Work = props.workspaceinfo.map((workObj) => {
         return (
             <div className="col-sm-5 mt-3 mb-2 col-12" key={workObj.id}>
@@ -78,7 +61,7 @@ const Workspace = (props) => {
                 </div>
                 <div className="row mt-2 d-flex justify-content-center">
                     <div className="col-sm-5 offset-sm-1 col-12">
-                        <p>Showing avalable properties for Date:- <strong>{props.date}</strong> and for <strong>{props.people}</strong> peoples</p>
+                        <p>Showing avalable properties for Date:- <strong>{props.setDate}</strong> and for <strong>{props.people}</strong> peoples</p>
                     </div>
                     <div className="col-sm-4 offset-sm-2 col-12">
                         <label for="price"><strong>Price Range (<i class="fa fa-usd" aria-hidden="true"></i>) :- </strong>  </label>

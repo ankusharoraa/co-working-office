@@ -19,11 +19,11 @@ export default class Landing extends Component {
 
     }
 
-    validate = (zipCode, date, people, location) => {
+    validate = (zipCode, setDate, people, location) => {
 
         const errors = {
             zipCode: '',
-            date: '',
+            setDate: '',
             people: '',
             location: ''
 
@@ -42,8 +42,8 @@ export default class Landing extends Component {
             errors.zipCode = "Please enter the zip code"
         }
 
-        if (date === '') {
-            errors.date = "Please select the date"
+        if (setDate === '') {
+            errors.setDate = "Please select the setDate"
         }
         
         if (people === '0' || people === 0 || people === '') {
@@ -125,7 +125,7 @@ export default class Landing extends Component {
             });
     }
     render() {
-        const errors = this.validate(this.props.zipCode, this.props.date, this.props.people, this.props.location);
+        const errors = this.validate(this.props.zipCode, this.props.setDate, this.props.people, this.props.location);
         let isDisabled
         if (this.props.isVerified === false) {
             isDisabled = true;
@@ -178,13 +178,13 @@ export default class Landing extends Component {
                                 <FormGroup row>
 
                                     <div className="col-sm-6 mt-2">
-                                        <Input type="date" id="date" name="date" min={today}
-                                            placeholder="Date" value={this.props.date}
-                                            valid={errors.date === ''}
-                                            invalid={errors.date !== ''}
-                                            onBlur={this.props.handleBlur('date')}
+                                        <Input type="date" id="setDate" name="setDate" min={today}
+                                             value={this.props.setDate}
+                                            valid={errors.setDate === ''}
+                                            invalid={errors.setDate !== ''}
+                                            onBlur={this.props.handleBlur('setDate')}
                                             onChange={this.props.handInputChange} />
-                                        <FormFeedback>{errors.date}</FormFeedback>
+                                        <FormFeedback>{errors.setDate}</FormFeedback>
                                     </div>
                                 </FormGroup>
                                 <h4>How many people do you want to accommodate?</h4>
@@ -270,13 +270,13 @@ export default class Landing extends Component {
                                 <FormGroup row>
                                     {/* <Label htmlFor="date" className="col-md-3 col-3">Date</Label> */}
                                     <div className="col-12 mt-2">
-                                        <Input type="date" name="date" min={today}
-                                            placeholder="Date" value={this.props.date}
-                                            valid={errors.date === ''}
-                                            invalid={errors.date !== ''}
-                                            onBlur={this.props.handleBlur('date')}
+                                        <Input type="date" name="setDate" min={today}
+                                            placeholder="Date" value={this.props.setDate}
+                                            valid={errors.setDate === ''}
+                                            invalid={errors.setDate !== ''}
+                                            onBlur={this.props.handleBlur('setDate')}
                                             onChange={this.props.handInputChange} />
-                                        <FormFeedback>{errors.date}</FormFeedback>
+                                        <FormFeedback>{errors.setDate}</FormFeedback>
                                     </div>
                                 </FormGroup>
                                 <h4>How many people do you want to accommodate?</h4>
