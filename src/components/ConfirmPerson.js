@@ -49,6 +49,7 @@ export default function ConfirmPerson(props) {
                                             <Label htmlFor="ownerName" className="col-sm-4 col-form-label form-control-label required">Owner's Name</Label>
                                             <div className="col-sm-8">
                                                 <Input type="text" name="ownerName" id="ownerName"
+                                                value = {props.personName}
                                                 />
                                             </div>
                                             {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}
@@ -61,6 +62,7 @@ export default function ConfirmPerson(props) {
                                             <Label htmlFor="address" className="col-sm-4 col-form-label form-control-label required">Address</Label>
                                             <div className="col-sm-8">
                                                 <Input type="text" name="address" id="address"
+                                                value = {props.personAddress}
                                                 />
                                             </div>
                                             {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}
@@ -107,6 +109,7 @@ export default function ConfirmPerson(props) {
                                             <Label htmlFor="phoneNumber" className="col-sm-4 col-form-label form-control-label required">Phone Number</Label>
                                             <div className="col-sm-8">
                                                 <Input id="phoneNumber" type="text" name="phoneNumber"
+                                                value = {props.personPhone}
                                                 />
                                             </div>
 

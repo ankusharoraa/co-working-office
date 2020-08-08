@@ -1,8 +1,14 @@
 import React from 'react'
 import { CardHeader, CardBody, Form, FormGroup, Input, Label, Progress, Button, Card, CardTitle } from 'reactstrap';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
+// function uploadFile() {
+//     document.getElementById('scanBtn').addEventListener("click", function() {
+//         document.getElementById('scanFile').click();
+//     });
+    
+// }
 
 const PopulateDetails = (updatePersonDetails, deletePersonDetails) => {
     updatePersonDetails();
@@ -48,6 +54,14 @@ let handleSubmit = (event) => {
 
 }
 const PersonalInfo = (props) => {
+//     let fileName = '';
+//    if(props.selectedFile.name!=null){
+//         fileName = props.selectedFile.name
+//    }
+//    else{
+//        fileName = ''
+//    }
+   
     return (
         <>
             <div className="container-fluid">
@@ -67,7 +81,7 @@ const PersonalInfo = (props) => {
                                     <CardTitle className="lead">Let us get to know you...</CardTitle>
                                 </CardHeader>
                                 <CardBody>
-                                    <Form onSubmit={handleSubmit} key = {'ankuu'}>
+                                    <Form onSubmit={handleSubmit} key={'ankuu'}>
                                         <FormGroup row>
 
 
@@ -130,28 +144,50 @@ const PersonalInfo = (props) => {
                                             </div>
                                         </FormGroup>
                                         <h3 id="or" style={{ textAlign: 'center' }} className="mt-4">OR</h3>
-                                        
-                                        <div id="scan" style={{ cursor: 'pointer' }} onClick={() => PopulateDetails(props.updatePersonDetails, props.deletePersonDetails)} className="card bg-warning mt-4">
+                                        {/* <div id="scan" className="card mt-4  bg-dark">
                                         <div className="card-body text-center">
-                                            <div className="card-text">Scan a business card</div>
+                                            <input id="scanFile" type="file" style = {{display : 'none'}} />
+                                                <button onClick = {uploadFile} className = "btn btn-dark" id="scanBtn">Scan a business card</button>
+                                                </div>
+                                        </div> */}
+
+                                            <div id = "scan" className="card mt-4  bg-warning">
+                                        <div className="card-body text-center">
+                    
+                                            <input type="file" id = "files" style = {{display : 'none'}} onChange={props.onFileChange}/>
+                                            <label htmlFor="files" style={{ cursor: 'pointer',fontWeight : 'bold' }}>Scan a business card</label>
+                                            {/* <button className = "btn btn-dark" onClick={props.onFileUpload}>
+                                                Upload!
+                                            </button> */}
+                                            </div>
+                                       
                                         </div>
-                                    </div>
-                                        <FormGroup row>
-                                        <div className="col-sm-12 col-12 mt-3">
-                                        <Link style={{ textDecoration: 'none' }} to='confirmPerson'><button className="btn btn-block btn-primary">Next <i className="fa fa-arrow-right" aria-hidden="true"></i></button></Link>
-                                    </div>
-                                        </FormGroup>
+                                        {/* <div>
+                                            {fileName}
+                                        </div> */}
+                                            {/* <div id="scan" style={{ cursor: 'pointer' }} className="card bg-warning mt-4">
+                                        <div className="card-body text-center">
+                                            <div className="card-text">
+                                                <input type = "file" onChange={props.onFileChange}/>
+                                                Scan a business card</div>
+                                        </div>
+                                    </div> */}
+                                            <FormGroup row>
+                                                <div className="col-sm-12 col-12 mt-3">
+                                                    <Link style={{ textDecoration: 'none' }} to='confirmPerson'><button className="btn btn-block btn-primary">Next <i className="fa fa-arrow-right" aria-hidden="true"></i></button></Link>
+                                                </div>
+                                            </FormGroup>
                                     </Form>
 
 
-                                    
-                                  
+
+
                                 </CardBody>
                             </Card>
                         </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </>
     )
 }
