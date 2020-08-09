@@ -217,7 +217,7 @@ export default class MainComponent extends Component {
     };
 
     scanCard = async (selectedFileState, imageChkSumState) => {
-        let res
+        let res = '';
         let taskId = '';
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         let url = 'https://cloud-westus.ocrsdk.com/v2/processBusinessCard?exportFormat=xml';
@@ -245,8 +245,9 @@ export default class MainComponent extends Component {
         // alert(taskId);
         this.GetresultUrls(taskId);
     }
+
     // xml  response to JSON
-    xmlToJson(xml) {
+    xmlToJson = (xml) =>{
         // Create the return object
         let obj = {};
 
@@ -293,9 +294,9 @@ export default class MainComponent extends Component {
         return obj;
     }
     GetresultUrls = async (taskId) => {
-        let resultUrls
-        let getRes
-        let jsonResponse
+        let resultUrls = ''
+        let getRes = ''
+        let jsonResponse = ''
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         let url2 = 'https://cloud-westus.ocrsdk.com/v2/getTaskStatus';
         let username = "53573204-976c-40f4-a22b-5f6bad540290"
@@ -308,10 +309,18 @@ export default class MainComponent extends Component {
         }
         const paramsNew = { 'taskId': taskId }
         try {
-            getRes = await trackPromise(axios.get(proxyurl + url2, { headers: httpOptions2, params: paramsNew }))
-            console.log(JSON.stringify(getRes.data))
             
-            resultUrls = getRes.data.resultUrls[0];
+            getRes = await trackPromise(axios.get(proxyurl + url2, { headers: httpOptions2, params: paramsNew }))
+            console.log("url check --->"+JSON.stringify(getRes.data))
+            // requestUrl will be empty if it is in other status than complete
+            while(getRes.data.status!=='Completed'){
+                console.log("Inside while")
+                getRes = ''
+                getRes = await trackPromise(axios.get(proxyurl + url2, { headers: httpOptions2, params: paramsNew }))
+                console.log("while---->"+JSON.stringify(getRes.data))
+            }
+             resultUrls = await getRes.data.resultUrls[0];
+            
             // alert(resultUrls)
             const response = await trackPromise(fetch(proxyurl + resultUrls));
             
