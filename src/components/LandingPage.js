@@ -195,7 +195,7 @@ export default class Landing extends Component {
                                             <button style={{ height: '40px', width: '40px',borderRadius : '50px' }} className="btn btn-primary" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
 
 
-                                            <Input name="people" id="people" style={{ width: '50px',textAlign: 'center' }}
+                                            <Input name="people" id="people" style={{ width: '70px',textAlign: 'center'}}
                                                 className="ml-1 mr-1" type="number"
                                                 value={this.props.people}
                                                 valid={errors.people === ''}

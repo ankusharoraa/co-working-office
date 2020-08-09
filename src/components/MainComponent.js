@@ -90,7 +90,7 @@ export default class MainComponent extends Component {
     handleFetch = async (zipCodeUs) => {
         const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
         // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        // const api = 'Cs0B6SzMd49dnyuT8AvjYnElfaHPAgMO6478wMQdnnZsqvZA8O64Urz2rBFFAEDG';
+        // const api = 'GG25HBxBIbWTyCmL38aAguaRMdjdzOMdzW1dOYN4w0ANmatnlIuSBFaWL1sS22G1';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
         const res = await axios.get(url);
@@ -163,13 +163,13 @@ export default class MainComponent extends Component {
     onFileChange = async (event) => {
 
         // Update the state 
-        if(this.state.businessName!==''||this.state.personAddress!==''||this.state.personEmail!==''||this.state.personPhone!==''){
+        if (this.state.businessName !== '' || this.state.personAddress !== '' || this.state.personEmail !== '' || this.state.personPhone !== '') {
             this.setState({
-                businessName : '',
-                personAddress :'',
-                personEmail : '',
-                personName :'',
-                personPhone : ''
+                businessName: '',
+                personAddress: '',
+                personEmail: '',
+                personName: '',
+                personPhone: ''
             })
         }
         await this.setState({ selectedFile: event.target.files[0] });
@@ -247,7 +247,7 @@ export default class MainComponent extends Component {
     }
 
     // xml  response to JSON
-    xmlToJson = (xml) =>{
+    xmlToJson = (xml) => {
         // Create the return object
         let obj = {};
 
@@ -294,6 +294,7 @@ export default class MainComponent extends Component {
         return obj;
     }
     GetresultUrls = async (taskId) => {
+        let hitCount = 0;
         let resultUrls = ''
         let getRes = ''
         let jsonResponse = ''
@@ -309,27 +310,33 @@ export default class MainComponent extends Component {
         }
         const paramsNew = { 'taskId': taskId }
         try {
-            
+
             getRes = await trackPromise(axios.get(proxyurl + url2, { headers: httpOptions2, params: paramsNew }))
-            console.log("url check --->"+JSON.stringify(getRes.data))
+            console.log("url check --->" + JSON.stringify(getRes.data))
             // requestUrl will be empty if it is in other status than complete
-            while(getRes.data.status!=='Completed'){
-                console.log("Inside while")
-                getRes = ''
-                getRes = await trackPromise(axios.get(proxyurl + url2, { headers: httpOptions2, params: paramsNew }))
-                console.log("while---->"+JSON.stringify(getRes.data))
+            while (getRes.data.status !== 'Completed') {
+                if (hitCount <= 10) {
+                    console.log("Inside while")
+                    getRes = ''
+                    getRes = await trackPromise(axios.get(proxyurl + url2, { headers: httpOptions2, params: paramsNew }))
+                    console.log("while---->" + JSON.stringify(getRes.data) + " count is " + hitCount)
+                    hitCount++;
+                }
+                else {
+                    break;
+                }
             }
-             resultUrls = await getRes.data.resultUrls[0];
-            
+            resultUrls = await getRes.data.resultUrls[0];
+
             // alert(resultUrls)
             const response = await trackPromise(fetch(proxyurl + resultUrls));
-            
+
             const xmlString = await trackPromise(response.text());
             let XmlNode = new DOMParser().parseFromString(xmlString, 'text/xml');
             jsonResponse = this.xmlToJson(XmlNode);
             console.log("Response of xml ", jsonResponse)
             this.setDataforXmlResponse(jsonResponse)
-            
+
         } catch (e) {
             console.error("error in taskId---->" + e)
         }
@@ -348,7 +355,7 @@ export default class MainComponent extends Component {
             }
             if (i["@attributes"].type === "Email") {
                 // this.addressOnCard = i.value
-                if (i.value !== '' && i.value !== null && i.value!==0) {
+                if (i.value !== '' && i.value !== null && i.value !== 0) {
                     this.setState({
                         personEmail: i.value
                     })
@@ -356,7 +363,7 @@ export default class MainComponent extends Component {
             }
             if (i["@attributes"].type === "Phone") {
                 // this.addressOnCard = i.value
-                if (i.value !== '' && i.value !== null && i.value!==0) {
+                if (i.value !== '' && i.value !== null && i.value !== 0) {
                     this.setState({
                         personPhone: i.value
                     })
@@ -364,7 +371,7 @@ export default class MainComponent extends Component {
             }
             if (i["@attributes"].type === "Name") {
                 // this.addressOnCard = i.value
-                if (i.value !== '' && i.value !== null && i.value!==0) {
+                if (i.value !== '' && i.value !== null && i.value !== 0) {
                     this.setState({
                         personName: i.value
                     })
@@ -372,7 +379,7 @@ export default class MainComponent extends Component {
             }
             if (i["@attributes"].type === "Address") {
                 // this.addressOnCard = i.value
-                if (i.value !== '' && i.value !== null && i.value!==0) {
+                if (i.value !== '' && i.value !== null && i.value !== 0) {
                     this.setState({
                         personAddress: i.value
                     })
@@ -446,7 +453,10 @@ export default class MainComponent extends Component {
                             deletePersonDetails={this.deletePersonDetails}
                             personLocation={this.state.personLocation}
                             onFileChange={this.onFileChange}
-                            selectedFile={this.state.selectedFile} />} />
+                            selectedFile={this.state.selectedFile}
+                            personEmailTouched = {this.state.touched.personEmail}
+                            businessNameTouched = {this.state.touched.businessName}
+                            personZipCodeTouched = {this.state.touched.personZipCode} />} />
                         <Route exact path="/confirmPerson" render={() => <ConfirmPerson
                             personCity={this.state.personCity}
                             personState={this.state.personState}

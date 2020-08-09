@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardHeader, CardBody, Form, FormGroup, Input, Label, Progress, Button, Card, CardTitle } from 'reactstrap';
+import { CardHeader, CardBody, Form, FormGroup, Input, Label, Progress, Button, Card, CardTitle, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -7,61 +7,101 @@ import { Link } from 'react-router-dom';
 //     document.getElementById('scanBtn').addEventListener("click", function() {
 //         document.getElementById('scanFile').click();
 //     });
-    
+
 // }
 
-const PopulateDetails = (updatePersonDetails, deletePersonDetails) => {
-    updatePersonDetails();
-    let business = document.getElementById('businessName')
-    let personEmail = document.getElementById('personEmail')
-    let personZip = document.getElementById('personZipCode')
-    let scan = document.getElementById('scan')
-    let or = document.getElementById('or')
-    let edit = document.getElementById('edit');
-    let clear = document.getElementById('clear');
-    business.disabled = true;
-    console.log(business.disabled)
-    personEmail.disabled = true;
-    personZip.disabled = true;
-    scan.style.display = 'none';
-    or.style.display = 'none';
-    edit.style.display = 'block';
-    clear.style.display = 'block';
+// const PopulateDetails = (updatePersonDetails, deletePersonDetails) => {
+//     updatePersonDetails();
+//     let business = document.getElementById('businessName')
+//     let personEmail = document.getElementById('personEmail')
+//     let personZip = document.getElementById('personZipCode')
+//     let scan = document.getElementById('scan')
+//     let or = document.getElementById('or')
+//     let edit = document.getElementById('edit');
+//     let clear = document.getElementById('clear');
+//     business.disabled = true;
+//     console.log(business.disabled)
+//     personEmail.disabled = true;
+//     personZip.disabled = true;
+//     scan.style.display = 'none';
+//     or.style.display = 'none';
+//     edit.style.display = 'block';
+//     clear.style.display = 'block';
 
-    edit.addEventListener('click', () => {
-        business.disabled = false;
-        personEmail.disabled = false;
-        personZip.disabled = false;
+//     edit.addEventListener('click', () => {
+//         business.disabled = false;
+//         personEmail.disabled = false;
+//         personZip.disabled = false;
 
-    })
+//     })
 
-    clear.addEventListener('click', () => {
-        deletePersonDetails();
-        edit.style.display = 'none';
-        clear.style.display = 'none';
-        scan.style.display = 'block';
-        or.style.display = 'block';
-        business.disabled = false;
-        personEmail.disabled = false;
-        personZip.disabled = false;
-    })
+//     clear.addEventListener('click', () => {
+//         deletePersonDetails();
+//         edit.style.display = 'none';
+//         clear.style.display = 'none';
+//         scan.style.display = 'block';
+//         or.style.display = 'block';
+//         business.disabled = false;
+//         personEmail.disabled = false;
+//         personZip.disabled = false;
+//     })
 
 
 
+// }
+
+const Validate = (businessName, personEmail, personZipCode, touchedPersonEmail, businessNameTouched, personZipCodeTouched, personLocation) => {
+
+    const errors = {
+        businessName: '',
+        personEmail: '',
+        personZipCode: '',
+        personLocation: ''
+    }
+    if (businessNameTouched && businessName.length < 3) {
+        errors.businessName = "Business name length should be more than 3"
+    }
+    const reg = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
+    if (touchedPersonEmail && !reg.test(personEmail)) {
+        errors.personEmail = "Please enter valid email format"
+    }
+    const regZip = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
+    if (personZipCodeTouched && !regZip.test(personZipCode)) {
+        errors.personZipCode = "Please enter the zip code in the US zip code format"
+    }
+    else if (personZipCodeTouched && personZipCode === '') {
+        errors.personZipCode = "Please enter the zip code"
+    }
+    if (personLocation === '') {
+        errors.personLocation = 'Enter the zipCode to get the location'
+    }
+    if (personZipCode.length >= 5 && personLocation === '') {
+        errors.personLocation = 'Incorrect ZipCode or This ZipCode does not exists in our database'
+    }
+
+    return errors;
 }
+
 let handleSubmit = (event) => {
     event.preventDefault();
 
 }
 const PersonalInfo = (props) => {
-//     let fileName = '';
-//    if(props.selectedFile.name!=null){
-//         fileName = props.selectedFile.name
-//    }
-//    else{
-//        fileName = ''
-//    }
-   
+    //     let fileName = '';
+    //    if(props.selectedFile.name!=null){
+    //         fileName = props.selectedFile.name
+    //    }
+    //    else{
+    //        fileName = ''
+    //    }
+
+    const errors = Validate(props.businessName, props.personEmail, props.personZipCode, props.personEmailTouched, props.businessNameTouched, props.personZipCodeTouched, props.personLocation);
+    let isDisabled
+    isDisabled = true;
+    isDisabled = Object.keys(errors).some(x => errors[x]);
+    // console.log("is disabled ---> "+isDisabled)
+
+
     return (
         <>
             <div className="container-fluid">
@@ -88,11 +128,15 @@ const PersonalInfo = (props) => {
                                             <Label htmlFor="businessName" className="col-sm-4 col-form-label form-control-label required">Business Name</Label>
                                             <div className="col-sm-8">
                                                 <Input key="business" type="text" name="businessName" id="businessName"
+                                                    valid={errors.businessName === ''}
+                                                    invalid={errors.businessName !== ''}
                                                     onBlur={props.handleBlur('businessName')}
                                                     onChange={props.handInputChange}
-                                                    value={props.businessName} />
+                                                    value={props.businessName}
+                                                />
+                                                <FormFeedback>{errors.businessName}</FormFeedback>
                                             </div>
-                                            {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}
+
 
                                         </FormGroup>
                                         <FormGroup row>
@@ -101,11 +145,14 @@ const PersonalInfo = (props) => {
                                             <Label htmlFor="personEmail" className="col-sm-4 col-form-label form-control-label required">Email</Label>
                                             <div className="col-sm-8">
                                                 <Input key="personEmail" type="email" name="personEmail" id="personEmail"
+                                                    valid={errors.personEmail === ''}
+                                                    invalid={errors.personEmail !== ''}
                                                     onChange={props.handInputChange}
                                                     onBlur={props.handleBlur('personEmail')}
                                                     value={props.personEmail} />
+                                                <FormFeedback>{errors.personEmail}</FormFeedback>
                                             </div>
-                                            {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}
+
 
                                         </FormGroup>
                                         <FormGroup row>
@@ -114,12 +161,15 @@ const PersonalInfo = (props) => {
                                             <Label htmlFor="personZipCode" className="col-sm-4 col-form-label form-control-label required">Zip Code</Label>
                                             <div className="col-sm-8">
                                                 <Input id="personZipCode" type="text" name="personZipCode"
+                                                    valid={errors.personZipCode === ''}
+                                                    invalid={errors.personZipCode !== ''}
                                                     onBlur={props.handleBlur('personZipCode')}
                                                     onChange={props.handInputChange}
                                                     value={props.personZipCode} />
+                                                <FormFeedback>{errors.personZipCode}</FormFeedback>
                                             </div>
 
-                                            {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}
+
 
                                         </FormGroup>
                                         <FormGroup row>
@@ -128,11 +178,13 @@ const PersonalInfo = (props) => {
                                             <Label htmlFor="personLocation" className="col-sm-4 col-form-label form-control-label required">Location</Label>
                                             <div className="col-sm-8">
                                                 <Input disabled={true} id="personLocation" type="text" name="personLocation"
-
+                                                    valid={errors.personLocation === ''}
+                                                    invalid={errors.personLocation !== ''}
                                                     value={props.personLocation} />
+                                                <FormFeedback>{errors.personLocation}</FormFeedback>
                                             </div>
 
-                                            {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}
+
 
                                         </FormGroup>
                                         <FormGroup row>
@@ -151,32 +203,32 @@ const PersonalInfo = (props) => {
                                                 </div>
                                         </div> */}
 
-                                            <div id = "scan" className="card mt-4  bg-warning">
-                                        <div className="card-body text-center">
-                    
-                                            <input type="file" id = "files" style = {{display : 'none'}} onChange={props.onFileChange}/>
-                                            <label htmlFor="files" style={{ cursor: 'pointer',fontWeight : 'bold' }}>Scan a business card</label>
-                                            {/* <button className = "btn btn-dark" onClick={props.onFileUpload}>
+                                        <div id="scan" className="card mt-4  bg-warning">
+                                            <div className="card-body text-center">
+
+                                                <input type="file" id="files" style={{ display: 'none' }} onChange={props.onFileChange} />
+                                                <label htmlFor="files" style={{ cursor: 'pointer', fontWeight: 'bold' }}>Scan a business card</label>
+                                                {/* <button className = "btn btn-dark" onClick={props.onFileUpload}>
                                                 Upload!
                                             </button> */}
                                             </div>
-                                       
+
                                         </div>
                                         {/* <div>
                                             {fileName}
                                         </div> */}
-                                            {/* <div id="scan" style={{ cursor: 'pointer' }} className="card bg-warning mt-4">
+                                        {/* <div id="scan" style={{ cursor: 'pointer' }} className="card bg-warning mt-4">
                                         <div className="card-body text-center">
                                             <div className="card-text">
                                                 <input type = "file" onChange={props.onFileChange}/>
                                                 Scan a business card</div>
                                         </div>
                                     </div> */}
-                                            <FormGroup row>
-                                                <div className="col-sm-12 col-12 mt-3">
-                                                    <Link style={{ textDecoration: 'none' }} to='confirmPerson'><button className="btn btn-block btn-primary">Next <i className="fa fa-arrow-right" aria-hidden="true"></i></button></Link>
-                                                </div>
-                                            </FormGroup>
+                                        <FormGroup row>
+                                            <div className="col-sm-12 col-12 mt-3">
+                                                <Link style={{ textDecoration: 'none' }} to={isDisabled?'#':'confirmperson'}><button className="btn btn-block btn-primary" disabled={isDisabled}>Next <i className="fa fa-arrow-right" aria-hidden="true"></i></button></Link>
+                                            </div>
+                                        </FormGroup>
                                     </Form>
 
 
@@ -185,9 +237,9 @@ const PersonalInfo = (props) => {
                                 </CardBody>
                             </Card>
                         </div>
-                        </div>
                     </div>
                 </div>
+            </div>
         </>
     )
 }
