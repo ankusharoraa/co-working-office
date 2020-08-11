@@ -89,8 +89,8 @@ export default class MainComponent extends Component {
 
     handleFetch = async (zipCodeUs) => {
         const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        // const api = 'GG25HBxBIbWTyCmL38aAguaRMdjdzOMdzW1dOYN4w0ANmatnlIuSBFaWL1sS22G1';
+        // const proxyurl = "https://corsaccess.herokuapp.com/";
+        // const api = 'GxiqzvIQ8f5JIu5FMNIsjzjajqogoExPwTdCSg0OfdJeHnNtZAU9op9b20fNACjw';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
         const res = await axios.get(url);
@@ -169,7 +169,9 @@ export default class MainComponent extends Component {
                 personAddress: '',
                 personEmail: '',
                 personName: '',
-                personPhone: ''
+                personPhone: '',
+                personZipCode : '',
+                personLocation : ''
             })
         }
         await this.setState({ selectedFile: event.target.files[0] });
@@ -219,7 +221,7 @@ export default class MainComponent extends Component {
     scanCard = async (selectedFileState, imageChkSumState) => {
         let res = '';
         let taskId = '';
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const proxyurl = "https://corsaccess.herokuapp.com/";
         let url = 'https://cloud-westus.ocrsdk.com/v2/processBusinessCard?exportFormat=xml';
         let username = "53573204-976c-40f4-a22b-5f6bad540290"
         let pass = "W9zhas+CMMYurG3HOmnrqsig"
@@ -298,7 +300,7 @@ export default class MainComponent extends Component {
         let resultUrls = ''
         let getRes = ''
         let jsonResponse = ''
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const proxyurl = "https://corsaccess.herokuapp.com/";
         let url2 = 'https://cloud-westus.ocrsdk.com/v2/getTaskStatus';
         let username = "53573204-976c-40f4-a22b-5f6bad540290"
         let pass = "W9zhas+CMMYurG3HOmnrqsig"
@@ -342,7 +344,7 @@ export default class MainComponent extends Component {
         }
 
     }
-    setDataforXmlResponse(xmltojsonResponse) {
+     setDataforXmlResponse = (xmltojsonResponse) => {
         const Data = xmltojsonResponse
         //console.log(Data.document.businessCard.field) 
         const length = Data.document.businessCard.field.length
@@ -379,6 +381,39 @@ export default class MainComponent extends Component {
             }
             if (i["@attributes"].type === "Address") {
                 // this.addressOnCard = i.value
+                let newArr = []
+                let checkZip = []
+                newArr = i.value.split(' ')
+                for(let j=0;j<newArr.length;j++){
+                    checkZip[j] = parseInt(newArr[j]);
+                    // if(isNaN(checkZip[j])){
+                    //     checkZip.splice(j,1)
+                    // }
+                    // console.log(`${checkZip[j]} ${typeof(checkZip[j])} `)
+                  
+                    // if(newArr[j].length>=5 && Number.isInteger(newArr[j])){
+                    //     console.log(newArr[j])
+                    // }
+                }
+                for(let j=checkZip.length;j>=0;j--){
+                    
+                    if(isNaN(checkZip[j])){
+                        checkZip.splice(j,1)
+                    }
+                    if(checkZip[j]>=5){
+                        let locationZip = checkZip[j].toString()
+                        
+                        this.setState({
+                            personZipCode : checkZip[j]
+                        })
+                         this.handleFetch(locationZip);
+                        break;
+                    }
+                    
+                }
+                
+                console.log(`Check Zip ---> ${[...checkZip]}`)
+                console.log(`newArr ---> ${newArr.length}, ${newArr}`)
                 if (i.value !== '' && i.value !== null && i.value !== 0) {
                     this.setState({
                         personAddress: i.value
