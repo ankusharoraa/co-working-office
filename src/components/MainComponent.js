@@ -90,7 +90,7 @@ export default class MainComponent extends Component {
     handleFetch = async (zipCodeUs) => {
         const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
         // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'GxiqzvIQ8f5JIu5FMNIsjzjajqogoExPwTdCSg0OfdJeHnNtZAU9op9b20fNACjw';
+        // const api = 'bIdVpbF6QaBqf07zutnoTGbzkQMbo4konMAmkgLMW7rwA70FT687sJUcTuYGRS4k';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
         const res = await axios.get(url);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-    Button, Form, FormGroup, Input, FormFeedback
+    Button, Form, FormGroup, Input, FormFeedback, Card, CardHeader, CardBody, CardTitle
 } from 'reactstrap';
 import anime from 'animejs/lib/anime.es.js';
 import ReCAPTCHA from "react-google-recaptcha";
@@ -45,7 +45,7 @@ export default class Landing extends Component {
         if (setDate === '') {
             errors.setDate = "Please select the setDate"
         }
-        
+
         if (people === '0' || people === 0 || people === '') {
 
             errors.people = "There must be atleast 1 person to find workspace"
@@ -149,88 +149,94 @@ export default class Landing extends Component {
                             <h1 className="ml16" id="title">Co-Working Office Space</h1>
                             <p className="ml3" id="para">With all the buzz around coworking spaces, we decided to provide you with a primer. We cover the coworking basics as well as implications for the traditional office and facility managers.</p>
                         </div>
-                        <div className="col-sm-4 offset-sm-1 wrapper">
-                            <h4>Where do you want to find workspace?</h4>
-                            <Form onSubmit={this.handleSubmit} key = {'landing'}>
-                                <FormGroup row>
+                        <div className="col-sm-4 offset-sm-1 py-5 mt-4 mr-5 wrapper">
+                            <Card>
 
-                                    <div className="col-sm-4 mt-2">
-                                        <Input type="text" name="zipCode"
-                                            placeholder="Zip Code" value={this.props.zipCode}
-                                            valid={errors.zipCode === ''}
-                                            invalid={errors.zipCode !== ''}
-                                            onBlur={this.props.handleBlur('zipCode')}
-                                            onChange={this.props.handInputChange} />
+                                <CardBody>
+                                    <CardTitle>Where do you want to find workspace?</CardTitle>
+                                    <Form onSubmit={this.handleSubmit} key={'landing'}>
+                                        <FormGroup row>
 
-                                        <FormFeedback>{errors.zipCode}</FormFeedback>
-                                    </div>
-                                    <div className="col-sm-7 mt-2">
-                                        <Input name="location"
-                                            placeholder="Enter 5 or 9-digit Zip Code"
-                                            valid={errors.location === ''}
-                                            invalid={errors.location !== ''}
-                                            disabled={true}
-                                            value={this.props.location} />
-                                        <FormFeedback>{errors.location}</FormFeedback>
-                                    </div>
-                                </FormGroup>
-                                <h4>When do you want to move in?</h4>
-                                <FormGroup row>
+                                            <div className="col-sm-5 mt-2">
+                                                <Input type="text" name="zipCode"
+                                                    placeholder="Zip Code" value={this.props.zipCode}
+                                                    valid={errors.zipCode === ''}
+                                                    invalid={errors.zipCode !== ''}
+                                                    onBlur={this.props.handleBlur('zipCode')}
+                                                    onChange={this.props.handInputChange} />
 
-                                    <div className="col-sm-6 mt-2">
-                                        <Input type="date" id="setDate" name="setDate" min={today}
-                                             value={this.props.setDate}
-                                            valid={errors.setDate === ''}
-                                            invalid={errors.setDate !== ''}
-                                            onBlur={this.props.handleBlur('setDate')}
-                                            onChange={this.props.handInputChange} />
-                                        <FormFeedback>{errors.setDate}</FormFeedback>
-                                    </div>
-                                </FormGroup>
-                                <h4>How many people do you want to accommodate?</h4>
-                                <div className="form-inline">
-                                    <FormGroup row>
-                                        <div className="col-sm-12 mt-2">
+                                                <FormFeedback>{errors.zipCode}</FormFeedback>
+                                            </div>
+                                            <div className="col-sm-7 mt-2">
+                                                <Input name="location"
+                                                    placeholder="Enter 5 or 9-digit Zip Code"
+                                                    valid={errors.location === ''}
+                                                    invalid={errors.location !== ''}
+                                                    disabled={true}
+                                                    value={this.props.location} />
+                                                <FormFeedback>{errors.location}</FormFeedback>
+                                            </div>
+                                        </FormGroup>
+                                        <CardTitle>When do you want to move in?</CardTitle>
+                                        <FormGroup row>
 
-                                            <button style={{ height: '40px', width: '40px',borderRadius : '50px' }} className="btn btn-primary" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
+                                            <div className="col-sm-6 mt-2">
+                                                <Input type="date" id="setDate" name="setDate" min={today}
+                                                    value={this.props.setDate}
+                                                    valid={errors.setDate === ''}
+                                                    invalid={errors.setDate !== ''}
+                                                    onBlur={this.props.handleBlur('setDate')}
+                                                    onChange={this.props.handInputChange} />
+                                                <FormFeedback>{errors.setDate}</FormFeedback>
+                                            </div>
+                                        </FormGroup>
+                                        <CardTitle>How many people do you want to accommodate?</CardTitle>
+                                        <div className="form-inline">
+                                            <FormGroup row>
+                                                <div className="col-sm-12 mt-2">
+
+                                                    <button style={{ height: '40px', width: '40px', borderRadius: '50px' }} className="btn btn-primary" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
 
 
-                                            <Input name="people" id="people" style={{ width: '70px',textAlign: 'center'}}
-                                                className="ml-1 mr-1" type="number"
-                                                value={this.props.people}
-                                                valid={errors.people === ''}
-                                                invalid={errors.people !== ''}
-                                                onChange={this.props.handInputChange}
-                                                onBlur={this.props.handleBlur('people')}
-                                            />
+                                                    <Input name="people" id="people" style={{ width: '70px', textAlign: 'center' }}
+                                                        className="ml-1 mr-1" type="number"
+                                                        value={this.props.people}
+                                                        valid={errors.people === ''}
+                                                        invalid={errors.people !== ''}
+                                                        onChange={this.props.handInputChange}
+                                                        onBlur={this.props.handleBlur('people')}
+                                                    />
 
-                                            <Button style={{ height: '40px', width: '40px',borderRadius : '50px' }} className="btn btn-dark" onClick={this.props.increase}><i className="fa fa-plus" aria-hidden="true"></i></Button>
-                                            <FormFeedback>{errors.people}</FormFeedback>
+                                                    <Button style={{ height: '40px', width: '40px', borderRadius: '50px' }} className="btn btn-dark" onClick={this.props.increase}><i className="fa fa-plus" aria-hidden="true"></i></Button>
+                                                    <FormFeedback>{errors.people}</FormFeedback>
+                                                </div>
+
+
+                                            </FormGroup>
                                         </div>
+                                        <FormGroup row>
+                                            <div className="col-sm-8 mt-3">
+                                                <ReCAPTCHA
+                                                    sitekey="6Lf4QrIZAAAAADu8cXAyrlUNdTlQ4wasosFATzmY"
+                                                    theme="dark"
+                                                    onChange={this.props.onChange}
+                                                    onErrored={this.networkError}
+                                                />
+                                            </div>
+                                        </FormGroup>
 
+                                        <FormGroup row>
+                                            <div className="col-sm-12 col-12">
+                                                <Button className="btn btn-block" disabled={isDisabled} type="submit" onClick={this.props.toggleWorkspace} color="btn btn-primary">
+                                                    Find Workspace <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
 
-                                    </FormGroup>
-                                </div>
-                                <FormGroup row>
-                                    <div className="col-sm-8 mt-3">
-                                        <ReCAPTCHA
-                                            sitekey="6Lf4QrIZAAAAADu8cXAyrlUNdTlQ4wasosFATzmY"
-                                            theme="dark"
-                                            onChange={this.props.onChange}
-                                            onErrored={this.networkError}
-                                        />
-                                    </div>
-                                </FormGroup>
-
-                                <FormGroup row>
-                                    <div className="col-sm-12 col-12">
-                                        <Button className="btn btn-block" disabled={isDisabled} type="submit" onClick={this.props.toggleWorkspace} color="btn btn-primary">
-                                            Find Workspace <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
-
-                                    </div>
-                                </FormGroup>
-                            </Form>
+                                            </div>
+                                        </FormGroup>
+                                    </Form>
+                                </CardBody>
+                            </Card>
                         </div>
+
                     </div>
 
                 </div>
@@ -283,10 +289,10 @@ export default class Landing extends Component {
 
                                 <div className="row form-inline col-12 mt-2">
 
-                                    <button style={{ height: '40px', width: '40px',borderRadius : '50px' }} className="btn btn-danger" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
+                                    <button style={{ height: '40px', width: '40px', borderRadius: '50px' }} className="btn btn-danger" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
 
 
-                                    <Input name="people" id="people" style={{ width: '50px',textAlign: 'center' }}
+                                    <Input name="people" id="peopleMob" style={{ width: '50px', textAlign: 'center' }}
                                         className="ml-1 mr-1" type="number"
                                         value={this.props.people}
                                         valid={errors.people === ''}
@@ -295,7 +301,7 @@ export default class Landing extends Component {
                                         onBlur={this.props.handleBlur('people')}
                                     />
 
-                                    <Button style={{ height: '40px', width: '40px',borderRadius : '50px' }} className="btn btn-primary" onClick={this.props.increase}><i className="fa fa-plus" aria-hidden="true"></i></Button>
+                                    <Button style={{ height: '40px', width: '40px', borderRadius: '50px' }} className="btn btn-primary" onClick={this.props.increase}><i className="fa fa-plus" aria-hidden="true"></i></Button>
                                     <FormFeedback>{errors.people}</FormFeedback>
                                 </div>
                                 <FormGroup row>
