@@ -1,5 +1,5 @@
 import React from 'react';
-import { UncontrolledCarousel, Progress, Button, Card, CardTitle, CardText, } from 'reactstrap';
+import { UncontrolledCarousel, Progress, Card } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 const WorkspaceDetails = (props) => {

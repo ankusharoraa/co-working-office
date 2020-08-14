@@ -263,7 +263,7 @@ export default class MainComponent extends Component {
                     obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
                 }
             }
-        } else if (xml.nodeType == 3) {
+        } else if (xml.nodeType === 3) {
             // text
             obj = xml.nodeValue;
         }
@@ -348,7 +348,7 @@ export default class MainComponent extends Component {
         const Data = xmltojsonResponse
         //console.log(Data.document.businessCard.field) 
         const length = Data.document.businessCard.field.length
-        for (let i of Data.document.businessCard.field) {
+        for (let i of length) {
             // console.log(i);
             if (i["@attributes"].type === "Company") {
                 this.setState({

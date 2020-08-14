@@ -69,41 +69,41 @@ export default class Landing extends Component {
         let textWrapper = document.getElementById('title');
         textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
-        let mobWrapper = document.getElementById('titleMob');
-        mobWrapper.innerHTML = mobWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+        // let mobWrapper = document.getElementById('titleMob');
+        // mobWrapper.innerHTML = mobWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
 
-        setTimeout(() => {
-            anime.timeline({ loop: true })
-                .add({
-                    targets: '.ml16 .letter',
-                    translateY: [-100, 0],
-                    easing: "easeOutExpo",
-                    duration: 1400,
-                    delay: (el, i) => 30 * i
-                }).add({
-                    targets: '.ml16',
-                    opacity: 0,
-                    duration: 1000,
-                    easing: "easeOutExpo",
-                    delay: 10000
-                });
-        }, 24000);
+        // setTimeout(() => {
+        //     anime.timeline({ loop: true })
+        //         .add({
+        //             targets: '.ml16 .letter',
+        //             translateY: [-100, 0],
+        //             easing: "easeOutExpo",
+        //             duration: 1400,
+        //             delay: (el, i) => 30 * i
+        //         }).add({
+        //             targets: '.ml16',
+        //             opacity: 0,
+        //             duration: 1000,
+        //             easing: "easeOutExpo",
+        //             delay: 10000
+        //         });
+        // }, 24000);
 
-        anime.timeline({ loop: true })
-            .add({
-                targets: '.ml16Mob .letter',
-                translateY: [-100, 0],
-                easing: "easeOutExpo",
-                duration: 1400,
-                delay: (el, i) => 30 * i
-            }).add({
-                targets: '.ml16Mob',
-                opacity: 0,
-                duration: 1000,
-                easing: "easeOutExpo",
-                delay: 10000
-            });
+        // anime.timeline({ loop: true })
+        //     .add({
+        //         targets: '.ml16Mob .letter',
+        //         translateY: [-100, 0],
+        //         easing: "easeOutExpo",
+        //         duration: 1400,
+        //         delay: (el, i) => 30 * i
+        //     }).add({
+        //         targets: '.ml16Mob',
+        //         opacity: 0,
+        //         duration: 1000,
+        //         easing: "easeOutExpo",
+        //         delay: 10000
+        //     });
 
 
         let paraWrapper = document.getElementById('para');
@@ -143,11 +143,14 @@ export default class Landing extends Component {
         return (
             <>
 
-                <div className="container-fluid main p-0 d-none d-sm-block">
+                <div className="container-fluid main p-0">
                     <div className="row row-content mx-0">
-                        <div className="col-sm-6 wrappertxt">
+                        <div className="col-sm-6 wrappertxt d-none d-sm-block">
                             <h1 className="ml16" id="title">Co-Working Office Space</h1>
                             <p className="ml3" id="para">With all the buzz around coworking spaces, we decided to provide you with a primer. We cover the coworking basics as well as implications for the traditional office and facility managers.</p>
+                        </div>
+                        <div className = "col-12 d-sm-none d-block">
+                        <h2 id="titleMob" className="ml16Mob col-12 ml-2 d-sm-none">Co-Working Space</h2>
                         </div>
                         <div className="col-sm-4 offset-sm-1 py-5 mt-4 mr-5 wrapper">
                             <Card>
@@ -191,7 +194,7 @@ export default class Landing extends Component {
                                             </div>
                                         </FormGroup>
                                         <CardTitle>How many people do you want to accommodate?</CardTitle>
-                                        <div className="form-inline">
+                                        <div className="form-inline  d-sm-block d-none">
                                             <FormGroup row>
                                                 <div className="col-sm-12 mt-2">
 
@@ -213,6 +216,24 @@ export default class Landing extends Component {
 
 
                                             </FormGroup>
+                                        </div>
+
+                                        <div className="row form-inline col-12 mt-2 d-sm-none">
+
+                                            <button style={{ height: '40px', width: '40px', borderRadius: '50px' }} className="btn btn-danger" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
+
+
+                                            <Input name="people" id="peopleMob" style={{ width: '50px', textAlign: 'center' }}
+                                                className="ml-1 mr-1" type="number"
+                                                value={this.props.people}
+                                                valid={errors.people === ''}
+                                                invalid={errors.people !== ''}
+                                                onChange={this.props.handInputChange}
+                                                onBlur={this.props.handleBlur('people')}
+                                            />
+
+                                            <Button style={{ height: '40px', width: '40px', borderRadius: '50px' }} className="btn btn-primary" onClick={this.props.increase}><i className="fa fa-plus" aria-hidden="true"></i></Button>
+                                            <FormFeedback>{errors.people}</FormFeedback>
                                         </div>
                                         <FormGroup row>
                                             <div className="col-sm-8 mt-3">
@@ -241,7 +262,7 @@ export default class Landing extends Component {
 
                 </div>
 
-                <div className="container mainMob d-block d-sm-none p-0">
+                {/* <div className="container mainMob d-block d-sm-none p-0">
                     <div className="row mx-0">
                         <div className="col-12">
                             <h2 id="titleMob" className="ml16Mob ml-2">Co-Working Space</h2>
@@ -252,7 +273,7 @@ export default class Landing extends Component {
                             <h4>Where do you want to find workspace?</h4>
                             <Form onSubmit={this.handleSubmit}>
                                 <FormGroup row>
-                                    {/* <Label htmlFor="zipCode" className="col-md-3 col-3">Zip Code</Label> */}
+                                    
                                     <div className="col-12 mt-2">
                                         <Input type="text" name="zipCode"
                                             placeholder="Zip Code" value={this.props.zipCode}
@@ -274,7 +295,7 @@ export default class Landing extends Component {
                                 </FormGroup>
                                 <h4>When do you want to move in?</h4>
                                 <FormGroup row>
-                                    {/* <Label htmlFor="date" className="col-md-3 col-3">Date</Label> */}
+                                    
                                     <div className="col-12 mt-2">
                                         <Input type="date" name="setDate" min={today}
                                             placeholder="Date" value={this.props.setDate}
@@ -325,7 +346,7 @@ export default class Landing extends Component {
                         </div>
                     </div>
                     <div className="push"></div>
-                </div>
+                </div> */}
             </>
         )
     }
