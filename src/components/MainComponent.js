@@ -88,13 +88,13 @@ export default class MainComponent extends Component {
     }
 
     handleFetch = async (zipCodeUs) => {
-        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-        // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'bIdVpbF6QaBqf07zutnoTGbzkQMbo4konMAmkgLMW7rwA70FT687sJUcTuYGRS4k';
+        // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        const proxyurl = "https://corsaccess.herokuapp.com/";
+        const api = 'D7tjLiQJPsT79URUYdaTXxG8MpvqZMUers7pbB2zfjz0s8AzLo8XxK4LibTT7NYT';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-        const res = await axios.get(url);
-        // const res = await axios.get(`${proxyurl}${url}`);
+        // const res = await axios.get(url);
+        const res = await axios.get(`${proxyurl}${url}`);
         let city = res.data.city;
         let locState = res.data.state
         if (city && locState !== undefined && this.state.zipCode >= 5) {
@@ -170,8 +170,8 @@ export default class MainComponent extends Component {
                 personEmail: '',
                 personName: '',
                 personPhone: '',
-                personZipCode : '',
-                personLocation : ''
+                personZipCode: '',
+                personLocation: ''
             })
         }
         await this.setState({ selectedFile: event.target.files[0] });
@@ -344,10 +344,10 @@ export default class MainComponent extends Component {
         }
 
     }
-     setDataforXmlResponse = (xmltojsonResponse) => {
+    setDataforXmlResponse = (xmltojsonResponse) => {
         const Data = xmltojsonResponse
         //console.log(Data.document.businessCard.field) 
-        const length = Data.document.businessCard.field.length
+        const length = Data.document.businessCard.field
         for (let i of length) {
             // console.log(i);
             if (i["@attributes"].type === "Company") {
@@ -384,34 +384,34 @@ export default class MainComponent extends Component {
                 let newArr = []
                 let checkZip = []
                 newArr = i.value.split(' ')
-                for(let j=0;j<newArr.length;j++){
+                for (let j = 0; j < newArr.length; j++) {
                     checkZip[j] = parseInt(newArr[j]);
                     // if(isNaN(checkZip[j])){
                     //     checkZip.splice(j,1)
                     // }
                     // console.log(`${checkZip[j]} ${typeof(checkZip[j])} `)
-                  
+
                     // if(newArr[j].length>=5 && Number.isInteger(newArr[j])){
                     //     console.log(newArr[j])
                     // }
                 }
-                for(let j=checkZip.length;j>=0;j--){
-                    
-                    if(isNaN(checkZip[j])){
-                        checkZip.splice(j,1)
+                for (let j = checkZip.length; j >= 0; j--) {
+
+                    if (isNaN(checkZip[j])) {
+                        checkZip.splice(j, 1)
                     }
-                    if(checkZip[j]>=5){
+                    if (checkZip[j] >= 5) {
                         let locationZip = checkZip[j].toString()
-                        
+
                         this.setState({
-                            personZipCode : checkZip[j]
+                            personZipCode: checkZip[j]
                         })
-                         this.handleFetch(locationZip);
+                        this.handleFetch(locationZip);
                         break;
                     }
-                    
+
                 }
-                
+
                 console.log(`Check Zip ---> ${[...checkZip]}`)
                 console.log(`newArr ---> ${newArr.length}, ${newArr}`)
                 if (i.value !== '' && i.value !== null && i.value !== 0) {
@@ -489,17 +489,21 @@ export default class MainComponent extends Component {
                             personLocation={this.state.personLocation}
                             onFileChange={this.onFileChange}
                             selectedFile={this.state.selectedFile}
-                            personEmailTouched = {this.state.touched.personEmail}
-                            businessNameTouched = {this.state.touched.businessName}
-                            personZipCodeTouched = {this.state.touched.personZipCode} />} />
+                            personEmailTouched={this.state.touched.personEmail}
+                            businessNameTouched={this.state.touched.businessName}
+                            personZipCodeTouched={this.state.touched.personZipCode} />} />
                         <Route exact path="/confirmPerson" render={() => <ConfirmPerson
+                            handInputChange={this.handInputChange}
+                            handleBlur={this.handleBlur}
+                            onChange={this.onChange}
                             personCity={this.state.personCity}
                             personState={this.state.personState}
                             personEmail={this.state.personEmail}
                             businessName={this.state.businessName}
                             personAddress={this.state.personAddress}
                             personName={this.state.personName}
-                            personPhone={this.state.personPhone} />} />
+                            personPhone={this.state.personPhone} />}
+                        />
                         <Redirect to='/' />
                     </Switch>
 
