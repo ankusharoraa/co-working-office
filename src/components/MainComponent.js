@@ -17,6 +17,7 @@ import CRC32 from 'crc-32/crc32.js';
 import { trackPromise } from 'react-promise-tracker';
 import { usePromiseTracker } from 'react-promise-tracker';
 import Loader from 'react-promise-loader';
+import LeaseTimePeriod from './LeaseTimePeriod';
 
 export default class MainComponent extends Component {
     constructor(props) {
@@ -49,7 +50,8 @@ export default class MainComponent extends Component {
             imageChkSum: '',
             personName: '',
             personPhone: '',
-            personAddress: ''
+            personAddress: '',
+            selectedWorkspaceId : ''
         }
     }
 
@@ -445,10 +447,26 @@ export default class MainComponent extends Component {
         })
     }
 
+    getSelectedWorkspaceId = async () =>{
+        let url = window.location.href
+        console.log(url)
+        let findId = url.split('/')
+        let id
+        id = findId[4]
+        console.log("ID is --->" +id)
+        await this.setState({
+            selectedWorkspaceId : id
+        })
+    }
+     
     render() {
         const WorkspaceWithId = ({ match }) => {
+
             return (
-                <WorkspaceDetails workspace={this.state.workspaceinfo.filter((workspace) => workspace.id === parseInt(match.params.workspaceId, 10))[0]} />
+                <>
+                <WorkspaceDetails workspace={this.state.workspaceinfo.filter((workspace) => workspace.id === parseInt(match.params.workspaceId, 10))[0]}
+                getSelectedWorkspaceId = {this.getSelectedWorkspaceId} />
+                </>
             )
         }
 
@@ -504,10 +522,12 @@ export default class MainComponent extends Component {
                             personName={this.state.personName}
                             personPhone={this.state.personPhone} />}
                         />
+                        <Route exact path = "/leaseDuration" render = {()=><LeaseTimePeriod
+                        workspace = {this.state.workspaceinfo}
+                        selectedWorkspaceId = {this.state.selectedWorkspaceId}/>}
+                        />
                         <Redirect to='/' />
                     </Switch>
-
-
                 </Router>
                 <Footer />
             </>

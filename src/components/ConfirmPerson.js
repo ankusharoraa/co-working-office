@@ -136,12 +136,12 @@ export default function ConfirmPerson(props) {
 
                                             <Label htmlFor="personPhone" className="col-sm-4 col-form-label form-control-label required">Industry</Label>
                                             <div className="col-sm-8">
-                                                <select className="form-control" name = "industry" id = "industry">
-                                                    <option value = "sales">Sales Enablement</option>
-                                                    <option value = "insurance">Insurance</option>
-                                                    <option value = "example1">Example 1</option>
-                                                    <option value = "example2">Example 2</option>
-                                                    <option value = "example3">Example 3</option>
+                                                <select className="form-control" name="industry" id="industry">
+                                                    <option value="sales">Sales Enablement</option>
+                                                    <option value="insurance">Insurance</option>
+                                                    <option value="example1">Example 1</option>
+                                                    <option value="example2">Example 2</option>
+                                                    <option value="example3">Example 3</option>
                                                 </select>
                                             </div>
 
@@ -151,7 +151,7 @@ export default function ConfirmPerson(props) {
 
                                         <FormGroup row>
                                             <div className="col-sm-12 col-12 mt-3">
-                                                <Link style={{ textDecoration: 'none' }} to='confirmPerson'><button className="btn btn-block btn-primary">Next <i className="fa fa-arrow-right" aria-hidden="true"></i></button></Link>
+                                                <Link style={{ textDecoration: 'none' }} to='leaseDuration'><button className="btn btn-block btn-primary">Next <i className="fa fa-arrow-right" aria-hidden="true"></i></button></Link>
                                             </div>
                                         </FormGroup>
                                     </Form>

@@ -76,7 +76,7 @@ const WorkspaceDetails = (props) => {
                         <div className="row">
                             <div className="col-sm-12 col-12">
                                 <p id = "special"><em>Contact us <a href='#special'>here</a> to enquire about special facilities</em></p>
-                                <Link style = {{textDecoration : "none"}} to = "/personalinfo"><button className="btn btn-block btn-primary mt-2">Lease This Workspace</button></Link>
+                                <Link style = {{textDecoration : "none"}} to = "/personalinfo"><button onClick = {props.getSelectedWorkspaceId} className="btn btn-block btn-primary mt-2">Lease This Workspace</button></Link>
                             </div>
                         </div>
                     </Card>

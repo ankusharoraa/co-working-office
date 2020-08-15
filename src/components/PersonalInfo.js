@@ -58,18 +58,21 @@ const Validate = (businessName, personEmail, personZipCode, touchedPersonEmail, 
         personZipCode: '',
         personLocation: ''
     }
-    if (businessNameTouched && businessName.length < 3) {
+    if (businessName.length < 3) {
         errors.businessName = "Business name length should be more than 3"
     }
     const reg = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
-    if (touchedPersonEmail && !reg.test(personEmail)) {
-        errors.personEmail = "Please enter valid email format"
+    if(personEmail === ''){
+        errors.personEmail = "Please enter the email"
+    }
+    else if (!reg.test(personEmail)) {
+        errors.personEmail = "Please enter email in valid format"
     }
     const regZip = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
-    if (personZipCodeTouched && !regZip.test(personZipCode)) {
+    if (!regZip.test(personZipCode)) {
         errors.personZipCode = "Please enter the zip code in the US zip code format"
     }
-    else if (personZipCodeTouched && personZipCode === '') {
+    else if (personZipCode === '') {
         errors.personZipCode = "Please enter the zip code"
     }
     if (personLocation === '') {
