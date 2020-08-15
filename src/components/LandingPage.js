@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-    Button, Form, FormGroup, Input, FormFeedback, Card, CardHeader, CardBody, CardTitle
+    Button, Form, FormGroup, Input, FormFeedback, Card, CardBody, CardTitle
 } from 'reactstrap';
 import anime from 'animejs/lib/anime.es.js';
 import ReCAPTCHA from "react-google-recaptcha";
@@ -152,7 +152,7 @@ export default class Landing extends Component {
                         <div className = "col-12 d-sm-none d-block">
                         <h2 id="titleMob" className="ml16Mob col-12 ml-2 d-sm-none">Co-Working Space</h2>
                         </div>
-                        <div className="col-sm-4 offset-sm-1 py-5 mt-4 mr-5 wrapper">
+                        <div className="col-sm-4 offset-sm-1 py-5 mt-4 mr-5 wrapper col-12">
                             <Card>
 
                                 <CardBody>

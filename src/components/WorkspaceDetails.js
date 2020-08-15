@@ -31,7 +31,7 @@ const WorkspaceDetails = (props) => {
                 </div>
                 <div className="row">
                     <div className="col-sm-12 col-12">
-                        <p className="lead mt-1" style={{ textAlign: 'center' }}>Take a virtual tour <a href="">here</a> </p>
+                        <p id = "tour" className="lead mt-1" style={{ textAlign: 'center' }}>Take a virtual tour <a href="#tour">here</a> </p>
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@ const WorkspaceDetails = (props) => {
                         </div>
                         <div className="row">
                             <div className="col-sm-12 col-12">
-                                <p><em>Contact us <a href=''>here</a> to enquire about special facilities</em></p>
+                                <p id = "special"><em>Contact us <a href='#special'>here</a> to enquire about special facilities</em></p>
                                 <Link style = {{textDecoration : "none"}} to = "/personalinfo"><button className="btn btn-block btn-primary mt-2">Lease This Workspace</button></Link>
                             </div>
                         </div>

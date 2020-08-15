@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect, withRouter } from 'react-router';
+import { Route, Redirect } from 'react-router';
 
 export const authentication = {
     isLoggedIn: false,
