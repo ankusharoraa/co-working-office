@@ -88,13 +88,13 @@ export default class MainComponent extends Component {
     }
 
     handleFetch = async (zipCodeUs) => {
-        // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-        const proxyurl = "https://corsaccess.herokuapp.com/";
-        const api = 'D7tjLiQJPsT79URUYdaTXxG8MpvqZMUers7pbB2zfjz0s8AzLo8XxK4LibTT7NYT';
+        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        // const proxyurl = "https://corsaccess.herokuapp.com/";
+        // const api = 'D7tjLiQJPsT79URUYdaTXxG8MpvqZMUers7pbB2zfjz0s8AzLo8XxK4LibTT7NYT';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-        // const res = await axios.get(url);
-        const res = await axios.get(`${proxyurl}${url}`);
+        const res = await axios.get(url);
+        // const res = await axios.get(`${proxyurl}${url}`);
         let city = res.data.city;
         let locState = res.data.state
         if (city && locState !== undefined && this.state.zipCode >= 5) {
