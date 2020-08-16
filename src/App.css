@@ -289,3 +289,7 @@ input[type='range']::-webkit-slider-thumb {
     transition: 0.3s;
   box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
 }
+
+.backColor{
+  background-color: #cbd4db;
+}

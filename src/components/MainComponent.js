@@ -51,7 +51,9 @@ export default class MainComponent extends Component {
             personName: '',
             personPhone: '',
             personAddress: '',
-            selectedWorkspaceId : ''
+            selectedWorkspaceId: '',
+            selectedLeaseDuration: '',
+            selectedLeasePrice: ''
         }
     }
 
@@ -90,13 +92,13 @@ export default class MainComponent extends Component {
     }
 
     handleFetch = async (zipCodeUs) => {
-        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-        // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'D7tjLiQJPsT79URUYdaTXxG8MpvqZMUers7pbB2zfjz0s8AzLo8XxK4LibTT7NYT';
+        // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        const proxyurl = "https://corsaccess.herokuapp.com/";
+        const api = 'xjSXYOXxhEenFhgY5JxwzDb21JX1qKkwITnH0WcPmG34LZE5VmcVzvodVKWxZWBi';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-        const res = await axios.get(url);
-        // const res = await axios.get(`${proxyurl}${url}`);
+        // const res = await axios.get(url);
+        const res = await axios.get(`${proxyurl}${url}`);
         let city = res.data.city;
         let locState = res.data.state
         if (city && locState !== undefined && this.state.zipCode >= 5) {
@@ -447,25 +449,33 @@ export default class MainComponent extends Component {
         })
     }
 
-    getSelectedWorkspaceId = async () =>{
+    getSelectedWorkspaceId = async () => {
         let url = window.location.href
         console.log(url)
         let findId = url.split('/')
         let id
         id = findId[4]
-        console.log("ID is --->" +id)
+        console.log("ID is --->" + id)
         await this.setState({
-            selectedWorkspaceId : id
+            selectedWorkspaceId: id
         })
     }
-     
+
+    updateLeaseDuration = async (duration, price) => {
+        //    alert(price)
+        this.setState({
+            selectedLeaseDuration: duration,
+            selectedLeasePrice: price
+        })
+    }
+
     render() {
         const WorkspaceWithId = ({ match }) => {
 
             return (
                 <>
-                <WorkspaceDetails workspace={this.state.workspaceinfo.filter((workspace) => workspace.id === parseInt(match.params.workspaceId, 10))[0]}
-                getSelectedWorkspaceId = {this.getSelectedWorkspaceId} />
+                    <WorkspaceDetails workspace={this.state.workspaceinfo.filter((workspace) => workspace.id === parseInt(match.params.workspaceId, 10))[0]}
+                        getSelectedWorkspaceId={this.getSelectedWorkspaceId} />
                 </>
             )
         }
@@ -522,9 +532,11 @@ export default class MainComponent extends Component {
                             personName={this.state.personName}
                             personPhone={this.state.personPhone} />}
                         />
-                        <Route exact path = "/leaseDuration" render = {()=><LeaseTimePeriod
-                        workspace = {this.state.workspaceinfo}
-                        selectedWorkspaceId = {this.state.selectedWorkspaceId}/>}
+                        <Route exact path="/leaseDuration" render={() => <LeaseTimePeriod
+                            workspace={this.state.workspaceinfo}
+                            selectedWorkspaceId={this.state.selectedWorkspaceId}
+                            selectedLeaseDuration={this.state.selectedLeaseDuration}
+                            updateLeaseDuration={(duration, price) => this.updateLeaseDuration(duration, price)} />}
                         />
                         <Redirect to='/' />
                     </Switch>
