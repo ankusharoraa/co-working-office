@@ -12,7 +12,7 @@ export const WORKSPACEINFO =
             distance: 0.5,
             description: 'miles away from',
             details: [
-                '50-person capacity',
+                '15-person capacity',
                 '2 floors fully-furnished',
                 'Package handling',
                 'Printing Facilities'
@@ -50,7 +50,7 @@ export const WORKSPACEINFO =
             distance: 1,
             description: 'miles away from',
             details: [
-                '50-person capacity',
+                '20-person capacity',
                 '2 floors fully-furnished',
                 'Package handling',
                 'Printing Facilities'
@@ -88,8 +88,8 @@ export const WORKSPACEINFO =
             distance: 3,
             description: 'miles away from',
             details: [
-                '50-person capacity',
-                '2 floors fully-furnished',
+                '12-person capacity',
+                '1 floor fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
@@ -127,7 +127,7 @@ export const WORKSPACEINFO =
             description: 'miles away from',
             details: [
                 '50-person capacity',
-                '2 floors fully-furnished',
+                '3 floors fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
@@ -164,8 +164,8 @@ export const WORKSPACEINFO =
             distance: 5,
             description: 'miles away from',
             details: [
-                '50-person capacity',
-                '2 floors fully-furnished',
+                '25-person capacity',
+                '1 floor fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
@@ -202,8 +202,8 @@ export const WORKSPACEINFO =
             distance: 3,
             description: 'miles away from',
             details: [
-                '50-person capacity',
-                '2 floors fully-furnished',
+                '12-person capacity',
+                '1 floor fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
@@ -278,7 +278,7 @@ export const WORKSPACEINFO =
             distance: 0.5,
             description: 'miles away from',
             details: [
-                '50-person capacity',
+                '35-person capacity',
                 '2 floors fully-furnished',
                 'Package handling',
                 'Printing Facilities'
@@ -317,7 +317,7 @@ export const WORKSPACEINFO =
             description: 'miles away from',
             details: [
                 '50-person capacity',
-                '2 floors fully-furnished',
+                '4 floors fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
@@ -354,7 +354,7 @@ export const WORKSPACEINFO =
             distance: 1,
             description: 'miles away from',
             details: [
-                '50-person capacity',
+                '18-person capacity',
                 '2 floors fully-furnished',
                 'Package handling',
                 'Printing Facilities'
@@ -392,7 +392,7 @@ export const WORKSPACEINFO =
             distance: 3,
             description: 'miles away from',
             details: [
-                '50-person capacity',
+                '35-person capacity',
                 '2 floors fully-furnished',
                 'Package handling',
                 'Printing Facilities'
@@ -430,8 +430,8 @@ export const WORKSPACEINFO =
             distance: 5,
             description: 'miles away from',
             details: [
-                '50-person capacity',
-                '2 floors fully-furnished',
+                '12-person capacity',
+                '1 floor fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
@@ -468,8 +468,8 @@ export const WORKSPACEINFO =
             distance: 5,
             description: 'miles away from',
             details: [
-                '50-person capacity',
-                '2 floors fully-furnished',
+                '12-person capacity',
+                '1 floor fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
@@ -506,8 +506,8 @@ export const WORKSPACEINFO =
             distance: 3,
             description: 'miles away from',
             details: [
-                '50-person capacity',
-                '2 floors fully-furnished',
+                '30-person capacity',
+                '3 floors fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
@@ -544,8 +544,8 @@ export const WORKSPACEINFO =
             distance: 1,
             description: 'miles away from',
             details: [
-                '50-person capacity',
-                '2 floors fully-furnished',
+                '10-person capacity',
+                '1 floor fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
@@ -582,8 +582,8 @@ export const WORKSPACEINFO =
             distance: 0.5,
             description: 'miles away from',
             details: [
-                '50-person capacity',
-                '2 floors fully-furnished',
+                '30-person capacity',
+                '3 floors fully-furnished',
                 'Package handling',
                 'Printing Facilities'
             ],
