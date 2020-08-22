@@ -183,7 +183,7 @@ export default class Landing extends Component {
                                         <CardTitle>When do you want to move in?</CardTitle>
                                         <FormGroup row>
 
-                                            <div className="col-sm-6 mt-2">
+                                            <div className="col-sm-9 col-12 mt-2">
                                                 <Input type="date" id="setDate" name="setDate" min={today}
                                                     value={this.props.setDate}
                                                     valid={errors.setDate === ''}
@@ -236,8 +236,8 @@ export default class Landing extends Component {
                                             <FormFeedback>{errors.people}</FormFeedback>
                                         </div>
                                         <FormGroup row>
-                                            <div className="col-sm-8 mt-3">
-                                                <ReCAPTCHA
+                                            <div className="col-sm-12 col-12 mt-3">
+                                                <ReCAPTCHA style = {{overflow : 'hidden'}}
                                                     sitekey="6Lf4QrIZAAAAADu8cXAyrlUNdTlQ4wasosFATzmY"
                                                     theme="dark"
                                                     onChange={this.props.onChange}

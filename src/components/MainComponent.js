@@ -18,6 +18,8 @@ import { trackPromise } from 'react-promise-tracker';
 import { usePromiseTracker } from 'react-promise-tracker';
 import Loader from 'react-promise-loader';
 import LeaseTimePeriod from './LeaseTimePeriod';
+import Payment from './PaymentComponent';
+
 
 export default class MainComponent extends Component {
     constructor(props) {
@@ -58,6 +60,7 @@ export default class MainComponent extends Component {
     }
 
 
+
     handInputChange = async (event) => {
 
         const target = event.target;
@@ -92,13 +95,14 @@ export default class MainComponent extends Component {
     }
 
     handleFetch = async (zipCodeUs) => {
-        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-        // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'xjSXYOXxhEenFhgY5JxwzDb21JX1qKkwITnH0WcPmG34LZE5VmcVzvodVKWxZWBi';
+        this.guideWireApi();
+        // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        const proxyurl = "https://corsaccess.herokuapp.com/";
+        const api = '2q3f4mMpez1p9OFqRSVm3AozaSi6Wp41LHi5pQQS1ugthugw0aBj2WG7W5xGtjhl';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-        const res = await axios.get(url);
-        // const res = await axios.get(`${proxyurl}${url}`);
+        // const res = await axios.get(url);
+        const res = await axios.get(`${proxyurl}${url}`);
         let city = res.data.city;
         let locState = res.data.state
         if (city && locState !== undefined && this.state.zipCode >= 5) {
@@ -221,6 +225,120 @@ export default class MainComponent extends Component {
         }
         return new Array(L + 1).join(C) + s;
     };
+
+    guideWireApi = async () => {
+        const proxyurl = "https://corsaccess.herokuapp.com/";
+        // const url = 'http://direct-digital-gw.uk-e1.cloudhub.io/GWire';
+        const url = 'http://ec2-54-88-57-4.compute-1.amazonaws.com:8080/pc/service/foreService/microServicePolicy/createMicroServicePolicy'
+        const headers = {
+            // 'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials': 'true',
+            'userName': 'su',
+            'password': 'gw',
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
+            // 'Access-Control-Allow-Credentials': 'true',
+            // "Access-Control-Allow-Methods" : "DELETE, POST, GET, OPTIONS",
+            // "Access-Control-Allow-Headers" : "Content-Type, Authorization, X-Requested-With",
+            "X-Requested-With": "XMLHttpRequest"
+        }
+        const reqBody = {
+
+            "input": {
+                "orderKeys": ["policy"],
+                "policy": {
+                    "yearBusinessStarted": "2007",
+                    "BaseState": "IL",
+                    "accountHolderName": "John May",
+                    "accountHolderEmailAddress": "john.may@gmail.com",
+                    "accountHolderContactFirstName": "John",
+                    "accountHolderContactLastName": "May",
+                    "primaryAddressLine1": "444",
+                    "primaryAddressLine2": "MayBash",
+                    "primaryAddressCity": "Chicago",
+                    "primaryAddressState": "IL",
+                    "primaryAddressCountry": "US",
+                    "primaryAddressPostalCode": "60604",
+                    "primaryAddressType": "business",
+                    "coverageTermValue": "2000000",
+                    "exposureBasisAmount": "300",
+                    "generalInfoWebsite": "aa@aa.com",
+                    "generalInfoDBANames": "DBA",
+                    "generalInfoLegalStatus": "Open",
+                    "financialRiskAnnualRevenue": "5000",
+                    "financialRiskD_B": "1",
+                    "industryRiskSICDescription": "Low Risk",
+                    "industryRiskNAICSDescription": "NAICS",
+                    "industryRiskIndustryInfo": "Low",
+                    "industryRiskCompanyDesc": "Low Risk",
+                    "industryRiskTypeOfCargo": "Low",
+                    "locationRiskFloodRiskScore": "78",
+                    "locationRiskCrimeScore": "34",
+                    "locationRiskTextCrimeScore": "47",
+                    "locationRiskFireProtectScore": "89",
+                    "locationRiskNearestFireStation": "Alberta",
+                    "locationRiskNearFireStionType": "Low",
+                    "locationRiskFireProtectClass": "01",
+                    "locationRiskDistanceInMiles": "23",
+                    "locationRiskDistanceInMin": "12",
+                    "locationRiskNo_of_Locations": "1",
+                    "locationalRiskFIPSCode": "023",
+                    "locationalRiskLatitude": "12",
+                    "locationalRiskLongitude": "26",
+                    "locationalRiskWildfireRisk": "36",
+                    "locationalRiskEarthquake": "Medium",
+                    "locationalRiskWind": "87",
+                    "locationalRiskHail": "High",
+                    "locationalRiskDistanceToShore": "42",
+                    "locationalRiskTornado": "High",
+                    "locationalRiskLightning": "High",
+                    "locationalRiskToxicRelFltyDis": "Low",
+                    "locationalRiskForcibleRobbery": "Low",
+                    "locationalRiskMtrVehicleTheft": "High",
+                    "locationalRiskMurder": "High",
+                    "mgmtRiskBBBRating": "87",
+                    "mgmtRiskAny_ProductRecalls": "6",
+                    "mgmtRiskSocialMediaScore": "45",
+                    "mgmtRiskAny_CodeViolations": "1",
+                    "mgmtRiskPFR": "65",
+                    "operationRiskIsAllTime": "false",
+                    "propertyRiskOperateFromHome": "true",
+                    "propertyRiskDoPlaceOfBusiness": "true",
+                    "propertyRiskExactSqFootage": "2000",
+                    "propertyRiskNoOfFloors": "4",
+                    "propertyRiskYearBuilt": "2000",
+                    "propertyRiskConstructionType": "1A",
+                    "operationRiskHrsOfOperation": "2",
+                    "operationRiskFPCCodes": "112",
+                    "personnelRiskFullTimeEmployees": "3",
+                    "lineLeveDetailsTranpNumber": "1"
+                }
+            }
+        }
+        try {
+            //  let res = await fetch(url,{
+            //     method : 'POST',
+            //     mode: 'cors', 
+            //     credentials: 'same-origin',
+            //     headers,
+            //     body : JSON.stringify(reqBody)
+            // })
+            //     let res = await new XMLHttpRequest();
+            //    await res.open('POST',url);
+            //     await res.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            //     await res.setRequestHeader('userName','su')
+            //     await res.setRequestHeader('password','gw')
+            //     await res.setRequestHeader('Access-Control-Allow-Origin','http://localhost:3000')
+            //     await res.setRequestHeader('Access-Control-Allow-Credentials', 'true');
+            //     await res.send(JSON.stringify(reqBody))
+            let res = await axios.post(proxyurl + url, reqBody, { headers })
+            console.log(`response from guidewire ----> ${JSON.stringify(res)}`)
+        }
+        catch (e) {
+            console.error("error in GuideWire---->" + e)
+        }
+
+    }
+
 
     scanCard = async (selectedFileState, imageChkSumState) => {
         let res = '';
@@ -462,23 +580,105 @@ export default class MainComponent extends Component {
     }
 
     updateLeaseDuration = async (duration, price) => {
-        //    alert(price)
-        this.setState({
-            selectedLeaseDuration: duration,
-            selectedLeasePrice: price
-        })
+        if (duration === '1') {
+            this.setState({
+                selectedLeaseDuration: duration,
+                selectedLeasePrice: price
+            })
+        }
+        else if (duration === '6') {
+            price = parseInt(price) * parseInt(duration);
+            this.setState({
+                selectedLeaseDuration: duration,
+                selectedLeasePrice: price
+            })
+        }
+        else if (duration === '12') {
+            price = parseInt(price) * parseInt(duration);
+            this.setState({
+                selectedLeaseDuration: duration,
+                selectedLeasePrice: price
+            })
+        }
+    }
+
+    PersonInformation = () => {
+        return (
+            <>
+                <PersonalInfo key={'personalIn'}
+                    handInputChange={this.handInputChange}
+                    handleBlur={this.handleBlur}
+                    onChange={this.onChange}
+                    personZipCode={this.state.personZipCode}
+                    businessName={this.state.businessName}
+                    personEmail={this.state.personEmail}
+                    updatePersonDetails={this.updatePersonDetails}
+                    deletePersonDetails={this.deletePersonDetails}
+                    personLocation={this.state.personLocation}
+                    onFileChange={this.onFileChange}
+                    selectedFile={this.state.selectedFile}
+                    personEmailTouched={this.state.touched.personEmail}
+                    businessNameTouched={this.state.touched.businessName}
+                    personZipCodeTouched={this.state.touched.personZipCode} />
+            </>
+        )
+    }
+
+    WorkspaceWithId = ({ match }) => {
+
+        return (
+            <>
+                <WorkspaceDetails workspace={this.state.workspaceinfo.filter((workspace) => workspace.id === parseInt(match.params.workspaceId, 10))[0]}
+                    getSelectedWorkspaceId={this.getSelectedWorkspaceId} />
+            </>
+        )
+    }
+
+    Workspaces = () => {
+        return (
+            <>
+                <Workspace
+                    zipCode={this.state.zipCode}
+                    workspaceinfo={this.state.workspaceinfo}
+                    setDate={this.state.setDate}
+                    people={this.state.people}
+                    location={this.state.location} />
+            </>
+        )
+    }
+
+    ConfirmPersonDetails = () => {
+        return (
+            <>
+                <ConfirmPerson
+                    handInputChange={this.handInputChange}
+                    handleBlur={this.handleBlur}
+                    onChange={this.onChange}
+                    personCity={this.state.personCity}
+                    personState={this.state.personState}
+                    personEmail={this.state.personEmail}
+                    businessName={this.state.businessName}
+                    personAddress={this.state.personAddress}
+                    personName={this.state.personName}
+                    personPhone={this.state.personPhone} />
+            </>
+        )
+    }
+
+    LeaseWorkspaceTimeDuration = () => {
+        return (
+            <>
+                <LeaseTimePeriod
+                    workspace={this.state.workspaceinfo}
+                    selectedWorkspaceId={this.state.selectedWorkspaceId}
+                    selectedLeaseDuration={this.state.selectedLeaseDuration}
+                    updateLeaseDuration={(duration, price) => this.updateLeaseDuration(duration, price)} />
+            </>
+        )
     }
 
     render() {
-        const WorkspaceWithId = ({ match }) => {
 
-            return (
-                <>
-                    <WorkspaceDetails workspace={this.state.workspaceinfo.filter((workspace) => workspace.id === parseInt(match.params.workspaceId, 10))[0]}
-                        getSelectedWorkspaceId={this.getSelectedWorkspaceId} />
-                </>
-            )
-        }
 
         return (
             <>
@@ -498,48 +698,15 @@ export default class MainComponent extends Component {
                             increase={this.increase}
                             decrease={this.decrease}
                             location={this.state.location} />} />
-                        <SecuredRoute exact path='/workspaces' component={() => <Workspace
-                            zipCode={this.state.zipCode}
-                            workspaceinfo={this.state.workspaceinfo}
-                            setDate={this.state.setDate}
-                            people={this.state.people}
-                            location={this.state.location} />} />
-                        <SecuredRoute path="/workspaces/:workspaceId" component={WorkspaceWithId} />
-                        <Route exact path="/personalinfo" render={() => <PersonalInfo key={'personalIn'}
-                            handInputChange={this.handInputChange}
-                            handleBlur={this.handleBlur}
-                            onChange={this.onChange}
-                            personZipCode={this.state.personZipCode}
-                            businessName={this.state.businessName}
-                            personEmail={this.state.personEmail}
-                            updatePersonDetails={this.updatePersonDetails}
-                            deletePersonDetails={this.deletePersonDetails}
-                            personLocation={this.state.personLocation}
-                            onFileChange={this.onFileChange}
-                            selectedFile={this.state.selectedFile}
-                            personEmailTouched={this.state.touched.personEmail}
-                            businessNameTouched={this.state.touched.businessName}
-                            personZipCodeTouched={this.state.touched.personZipCode} />} />
-                        <Route exact path="/confirmPerson" render={() => <ConfirmPerson
-                            handInputChange={this.handInputChange}
-                            handleBlur={this.handleBlur}
-                            onChange={this.onChange}
-                            personCity={this.state.personCity}
-                            personState={this.state.personState}
-                            personEmail={this.state.personEmail}
-                            businessName={this.state.businessName}
-                            personAddress={this.state.personAddress}
-                            personName={this.state.personName}
-                            personPhone={this.state.personPhone} />}
-                        />
-                        <Route exact path="/leaseDuration" render={() => <LeaseTimePeriod
-                            workspace={this.state.workspaceinfo}
-                            selectedWorkspaceId={this.state.selectedWorkspaceId}
-                            selectedLeaseDuration={this.state.selectedLeaseDuration}
-                            updateLeaseDuration={(duration, price) => this.updateLeaseDuration(duration, price)} />}
-                        />
+                        <SecuredRoute exact path='/workspaces' component={this.Workspaces} />
+                        <SecuredRoute path="/workspaces/:workspaceId" component={this.WorkspaceWithId} />
+                        <SecuredRoute exact path="/personalinfo" component={this.PersonInformation} />
+                        <SecuredRoute exact path="/confirmPerson" component={this.ConfirmPersonDetails} />
+                        <SecuredRoute exact path="/leaseDuration" component={this.LeaseWorkspaceTimeDuration} />
+                        <Route exact path="/payment" render={() => <Payment selectedLeasePrice={this.state.selectedLeasePrice} />} />
                         <Redirect to='/' />
                     </Switch>
+
                 </Router>
                 <Footer />
             </>

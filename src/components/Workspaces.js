@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 
 
-
 function RenderWorkspace({ workObj, zipCode, cityName }) {
 
     return (
+     
         <Card>
             <Link style={{ textDecoration: 'none' }} to={`/workspaces/${workObj.id}`} >
                 <CardHeader>
@@ -26,6 +26,7 @@ function RenderWorkspace({ workObj, zipCode, cityName }) {
                 </CardBody>
             </Link>
         </Card>
+       
     );
 
 }

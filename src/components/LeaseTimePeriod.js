@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { CardHeader, CardBody, CardDeck, Progress, Card, CardTitle, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 
 let handleSubmit = (event) => {
-    event.preventDefault();
+    event.stopPropagation();
 
 }
 
-let AskInsurance = (duration, updateLeaseDuration, price) => {
 
+
+let AskInsurance = (duration, updateLeaseDuration, price) => {
+    
     let insurancePart
     insurancePart = document.getElementById('insurance');
     insurancePart.style.display = 'block'
@@ -42,11 +46,12 @@ let AskInsurance = (duration, updateLeaseDuration, price) => {
         sixMonths.style.boxShadow = 'none'
         monthly.style.boxShadow = 'none'
     }
-
-
-
 }
+
+
+
 const LeaseTimePeriod = (props) => {
+    const [radioValue, setValue] = useState(0);
     useEffect(() => {
         if (props.selectedLeaseDuration === '') {
             let insurancePart = document.getElementById('insurance');
@@ -54,7 +59,13 @@ const LeaseTimePeriod = (props) => {
             let jumbo = document.getElementById('jumbo');
             jumbo.style.marginBottom = '7%'
         }
+        
     });
+
+    let onChange = (e) =>{
+        setValue(parseInt(e))
+        console.log(e)
+    }
 
     let workspacePrice
     let workspaceFac
@@ -102,7 +113,7 @@ const LeaseTimePeriod = (props) => {
                         <CardDeck>
                             <Card className="price" id="monthly">
 
-                                <CardHeader className="bg-secondary text-white">
+                                <CardHeader className="bg-dark text-white">
                                     <CardTitle className="text-center">
                                         Monthly
                                   </CardTitle>
@@ -115,7 +126,7 @@ const LeaseTimePeriod = (props) => {
                                     <div className="mt-3">
                                         {facilities}
                                     </div>
-                                    <button className="btn btn-secondary btn-block mt-5" onClick={() => AskInsurance('1', props.updateLeaseDuration, workspacePrice)}>SELECT</button>
+                                    <button className="btn btn-dark btn-block mt-5" onClick={() => AskInsurance('1', props.updateLeaseDuration, workspacePrice)}>SELECT</button>
 
                                 </CardBody>
 
@@ -137,7 +148,7 @@ const LeaseTimePeriod = (props) => {
                                 </CardBody>
                             </Card>
                             <Card className="price" id="twelveMonths">
-                                <CardHeader className="bg-primary text-white">
+                                <CardHeader className="bg-dark text-white">
                                     <CardTitle className="text-center">
                                         Annually (12-Months)
                                   </CardTitle>
@@ -148,7 +159,7 @@ const LeaseTimePeriod = (props) => {
                                     <div className="mt-3">
                                     {facilities}
                                     </div>
-                                    <button className="btn btn-primary btn-block mt-5" onClick={() => AskInsurance('12', props.updateLeaseDuration, AnnualPrice)}>SELECT</button>
+                                    <button className="btn btn-dark btn-block mt-5" onClick={() => AskInsurance('12', props.updateLeaseDuration, AnnualPrice)}>SELECT</button>
                                 </CardBody>
                             </Card>
                         </CardDeck>
@@ -165,7 +176,7 @@ const LeaseTimePeriod = (props) => {
                         <div className="col-sm-12">
                             <Label check>
 
-                                <Input type="radio" name="radio1" />
+                                <Input type="radio" name="radio1" id = "yes" value = "10" onClick = {(e)=>onChange(e.target.value)}/>
                                     Yes, add policy for $10<sub>/mo</sub>
 
                             </Label>
@@ -178,7 +189,7 @@ const LeaseTimePeriod = (props) => {
                         <div className="col-sm-12">
                             <Label check>
 
-                                <Input type="radio" name="radio1" />
+                                <Input type="radio" name="radio1" id = "no" value = "0" onClick = {(e)=>onChange(e.target.value)} />
                                 No
                             </Label>
                         </div>
@@ -186,7 +197,9 @@ const LeaseTimePeriod = (props) => {
 
                     </FormGroup>
                     <FormGroup row>
-                        <button className="btn btn-dark btn-block mt-5">Proceed to Payment <i className="fa fa-arrow-right" aria-hidden="true"></i></button>
+                    <div className="col-sm-12 col-12 mt-3">
+                    <Link style={{ textDecoration: 'none' }} to = 'payment'><button className="btn btn-dark btn-block mt-5">Proceed to Payment <i className="fa fa-arrow-right" aria-hidden="true"></i></button></Link>
+                    </div>
                     </FormGroup>
                 </Form>
             </div>

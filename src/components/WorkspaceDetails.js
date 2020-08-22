@@ -2,6 +2,7 @@ import React from 'react';
 import { UncontrolledCarousel, Progress, Card } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+
 const WorkspaceDetails = (props) => {
 
     const selectedWorkspace = props.workspace.workImages
@@ -71,15 +72,21 @@ const WorkspaceDetails = (props) => {
                         <div className="row">
                             <div className="col-sm-5 col-12">
                                 <h4>Office details:</h4>
+
                                 <div>
+
                                     {showDetails}
+
                                 </div>
+
                             </div>
 
                             <div className="offset-sm-1 col-sm-6 col-12">
                                 <h4>Nearby Facilities:</h4>
                                 <div>
+
                                     {showFac}
+
                                 </div>
                             </div>
                         </div>
