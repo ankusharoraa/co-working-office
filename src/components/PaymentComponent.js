@@ -1,14 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CardHeader, CardBody, Form, FormGroup, Input, Label, Progress, Card, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
+// import Loader from 'react-loader-spinner'
+// import history from './history';
 
 let handleSubmit = (event) => {
     event.preventDefault();
 
 }
 
+// let loadingScreen = () =>{
+//     return(<Loader
+//          type="Puff"
+//          color="#00BFFF"
+//          height={100}
+//          width={100}
+//          timeout={3000} //3 secs
+ 
+//       />)
 
+// }
 const Payment = (props) => {
+   
+    useEffect(()=>{
+        window.onpopstate = e =>{
+            props.updateClickCount();
+        }
+    })
     return (
         <>
             <div className="container-fluid">
@@ -52,11 +70,11 @@ const Payment = (props) => {
                                             <Label htmlFor="cardNumber" className="col-sm-4 col-form-label form-control-label required">Card Number</Label>
                                             <div className="col-sm-8">
                                                 <Input type="number" name="cardNumber" id="cardNumber" pattern="[0-9.]+"
-                                                
+
 
 
                                                 />
-                                                
+
                                             </div>
                                             {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}
 
@@ -74,18 +92,18 @@ const Payment = (props) => {
 
                                         </FormGroup>
                                         <FormGroup row>
-                                    <div className="col-sm-8 offset-sm-4 mt-2">
-                                                <b className = "lead"><b>Final Price is ${props.selectedLeasePrice}</b><sup>*</sup></b>
+                                            <div className="col-sm-8 offset-sm-4 mt-2">
+                                                <b className="lead"><b>Final Price is ${props.yesSelected === true ? props.selectedRadioValueYes : props.selectedLeasePrice}</b><sup>*</sup></b>
                                                 <p>* <small className="text-muted">This is inclusive of workspace lease and insurance for a period of 1 month</small></p>
-                                                
+
                                             </div>
-                                            </FormGroup>
-                                    <FormGroup row>
+                                        </FormGroup>
+                                        <FormGroup row>
                                             <div className="col-sm-12 col-12">
                                                 <Link style={{ textDecoration: 'none' }}><button className="SubmitButton">Pay <i className="fa fa-lock" aria-hidden="true"></i></button></Link>
                                             </div>
                                         </FormGroup>
-                                        
+
                                     </Form>
                                 </CardBody>
                             </Card>

@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect } from 'react';
 import { CardHeader, CardBody, CardDeck, Progress, Card, CardTitle, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -51,7 +51,7 @@ let AskInsurance = (duration, updateLeaseDuration, price) => {
 
 
 const LeaseTimePeriod = (props) => {
-    const [radioValue, setValue] = useState(0);
+    // const [radioValue, setValue] = useState(0);
     useEffect(() => {
         if (props.selectedLeaseDuration === '') {
             let insurancePart = document.getElementById('insurance');
@@ -63,7 +63,7 @@ const LeaseTimePeriod = (props) => {
     });
 
     let onChange = (e) =>{
-        setValue(parseInt(e))
+        props.updateRadioState(e)
         console.log(e)
     }
 
