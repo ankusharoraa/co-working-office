@@ -25,6 +25,10 @@ const Payment = (props) => {
     useEffect(()=>{
         window.onpopstate = e =>{
             props.updateClickCount();
+            let insurancePart = document.getElementById('insurance');
+            insurancePart.style.display = 'none'
+            let jumbo = document.getElementById('jumbo');
+            jumbo.style.marginBottom = '7%'
         }
     })
     return (

@@ -10,7 +10,7 @@ let handleSubmit = (event) => {
 
 
 
-let AskInsurance = (duration, updateLeaseDuration, price) => {
+let AskInsurance = (duration, updateLeaseDuration, price,updateClickCount) => {
     
     let insurancePart
     insurancePart = document.getElementById('insurance');
@@ -20,6 +20,8 @@ let AskInsurance = (duration, updateLeaseDuration, price) => {
     let monthly = document.getElementById('monthly');
     let sixMonths = document.getElementById('sixMonths');
     let twelveMonths = document.getElementById('twelveMonths');
+    let yesValue = document.getElementById('yes');
+    let noValue = document.getElementById('no');
     if (duration === '1') {
 
         monthly.style.webkitTransition = '0.3s'
@@ -27,6 +29,11 @@ let AskInsurance = (duration, updateLeaseDuration, price) => {
         monthly.style.boxShadow = '0 16px 24px 0 rgba(0,0,0,0.2)'
         sixMonths.style.boxShadow = 'none'
         twelveMonths.style.boxShadow = 'none'
+        if(yesValue.checked || noValue.checked){
+            yesValue.checked = false;
+            noValue.checked = false;
+            updateClickCount();
+        }
 
 
     }
@@ -37,6 +44,11 @@ let AskInsurance = (duration, updateLeaseDuration, price) => {
         sixMonths.style.boxShadow = '0 16px 24px 0 rgba(0,0,0,0.2)'
         twelveMonths.style.boxShadow = 'none'
         monthly.style.boxShadow = 'none'
+        if(yesValue.checked || noValue.checked){
+            yesValue.checked = false;
+            noValue.checked = false
+            updateClickCount()
+        }
     }
     else if (duration === '12') {
 
@@ -45,6 +57,11 @@ let AskInsurance = (duration, updateLeaseDuration, price) => {
         twelveMonths.style.boxShadow = '0px 16px 24px 0 rgba(0,0,0,0.2)'
         sixMonths.style.boxShadow = 'none'
         monthly.style.boxShadow = 'none'
+        if(yesValue.checked || noValue.checked){
+            yesValue.checked = false;
+            noValue.checked = false
+            updateClickCount()
+        }
     }
 }
 
@@ -126,7 +143,7 @@ const LeaseTimePeriod = (props) => {
                                     <div className="mt-3">
                                         {facilities}
                                     </div>
-                                    <button className="btn btn-dark btn-block mt-5" onClick={() => AskInsurance('1', props.updateLeaseDuration, workspacePrice)}>SELECT</button>
+                                    <button className="btn btn-dark btn-block mt-5" onClick={() => AskInsurance('1', props.updateLeaseDuration, workspacePrice,props.updateClickCount)}>SELECT</button>
 
                                 </CardBody>
 
@@ -144,7 +161,7 @@ const LeaseTimePeriod = (props) => {
                                     <div className="mt-3">
                                     {facilities}
                                     </div>
-                                    <button className="btn btn-dark btn-block mt-5" onClick={() => AskInsurance('6', props.updateLeaseDuration, halfYearlyPrice)}>SELECT</button>
+                                    <button className="btn btn-dark btn-block mt-5" onClick={() => AskInsurance('6', props.updateLeaseDuration, halfYearlyPrice,props.updateClickCount)}>SELECT</button>
                                 </CardBody>
                             </Card>
                             <Card className="price" id="twelveMonths">
@@ -159,7 +176,7 @@ const LeaseTimePeriod = (props) => {
                                     <div className="mt-3">
                                     {facilities}
                                     </div>
-                                    <button className="btn btn-dark btn-block mt-5" onClick={() => AskInsurance('12', props.updateLeaseDuration, AnnualPrice)}>SELECT</button>
+                                    <button className="btn btn-dark btn-block mt-5" onClick={() => AskInsurance('12', props.updateLeaseDuration, AnnualPrice,props.updateClickCount)}>SELECT</button>
                                 </CardBody>
                             </Card>
                         </CardDeck>
