@@ -1,38 +1,48 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CardHeader, CardBody, Form, FormGroup, Input, Label, Progress, Card, CardTitle } from 'reactstrap';
-import { Link } from 'react-router-dom';
-// import Loader from 'react-loader-spinner'
-// import history from './history';
+import history from './history';
+import Loader from 'react-promise-loader';
+
+
 
 let handleSubmit = (event) => {
     event.preventDefault();
 
 }
 
-// let loadingScreen = () =>{
-//     return(<Loader
-//          type="Puff"
-//          color="#00BFFF"
-//          height={100}
-//          width={100}
-//          timeout={3000} //3 secs
- 
-//       />)
 
-// }
+
 const Payment = (props) => {
-   
-    useEffect(()=>{
-        window.onpopstate = e =>{
+    const [loaderStatus, setLoaderStatus] = useState(false);
+    
+
+
+    useEffect(() => {
+        window.onpopstate = e => {
             props.updateClickCount();
             let insurancePart = document.getElementById('insurance');
+            if(insurancePart!==null){
             insurancePart.style.display = 'none'
+            }
             let jumbo = document.getElementById('jumbo');
+            if(jumbo!==null){
             jumbo.style.marginBottom = '7%'
+            }
         }
+
     })
+
+    let showLoader = () => {
+        setLoaderStatus(true)
+        setTimeout(() => {
+            setLoaderStatus(false)
+            history.push('/congratulations')
+        }, 4000);
+    }
+
     return (
         <>
+            <Loader loading={loaderStatus} color={'#3d5e61'} background={'rgba(255,255,255,.5)'} />
             <div className="container-fluid">
                 <div className="row mt-2">
                     <div className="col-sm-12">
@@ -89,7 +99,18 @@ const Payment = (props) => {
 
                                             <Label htmlFor="validTill" className="col-sm-4 col-form-label form-control-label required">Valid till</Label>
                                             <div className="col-sm-8">
-                                                <Input type="text" name="validTill" id="validTill"
+                                                <Input type="month" min="2020-09" max="2036-08" name="validTill" id="validTill"
+                                                />
+                                            </div>
+                                            {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}
+
+                                        </FormGroup>
+                                        <FormGroup row>
+
+
+                                            <Label htmlFor="cvv" className="col-sm-4 col-form-label form-control-label required">CVV</Label>
+                                            <div className="col-sm-8">
+                                                <Input className="cvvPass" type="number" pattern="[0-9]*" inputmode="numeric" name="cvv" id="cvv"
                                                 />
                                             </div>
                                             {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}
@@ -104,7 +125,9 @@ const Payment = (props) => {
                                         </FormGroup>
                                         <FormGroup row>
                                             <div className="col-sm-12 col-12">
-                                                <Link style={{ textDecoration: 'none' }}><button className="SubmitButton">Pay <i className="fa fa-lock" aria-hidden="true"></i></button></Link>
+
+                                                <button onClick={showLoader} className="SubmitButton">Pay <i className="fa fa-lock" aria-hidden="true"></i></button>
+
                                             </div>
                                         </FormGroup>
 

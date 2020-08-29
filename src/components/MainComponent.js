@@ -19,6 +19,7 @@ import { usePromiseTracker } from 'react-promise-tracker';
 import Loader from 'react-promise-loader';
 import LeaseTimePeriod from './LeaseTimePeriod';
 import Payment from './PaymentComponent';
+import Congrats from './Congrats';
 
 
 class MainComponent extends Component {
@@ -103,7 +104,7 @@ class MainComponent extends Component {
         // this.guideWireApi();
         const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
         // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'xz6u6low8T4BsIegH3tYY08CiN7Fa6NIdXd7UPi7ABJVBCLuLgeNpdOqqtNLXrcv';
+        // const api = 'DdaKqqlEv5t7Crkm1JRFp09RPrjuvB4fudGwy1GW0r42Nz6rjwbYFFYzwIJRzAhT';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
         const res = await axios.get(url);
@@ -232,95 +233,95 @@ class MainComponent extends Component {
     };
 
     // guideWireApi = async () => {
-        // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const url = 'http://direct-digital-gw.uk-e1.cloudhub.io/GWire';
-        // const url = 'http://ec2-54-88-57-4.compute-1.amazonaws.com:8080/pc/service/foreService/microServicePolicy/createMicroServicePolicy'
-        // const headers = {
-        //     'Content-Type': 'application/json',
-        //     'Access-Control-Allow-Credentials': 'true',
-        //     'userName': 'su',
-        //     'password': 'gw',
-        //     'Access-Control-Allow-Origin': '*',
-            // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-            // 'Access-Control-Allow-Credentials': 'true',
-            // "Access-Control-Allow-Methods" : "DELETE, POST, GET, OPTIONS",
-            // "Access-Control-Allow-Headers" : "Content-Type, Authorization, X-Requested-With",
-        //     "X-Requested-With": "XMLHttpRequest"
-        // }
-        // const reqBody = {
+    // const proxyurl = "https://corsaccess.herokuapp.com/";
+    // const url = 'http://direct-digital-gw.uk-e1.cloudhub.io/GWire';
+    // const url = 'http://ec2-54-88-57-4.compute-1.amazonaws.com:8080/pc/service/foreService/microServicePolicy/createMicroServicePolicy'
+    // const headers = {
+    //     'Content-Type': 'application/json',
+    //     'Access-Control-Allow-Credentials': 'true',
+    //     'userName': 'su',
+    //     'password': 'gw',
+    //     'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+    // 'Access-Control-Allow-Credentials': 'true',
+    // "Access-Control-Allow-Methods" : "DELETE, POST, GET, OPTIONS",
+    // "Access-Control-Allow-Headers" : "Content-Type, Authorization, X-Requested-With",
+    //     "X-Requested-With": "XMLHttpRequest"
+    // }
+    // const reqBody = {
 
-        //     "input": {
-        //         "orderKeys": ["policy"],
-        //         "policy": {
-        //             "yearBusinessStarted": "2020",
-        //             "BaseState": "IL",
-        //             "accountHolderName": "John May",
-        //             "accountHolderEmailAddress": "john.may@gmail.com",
-        //             "accountHolderContactFirstName": "John",
-        //             "accountHolderContactLastName": "May",
-        //             "primaryAddressLine1": "444",
-        //             "primaryAddressLine2": "MayBash",
-        //             "primaryAddressCity": "Chicago",
-        //             "primaryAddressState": "IL",
-        //             "primaryAddressCountry": "US",
-        //             "primaryAddressPostalCode": "60604",
-        //             "primaryAddressType": "business",
-        //             "coverageTermValue": "2000000",
-        //             "exposureBasisAmount": "300",
-        //             "generalInfoWebsite": "aa@aa.com",
-        //             "generalInfoDBANames": "DBA",
-        //             "generalInfoLegalStatus": "Open",
-        //             "financialRiskAnnualRevenue": "5000",
-        //             "financialRiskD_B": "1",
-        //             "industryRiskSICDescription": "Low Risk",
-        //             "industryRiskNAICSDescription": "NAICS",
-        //             "industryRiskIndustryInfo": "Low",
-        //             "industryRiskCompanyDesc": "Low Risk",
-        //             "industryRiskTypeOfCargo": "Low",
-        //             "locationRiskFloodRiskScore": "78",
-        //             "locationRiskCrimeScore": "34",
-        //             "locationRiskTextCrimeScore": "47",
-        //             "locationRiskFireProtectScore": "89",
-        //             "locationRiskNearestFireStation": "Alberta",
-        //             "locationRiskNearFireStionType": "Low",
-        //             "locationRiskFireProtectClass": "01",
-        //             "locationRiskDistanceInMiles": "23",
-        //             "locationRiskDistanceInMin": "12",
-        //             "locationRiskNo_of_Locations": "1",
-        //             "locationalRiskFIPSCode": "023",
-        //             "locationalRiskLatitude": "12",
-        //             "locationalRiskLongitude": "26",
-        //             "locationalRiskWildfireRisk": "36",
-        //             "locationalRiskEarthquake": "Medium",
-        //             "locationalRiskWind": "87",
-        //             "locationalRiskHail": "High",
-        //             "locationalRiskDistanceToShore": "42",
-        //             "locationalRiskTornado": "High",
-        //             "locationalRiskLightning": "High",
-        //             "locationalRiskToxicRelFltyDis": "Low",
-        //             "locationalRiskForcibleRobbery": "Low",
-        //             "locationalRiskMtrVehicleTheft": "High",
-        //             "locationalRiskMurder": "High",
-        //             "mgmtRiskBBBRating": "87",
-        //             "mgmtRiskAny_ProductRecalls": "6",
-        //             "mgmtRiskSocialMediaScore": "45",
-        //             "mgmtRiskAny_CodeViolations": "1",
-        //             "mgmtRiskPFR": "65",
-        //             "operationRiskIsAllTime": "false",
-        //             "propertyRiskOperateFromHome": "true",
-        //             "propertyRiskDoPlaceOfBusiness": "true",
-        //             "propertyRiskExactSqFootage": "2000",
-        //             "propertyRiskNoOfFloors": "4",
-        //             "propertyRiskYearBuilt": "2000",
-        //             "propertyRiskConstructionType": "1A",
-        //             "operationRiskHrsOfOperation": "2",
-        //             "operationRiskFPCCodes": "112",
-        //             "personnelRiskFullTimeEmployees": "3",
-        //             "lineLeveDetailsTranpNumber": "1"
-        //         }
-        //     }
-        // }
-        // try {
+    //     "input": {
+    //         "orderKeys": ["policy"],
+    //         "policy": {
+    //             "yearBusinessStarted": "2020",
+    //             "BaseState": "IL",
+    //             "accountHolderName": "John May",
+    //             "accountHolderEmailAddress": "john.may@gmail.com",
+    //             "accountHolderContactFirstName": "John",
+    //             "accountHolderContactLastName": "May",
+    //             "primaryAddressLine1": "444",
+    //             "primaryAddressLine2": "MayBash",
+    //             "primaryAddressCity": "Chicago",
+    //             "primaryAddressState": "IL",
+    //             "primaryAddressCountry": "US",
+    //             "primaryAddressPostalCode": "60604",
+    //             "primaryAddressType": "business",
+    //             "coverageTermValue": "2000000",
+    //             "exposureBasisAmount": "300",
+    //             "generalInfoWebsite": "aa@aa.com",
+    //             "generalInfoDBANames": "DBA",
+    //             "generalInfoLegalStatus": "Open",
+    //             "financialRiskAnnualRevenue": "5000",
+    //             "financialRiskD_B": "1",
+    //             "industryRiskSICDescription": "Low Risk",
+    //             "industryRiskNAICSDescription": "NAICS",
+    //             "industryRiskIndustryInfo": "Low",
+    //             "industryRiskCompanyDesc": "Low Risk",
+    //             "industryRiskTypeOfCargo": "Low",
+    //             "locationRiskFloodRiskScore": "78",
+    //             "locationRiskCrimeScore": "34",
+    //             "locationRiskTextCrimeScore": "47",
+    //             "locationRiskFireProtectScore": "89",
+    //             "locationRiskNearestFireStation": "Alberta",
+    //             "locationRiskNearFireStionType": "Low",
+    //             "locationRiskFireProtectClass": "01",
+    //             "locationRiskDistanceInMiles": "23",
+    //             "locationRiskDistanceInMin": "12",
+    //             "locationRiskNo_of_Locations": "1",
+    //             "locationalRiskFIPSCode": "023",
+    //             "locationalRiskLatitude": "12",
+    //             "locationalRiskLongitude": "26",
+    //             "locationalRiskWildfireRisk": "36",
+    //             "locationalRiskEarthquake": "Medium",
+    //             "locationalRiskWind": "87",
+    //             "locationalRiskHail": "High",
+    //             "locationalRiskDistanceToShore": "42",
+    //             "locationalRiskTornado": "High",
+    //             "locationalRiskLightning": "High",
+    //             "locationalRiskToxicRelFltyDis": "Low",
+    //             "locationalRiskForcibleRobbery": "Low",
+    //             "locationalRiskMtrVehicleTheft": "High",
+    //             "locationalRiskMurder": "High",
+    //             "mgmtRiskBBBRating": "87",
+    //             "mgmtRiskAny_ProductRecalls": "6",
+    //             "mgmtRiskSocialMediaScore": "45",
+    //             "mgmtRiskAny_CodeViolations": "1",
+    //             "mgmtRiskPFR": "65",
+    //             "operationRiskIsAllTime": "false",
+    //             "propertyRiskOperateFromHome": "true",
+    //             "propertyRiskDoPlaceOfBusiness": "true",
+    //             "propertyRiskExactSqFootage": "2000",
+    //             "propertyRiskNoOfFloors": "4",
+    //             "propertyRiskYearBuilt": "2000",
+    //             "propertyRiskConstructionType": "1A",
+    //             "operationRiskHrsOfOperation": "2",
+    //             "operationRiskFPCCodes": "112",
+    //             "personnelRiskFullTimeEmployees": "3",
+    //             "lineLeveDetailsTranpNumber": "1"
+    //         }
+    //     }
+    // }
+    // try {
     //  let res = await fetch(url,{
     //     method : 'POST',
     //     mode: 'cors', 
@@ -731,7 +732,7 @@ class MainComponent extends Component {
                     selectedLeaseDuration={this.state.selectedLeaseDuration}
                     updateLeaseDuration={(duration, price) => this.updateLeaseDuration(duration, price)}
                     updateRadioState={(radioValue) => this.updateRadioState(radioValue)}
-                    updateClickCount = {this.updateClickCount} />
+                    updateClickCount={this.updateClickCount} />
             </>
         )
     }
@@ -746,6 +747,18 @@ class MainComponent extends Component {
                     updateClickCount={this.updateClickCount}
                     yesSelected={this.state.yesSelected}
                 />
+            </>
+        )
+    }
+
+    CongratsComp = () => {
+        return (
+            <>
+                <Congrats
+                    handInputChange={this.handInputChange}
+                    handleBlur={this.handleBlur}
+                    onChange={this.onChange}
+                    personEmail={this.state.personEmail} />
             </>
         )
     }
@@ -780,6 +793,7 @@ class MainComponent extends Component {
                         <SecuredRoute exact path="/confirmPerson" component={this.ConfirmPersonDetails} />
                         <SecuredRoute exact path="/leaseDuration" component={this.LeaseWorkspaceTimeDuration} />
                         <SecuredRoute exact path="/payment" component={this.PaymentComp} />
+                        <SecuredRoute exact path="/congratulations" component={this.CongratsComp} />
                         <Redirect to='/' />
                     </Switch>
 
