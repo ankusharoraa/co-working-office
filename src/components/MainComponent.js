@@ -20,6 +20,7 @@ import Loader from 'react-promise-loader';
 import LeaseTimePeriod from './LeaseTimePeriod';
 import Payment from './PaymentComponent';
 import Congrats from './Congrats';
+import FeedbackComp from './Feedback';
 
 
 class MainComponent extends Component {
@@ -104,7 +105,7 @@ class MainComponent extends Component {
         // this.guideWireApi();
         const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
         // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'DdaKqqlEv5t7Crkm1JRFp09RPrjuvB4fudGwy1GW0r42Nz6rjwbYFFYzwIJRzAhT';
+        // const api = 'fhrPDjhow8tT3GH2vhsWQM2RCygKtbtSeLhKL0oSslO9fLXwQSoto78HY3jlAIZO';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
         const res = await axios.get(url);
@@ -763,6 +764,14 @@ class MainComponent extends Component {
         )
     }
 
+    FeedbackCompSecured = () =>{
+        return(
+            <>
+                <FeedbackComp/>
+            </>
+        )
+    }
+
 
 
     render() {
@@ -794,6 +803,7 @@ class MainComponent extends Component {
                         <SecuredRoute exact path="/leaseDuration" component={this.LeaseWorkspaceTimeDuration} />
                         <SecuredRoute exact path="/payment" component={this.PaymentComp} />
                         <SecuredRoute exact path="/congratulations" component={this.CongratsComp} />
+                        <SecuredRoute exact path = '/feedback' component = {this.FeedbackCompSecured}/>
                         <Redirect to='/' />
                     </Switch>
 

@@ -41,7 +41,7 @@ const Congrats = (props) => {
                                 <p className="lead">Please reach out to your workspace manager John Doe at <a href="tel:+91987654321">987654321</a> for any assistance.</p>
                                 <FormGroup row>
                                     <div className="col-sm-12 col-12">
-                                        <Link to='/congratulations' style={{ textDecoration: 'none' }}><button className="btn btn-block btn-danger">Continue <i class="fa fa-arrow-right"></i></button></Link>
+                                        <Link to='/feedback' style={{ textDecoration: 'none' }}><button className="btn btn-block btn-danger">Continue <i class="fa fa-arrow-right"></i></button></Link>
                                     </div>
                                 </FormGroup>
                             </CardBody>

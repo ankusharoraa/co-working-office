@@ -97,7 +97,7 @@
   font-size: 55px;
   color: red;
 }
-input[type="text"],input[type="date"],input[type="password"],input[type="email"],input[type="number"],input[type="month"],select {
+input[type="text"],input[type="date"],input[type="password"],input[type="email"],input[type="number"],input[type="month"],input[type="textarea"],select {
   min-height: 45px;
   color: #707583;
   border-radius: 5px;
