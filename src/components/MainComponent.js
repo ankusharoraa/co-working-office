@@ -103,7 +103,7 @@ class MainComponent extends Component {
 
     handleFetch = async (zipCodeUs) => {
         // this.guideWireApi();
-        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        const api = '2svOlE4BX5a6nWxivi74yQATVsbMMYM1047v09mfyEDUQRhx5dLyO5xsgxKoOjWH';
         // const proxyurl = "https://corsaccess.herokuapp.com/";
         // const api = 'fhrPDjhow8tT3GH2vhsWQM2RCygKtbtSeLhKL0oSslO9fLXwQSoto78HY3jlAIZO';
         let formatZip = zipCodeUs.slice(0, 5);
