@@ -2,7 +2,7 @@ export const WORKSPACEINFO =
     [
         {
             id: 0,
-            name: '92 Broad St',
+            name: '92, Broad St',
             zipCode: '',
             image: '/assets/images/92Broad.jpg',
             category: 'Basic',
@@ -35,12 +35,12 @@ export const WORKSPACEINFO =
             {
                 src: '/assets/images/92Broad3.jpg',
                 altText: '',
-                caption: '92 Broad St'
+                caption: '92, Broad St'
             }]
         },
         {
             id: 1,
-            name: '332 Broadway',
+            name: '332, Broadway',
             zipCode: '',
             image: '/assets/images/332Broadway.jpg',
             category: 'Prime',
@@ -78,7 +78,7 @@ export const WORKSPACEINFO =
         },
         {
             id: 2,
-            name: '54 Montague St',
+            name: '54, Montague St',
             zipCode: '',
             image: '/assets/images/54Montague.jpg',
             category: 'Basic',
@@ -116,7 +116,7 @@ export const WORKSPACEINFO =
         },
         {
             id: 3,
-            name: 'Liberty Plaza',
+            name: '145, Liberty Plaza',
             zipCode: '',
             image: '/assets/images/LibertyPlaza.jpeg',
             category: 'Prime',

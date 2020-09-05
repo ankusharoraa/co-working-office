@@ -62,7 +62,15 @@ class MainComponent extends Component {
             selectedRadioValueYes: 0,
             selectedRadioValueNo: 0,
             clickCount: 0,
-            yesSelected: false
+            yesSelected: false,
+            setSelectedYear: '',
+            officeState: '',
+            officeCity: '',
+            personFirstName: '',
+            personLastName: '',
+            selectedOfficeAddress1: '',
+            selectedOfficeAddress2: ''
+
         }
     }
 
@@ -77,6 +85,26 @@ class MainComponent extends Component {
         await this.setState({
             [name]: value
         })
+
+        if (this.state.personName.length > 3) {
+            let fullName = this.state.personName;
+            let sepratedName = fullName.split(' ');
+            let firstName = sepratedName[0];
+            let lastName = sepratedName[1];
+            this.setState({
+                personFirstName: firstName,
+                personLastName: lastName
+            })
+
+        }
+
+        if (this.state.setDate) {
+            let dateEntered = this.state.setDate
+            let getYear = dateEntered.substring(0, 4)
+            this.setState({
+                setSelectedYear: getYear
+            })
+        }
 
         if (this.state.zipCode.length === 5 && this.state.location === '') {
 
@@ -103,19 +131,21 @@ class MainComponent extends Component {
 
     handleFetch = async (zipCodeUs) => {
         // this.guideWireApi();
-        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
         // const api = '2svOlE4BX5a6nWxivi74yQATVsbMMYM1047v09mfyEDUQRhx5dLyO5xsgxKoOjWH';
-        // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'gW2KkK0HQ2paZrMzQsAip73TvqxglQ4EVunAbRjLQp53yMFLBviXu9B0sfU5qij3';
+        const proxyurl = "https://corsaccess.herokuapp.com/";
+        const api = 'gW2KkK0HQ2paZrMzQsAip73TvqxglQ4EVunAbRjLQp53yMFLBviXu9B0sfU5qij3';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-        const res = await axios.get(url);
-        // const res = await axios.get(`${proxyurl}${url}`);
+        // const res = await axios.get(url);
+        const res = await axios.get(`${proxyurl}${url}`);
         let city = res.data.city;
         let locState = res.data.state
         if (city && locState !== undefined && this.state.zipCode >= 5) {
             this.setState({
-                location: `${city}, ${locState}, U.S`
+                location: `${city}, ${locState}, U.S`,
+                officeCity: city,
+                officeState: locState
             })
         }
         if (city && locState !== undefined && this.state.personZipCode >= 5) {
@@ -234,119 +264,127 @@ class MainComponent extends Component {
         return new Array(L + 1).join(C) + s;
     };
 
-    // guideWireApi = async () => {
-    // const proxyurl = "https://corsaccess.herokuapp.com/";
-    // const url = 'http://direct-digital-gw.uk-e1.cloudhub.io/GWire';
-    // const url = 'http://ec2-54-88-57-4.compute-1.amazonaws.com:8080/pc/service/foreService/microServicePolicy/createMicroServicePolicy'
-    // const headers = {
-    //     'Content-Type': 'application/json',
-    //     'Access-Control-Allow-Credentials': 'true',
-    //     'userName': 'su',
-    //     'password': 'gw',
-    //     'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-    // 'Access-Control-Allow-Credentials': 'true',
-    // "Access-Control-Allow-Methods" : "DELETE, POST, GET, OPTIONS",
-    // "Access-Control-Allow-Headers" : "Content-Type, Authorization, X-Requested-With",
-    //     "X-Requested-With": "XMLHttpRequest"
-    // }
-    // const reqBody = {
+    setYear = async (year) => {
+        await this.setState({
+            setSelectedYear: year
+        })
+    }
 
-    //     "input": {
-    //         "orderKeys": ["policy"],
-    //         "policy": {
-    //             "yearBusinessStarted": "2020",
-    //             "BaseState": "IL",
-    //             "accountHolderName": "John May",
-    //             "accountHolderEmailAddress": "john.may@gmail.com",
-    //             "accountHolderContactFirstName": "John",
-    //             "accountHolderContactLastName": "May",
-    //             "primaryAddressLine1": "444",
-    //             "primaryAddressLine2": "MayBash",
-    //             "primaryAddressCity": "Chicago",
-    //             "primaryAddressState": "IL",
-    //             "primaryAddressCountry": "US",
-    //             "primaryAddressPostalCode": "60604",
-    //             "primaryAddressType": "business",
-    //             "coverageTermValue": "2000000",
-    //             "exposureBasisAmount": "300",
-    //             "generalInfoWebsite": "aa@aa.com",
-    //             "generalInfoDBANames": "DBA",
-    //             "generalInfoLegalStatus": "Open",
-    //             "financialRiskAnnualRevenue": "5000",
-    //             "financialRiskD_B": "1",
-    //             "industryRiskSICDescription": "Low Risk",
-    //             "industryRiskNAICSDescription": "NAICS",
-    //             "industryRiskIndustryInfo": "Low",
-    //             "industryRiskCompanyDesc": "Low Risk",
-    //             "industryRiskTypeOfCargo": "Low",
-    //             "locationRiskFloodRiskScore": "78",
-    //             "locationRiskCrimeScore": "34",
-    //             "locationRiskTextCrimeScore": "47",
-    //             "locationRiskFireProtectScore": "89",
-    //             "locationRiskNearestFireStation": "Alberta",
-    //             "locationRiskNearFireStionType": "Low",
-    //             "locationRiskFireProtectClass": "01",
-    //             "locationRiskDistanceInMiles": "23",
-    //             "locationRiskDistanceInMin": "12",
-    //             "locationRiskNo_of_Locations": "1",
-    //             "locationalRiskFIPSCode": "023",
-    //             "locationalRiskLatitude": "12",
-    //             "locationalRiskLongitude": "26",
-    //             "locationalRiskWildfireRisk": "36",
-    //             "locationalRiskEarthquake": "Medium",
-    //             "locationalRiskWind": "87",
-    //             "locationalRiskHail": "High",
-    //             "locationalRiskDistanceToShore": "42",
-    //             "locationalRiskTornado": "High",
-    //             "locationalRiskLightning": "High",
-    //             "locationalRiskToxicRelFltyDis": "Low",
-    //             "locationalRiskForcibleRobbery": "Low",
-    //             "locationalRiskMtrVehicleTheft": "High",
-    //             "locationalRiskMurder": "High",
-    //             "mgmtRiskBBBRating": "87",
-    //             "mgmtRiskAny_ProductRecalls": "6",
-    //             "mgmtRiskSocialMediaScore": "45",
-    //             "mgmtRiskAny_CodeViolations": "1",
-    //             "mgmtRiskPFR": "65",
-    //             "operationRiskIsAllTime": "false",
-    //             "propertyRiskOperateFromHome": "true",
-    //             "propertyRiskDoPlaceOfBusiness": "true",
-    //             "propertyRiskExactSqFootage": "2000",
-    //             "propertyRiskNoOfFloors": "4",
-    //             "propertyRiskYearBuilt": "2000",
-    //             "propertyRiskConstructionType": "1A",
-    //             "operationRiskHrsOfOperation": "2",
-    //             "operationRiskFPCCodes": "112",
-    //             "personnelRiskFullTimeEmployees": "3",
-    //             "lineLeveDetailsTranpNumber": "1"
-    //         }
-    //     }
-    // }
-    // try {
-    //  let res = await fetch(url,{
-    //     method : 'POST',
-    //     mode: 'cors', 
-    //     credentials: 'same-origin',
-    //     headers,
-    //     body : JSON.stringify(reqBody)
-    // })
-    //     let res = await new XMLHttpRequest();
-    //    await res.open('POST',url);
-    //     await res.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    //     await res.setRequestHeader('userName','su')
-    //     await res.setRequestHeader('password','gw')
-    //     await res.setRequestHeader('Access-Control-Allow-Origin','http://localhost:3000')
-    //     await res.setRequestHeader('Access-Control-Allow-Credentials', 'true');
-    //     await res.send(JSON.stringify(reqBody))
-    //         let res = await axios.post(proxyurl + url, reqBody, { headers })
-    //         console.log(`response from guidewire ----> ${JSON.stringify(res)}`)
-    //     }
-    //     catch (e) {
-    //         console.error("error in GuideWire---->" + e)
-    //     }
+    guideWireApi = async () => {
+        const proxyurl = "https://corsaccess.herokuapp.com/";
+        const url = 'http://direct-digital-gw.uk-e1.cloudhub.io/GWire';
+        // const url = 'http://ec2-54-88-57-4.compute-1.amazonaws.com:8080/pc/service/foreService/microServicePolicy/createMicroServicePolicy'
+        const headers = {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials': 'true',
+            'userName': 'su',
+            'password': 'gw',
+            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+            // 'Access-Control-Allow-Credentials': 'true',
+            "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
+            "X-Requested-With": "XMLHttpRequest"
+        }
+        const reqBody = {
 
-    // }
+            "input": {
+                "orderKeys": ["policy"],
+                "policy": {
+                    "yearBusinessStarted": this.state.setSelectedYear,
+                    "BaseState": this.state.officeState,
+                    "accountHolderName": this.state.personName,
+                    "accountHolderEmailAddress": this.state.personEmail,
+                    "accountHolderContactFirstName": this.state.personFirstName,
+                    "accountHolderContactLastName": this.state.personLastName,
+                    "primaryAddressLine1": this.state.selectedOfficeAddress1,
+                    "primaryAddressLine2": this.state.selectedOfficeAddress2,
+                    "primaryAddressCity": this.state.officeCity,
+                    "primaryAddressState": this.state.officeState,
+                    "primaryAddressCountry": "US",
+                    "primaryAddressPostalCode": this.state.zipCode,
+                    "primaryAddressType": "business",
+                    "coverageTermValue": "2000000",
+                    "exposureBasisAmount": "30000",
+                    "generalInfoWebsite": "aa@aa.com",
+                    "generalInfoDBANames": "DBA",
+                    "generalInfoLegalStatus": "Open",
+                    "financialRiskAnnualRevenue": "5000",
+                    "financialRiskD_B": "1",
+                    "industryRiskSICDescription": "Low Risk",
+                    "industryRiskNAICSDescription": "NAICS",
+                    "industryRiskIndustryInfo": "Low",
+                    "industryRiskCompanyDesc": "Low Risk",
+                    "industryRiskTypeOfCargo": "Low",
+                    "locationRiskFloodRiskScore": "78",
+                    "locationRiskCrimeScore": "34",
+                    "locationRiskTextCrimeScore": "47",
+                    "locationRiskFireProtectScore": "89",
+                    "locationRiskNearestFireStation": "Alberta",
+                    "locationRiskNearFireStionType": "Low",
+                    "locationRiskFireProtectClass": "01",
+                    "locationRiskDistanceInMiles": "23",
+                    "locationRiskDistanceInMin": "12",
+                    "locationRiskNo_of_Locations": "1",
+                    "locationalRiskFIPSCode": "023",
+                    "locationalRiskLatitude": "12",
+                    "locationalRiskLongitude": "26",
+                    "locationalRiskWildfireRisk": "36",
+                    "locationalRiskEarthquake": "Medium",
+                    "locationalRiskWind": "87",
+                    "locationalRiskHail": "High",
+                    "locationalRiskDistanceToShore": "42",
+                    "locationalRiskTornado": "High",
+                    "locationalRiskLightning": "High",
+                    "locationalRiskToxicRelFltyDis": "Low",
+                    "locationalRiskForcibleRobbery": "Low",
+                    "locationalRiskMtrVehicleTheft": "High",
+                    "locationalRiskMurder": "High",
+                    "mgmtRiskBBBRating": "87",
+                    "mgmtRiskAny_ProductRecalls": "6",
+                    "mgmtRiskSocialMediaScore": "45",
+                    "mgmtRiskAny_CodeViolations": "1",
+                    "mgmtRiskPFR": "65",
+                    "operationRiskIsAllTime": "false",
+                    "propertyRiskOperateFromHome": "true",
+                    "propertyRiskDoPlaceOfBusiness": "true",
+                    "propertyRiskExactSqFootage": "2000",
+                    "propertyRiskNoOfFloors": "4",
+                    "propertyRiskYearBuilt": "2000",
+                    "propertyRiskConstructionType": "1A",
+                    "operationRiskHrsOfOperation": "2",
+                    "operationRiskFPCCodes": "112",
+                    "personnelRiskFullTimeEmployees": "3",
+                    "lineLeveDetailsTranpNumber": "1"
+                }
+            }
+        }
+        try {
+            let res = await axios.post(proxyurl + url, reqBody, { headers: headers })
+            console.log(res);
+            //  let res = await fetch(url,{
+            //     method : 'POST',
+            //     mode: 'cors', 
+            //     credentials: 'same-origin',
+            //     headers,
+            //     body : JSON.stringify(reqBody)
+            // })
+            //     let res = await new XMLHttpRequest();
+            //    await res.open('POST',url);
+            //     await res.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            //     await res.setRequestHeader('userName','su')
+            //     await res.setRequestHeader('password','gw')
+            //     await res.setRequestHeader('Access-Control-Allow-Origin','http://localhost:3000')
+            //     await res.setRequestHeader('Access-Control-Allow-Credentials', 'true');
+            //     await res.send(JSON.stringify(reqBody))
+            //         let res = await axios.post(proxyurl + url, reqBody, { headers })
+            //         console.log(`response from guidewire ----> ${JSON.stringify(res)}`)
+        }
+        catch (e) {
+            console.error("error in GuideWire---->" + e)
+        }
+
+    }
 
 
     scanCard = async (selectedFileState, imageChkSumState) => {
@@ -586,6 +624,17 @@ class MainComponent extends Component {
         await this.setState({
             selectedWorkspaceId: id
         })
+        let filteredWorkSpace = this.state.workspaceinfo.filter((work) => work.id === parseInt(id))[0];
+        if (filteredWorkSpace.name) {
+            let workspaceName = filteredWorkSpace.name;
+            let separateAddress = workspaceName.split(',');
+            let address1 = separateAddress[0].trim();
+            let address2 = separateAddress[1].trim();
+            this.setState({
+                selectedOfficeAddress1: address1,
+                selectedOfficeAddress2: address2
+            })
+        }
     }
 
     updateLeaseDuration = async (duration, price) => {
@@ -799,11 +848,12 @@ class MainComponent extends Component {
                             people={this.state.people}
                             increase={this.increase}
                             decrease={this.decrease}
-                            location={this.state.location} />} />
+                            location={this.state.location}
+                            setYear={(year) => this.setYear(year)} />} />
                         <SecuredRoute exact path='/workspaces' component={this.Workspaces} />
                         <SecuredRoute path="/workspaces/:workspaceId" component={this.WorkspaceWithId} />
                         <SecuredRoute exact path="/personalinfo" component={this.PersonInformation} />
-                        <SecuredRoute exact path="/confirmPerson" component={this.ConfirmPersonDetails} />
+                        <Route exact path="/confirmPerson" render={this.ConfirmPersonDetails} />
                         <SecuredRoute exact path="/leaseDuration" component={this.LeaseWorkspaceTimeDuration} />
                         <SecuredRoute exact path="/payment" component={this.PaymentComp} />
                         <SecuredRoute exact path="/congratulations" component={this.CongratsComp} />

@@ -65,6 +65,10 @@ export default class Landing extends Component {
         return errors;
     }
 
+     setYear = (year)=>{
+        this.props.setYear(year);
+    }
+
     componentDidMount() {
         let textWrapper = document.getElementById('title');
         textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
@@ -138,7 +142,6 @@ export default class Landing extends Component {
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0');;; //January is 0!
         let yyyy = today.getFullYear();
-
         today = yyyy + '-' + mm + '-' + dd;
         return (
             <>
