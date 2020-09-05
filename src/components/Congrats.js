@@ -14,7 +14,6 @@ const Congrats = (props) => {
 
                 <div className="row mt-2 jumbotron">
 
-
                     <div className="col-sm-5">
 
                         <CardImg left width="100%" src="/assets/images/us-thumbsup.png" alt="US thumbs up" />
@@ -23,6 +22,7 @@ const Congrats = (props) => {
                     <div className="offset-sm-1 col-sm-5 mt-3 d-sm-flex align-items-center">
                         <Card style={{ width: '100%' }}>
                             <CardBody className="text-center">
+                                <p className="lead"><b>Congratulations,</b> {props.businessName}</p>
                                 <h2><i>Great! You're all done!</i></h2>
                                 <p>Welcome to your new workspace</p>
                                 <p>Dowload the lease contract <a href="/assets/files/MembershipCertificate.pdf" download>here</a></p>

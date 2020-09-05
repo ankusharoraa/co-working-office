@@ -58,7 +58,7 @@ const Payment = (props) => {
                         <div className="mx-auto col-sm-6 col-12">
                             <Card>
                                 <CardHeader className="bg-primary text-white">
-                                    <CardTitle className="text-center">Pay Invoice</CardTitle>
+                                    <CardTitle className="text-center">Pay Invoice ({props.businessName})</CardTitle>
                                 </CardHeader>
                                 <CardBody>
                                     <Form onSubmit={handleSubmit}>

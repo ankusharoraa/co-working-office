@@ -36,7 +36,7 @@ let AskInsurance = (duration, updateLeaseDuration, price, updateClickCount) => {
         twelveMonth.removeAttribute("style")
         if (oneMonth.disabled) {
             oneMonth.style.fontWeight = '600'
-            oneMonth.style.color = '#aaa'
+            oneMonth.style.color = 'black'
             oneMonth.style.borderColor = '#aaa'
             oneMonth.style.background = 'transparent'
         }
@@ -65,7 +65,7 @@ let AskInsurance = (duration, updateLeaseDuration, price, updateClickCount) => {
         twelveMonth.removeAttribute("style")
         if (sixMonth.disabled) {
             sixMonth.style.fontWeight = '600'
-            sixMonth.style.color = '#aaa'
+            sixMonth.style.color = 'black'
             sixMonth.style.borderColor = '#aaa'
             sixMonth.style.background = 'transparent'
         }
@@ -93,7 +93,7 @@ let AskInsurance = (duration, updateLeaseDuration, price, updateClickCount) => {
         sixMonth.removeAttribute("style")
         if (twelveMonth.disabled) {
             twelveMonth.style.fontWeight = '600'
-            twelveMonth.style.color = '#aaa'
+            twelveMonth.style.color = 'black'
             twelveMonth.style.borderColor = '#aaa'
             twelveMonth.style.background = 'transparent'
         }
@@ -167,6 +167,9 @@ const LeaseTimePeriod = (props) => {
 
 
             <div className="container py-3" id="jumbo">
+                <div className="row">
+                    <p className="lead"><b>Hello, {props.businessName}</b></p>
+                </div>
                 <div className="row py-3">
                     <p className="lead ml-3">For how long would you like to lease the workspace?</p>
                 </div>

@@ -103,9 +103,10 @@ class MainComponent extends Component {
 
     handleFetch = async (zipCodeUs) => {
         // this.guideWireApi();
-        const api = '2svOlE4BX5a6nWxivi74yQATVsbMMYM1047v09mfyEDUQRhx5dLyO5xsgxKoOjWH';
+        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        // const api = '2svOlE4BX5a6nWxivi74yQATVsbMMYM1047v09mfyEDUQRhx5dLyO5xsgxKoOjWH';
         // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'fhrPDjhow8tT3GH2vhsWQM2RCygKtbtSeLhKL0oSslO9fLXwQSoto78HY3jlAIZO';
+        // const api = 'gW2KkK0HQ2paZrMzQsAip73TvqxglQ4EVunAbRjLQp53yMFLBviXu9B0sfU5qij3';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
         const res = await axios.get(url);
@@ -733,7 +734,8 @@ class MainComponent extends Component {
                     selectedLeaseDuration={this.state.selectedLeaseDuration}
                     updateLeaseDuration={(duration, price) => this.updateLeaseDuration(duration, price)}
                     updateRadioState={(radioValue) => this.updateRadioState(radioValue)}
-                    updateClickCount={this.updateClickCount} />
+                    updateClickCount={this.updateClickCount}
+                    businessName={this.state.businessName} />
             </>
         )
     }
@@ -747,6 +749,7 @@ class MainComponent extends Component {
                     selectedRadioValueNo={this.state.selectedRadioValueNo}
                     updateClickCount={this.updateClickCount}
                     yesSelected={this.state.yesSelected}
+                    businessName={this.state.businessName}
                 />
             </>
         )
@@ -759,15 +762,16 @@ class MainComponent extends Component {
                     handInputChange={this.handInputChange}
                     handleBlur={this.handleBlur}
                     onChange={this.onChange}
-                    personEmail={this.state.personEmail} />
+                    personEmail={this.state.personEmail}
+                    businessName={this.state.businessName} />
             </>
         )
     }
 
-    FeedbackCompSecured = () =>{
-        return(
+    FeedbackCompSecured = () => {
+        return (
             <>
-                <FeedbackComp/>
+                <FeedbackComp />
             </>
         )
     }
@@ -803,7 +807,7 @@ class MainComponent extends Component {
                         <SecuredRoute exact path="/leaseDuration" component={this.LeaseWorkspaceTimeDuration} />
                         <SecuredRoute exact path="/payment" component={this.PaymentComp} />
                         <SecuredRoute exact path="/congratulations" component={this.CongratsComp} />
-                        <SecuredRoute exact path = '/feedback' component = {this.FeedbackCompSecured}/>
+                        <SecuredRoute exact path='/feedback' component={this.FeedbackCompSecured} />
                         <Redirect to='/' />
                     </Switch>
 
