@@ -69,7 +69,9 @@ class MainComponent extends Component {
             personFirstName: '',
             personLastName: '',
             selectedOfficeAddress1: '',
-            selectedOfficeAddress2: ''
+            selectedOfficeAddress2: '',
+            setExposureAmount: '',
+            setPremiumAmount: ''
 
         }
     }
@@ -130,15 +132,14 @@ class MainComponent extends Component {
     }
 
     handleFetch = async (zipCodeUs) => {
-        // this.guideWireApi();
-        // const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
+        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
         // const api = '2svOlE4BX5a6nWxivi74yQATVsbMMYM1047v09mfyEDUQRhx5dLyO5xsgxKoOjWH';
-        const proxyurl = "https://corsaccess.herokuapp.com/";
-        const api = 'gW2KkK0HQ2paZrMzQsAip73TvqxglQ4EVunAbRjLQp53yMFLBviXu9B0sfU5qij3';
+        // const proxyurl = "https://corsaccess.herokuapp.com/";
+        // const api = 'JLDN8htbqjcospkQao41bPYoqal0x5dV59arONOWHzsL46lzUMPvO6bhbSuLi4eu';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-        // const res = await axios.get(url);
-        const res = await axios.get(`${proxyurl}${url}`);
+        const res = await axios.get(url);
+        // const res = await axios.get(`${proxyurl}${url}`);
         let city = res.data.city;
         let locState = res.data.state
         if (city && locState !== undefined && this.state.zipCode >= 5) {
@@ -273,15 +274,12 @@ class MainComponent extends Component {
     guideWireApi = async () => {
         const proxyurl = "https://corsaccess.herokuapp.com/";
         const url = 'http://direct-digital-gw.uk-e1.cloudhub.io/GWire';
-        // const url = 'http://ec2-54-88-57-4.compute-1.amazonaws.com:8080/pc/service/foreService/microServicePolicy/createMicroServicePolicy'
         const headers = {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Credentials': 'true',
             'userName': 'su',
             'password': 'gw',
             'Access-Control-Allow-Origin': '*',
-            // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-            // 'Access-Control-Allow-Credentials': 'true',
             "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
             "X-Requested-With": "XMLHttpRequest"
@@ -305,7 +303,7 @@ class MainComponent extends Component {
                     "primaryAddressPostalCode": this.state.zipCode,
                     "primaryAddressType": "business",
                     "coverageTermValue": "2000000",
-                    "exposureBasisAmount": "30000",
+                    "exposureBasisAmount": this.state.setExposureAmount,
                     "generalInfoWebsite": "aa@aa.com",
                     "generalInfoDBANames": "DBA",
                     "generalInfoLegalStatus": "Open",
@@ -360,25 +358,15 @@ class MainComponent extends Component {
             }
         }
         try {
-            let res = await axios.post(proxyurl + url, reqBody, { headers: headers })
-            console.log(res);
-            //  let res = await fetch(url,{
-            //     method : 'POST',
-            //     mode: 'cors', 
-            //     credentials: 'same-origin',
-            //     headers,
-            //     body : JSON.stringify(reqBody)
-            // })
-            //     let res = await new XMLHttpRequest();
-            //    await res.open('POST',url);
-            //     await res.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            //     await res.setRequestHeader('userName','su')
-            //     await res.setRequestHeader('password','gw')
-            //     await res.setRequestHeader('Access-Control-Allow-Origin','http://localhost:3000')
-            //     await res.setRequestHeader('Access-Control-Allow-Credentials', 'true');
-            //     await res.send(JSON.stringify(reqBody))
-            //         let res = await axios.post(proxyurl + url, reqBody, { headers })
-            //         console.log(`response from guidewire ----> ${JSON.stringify(res)}`)
+            let res = await trackPromise(axios.post(proxyurl + url, reqBody, { headers: headers }))
+            console.log(JSON.stringify(res.data.output.response.premium));
+            let premiumWithUsd = res.data.output.response.premium;
+            let separate = premiumWithUsd.split('.');
+            let premiumAmount = separate[0];
+            console.log(`premium amount is ---> ${premiumAmount}`);
+            this.setState(
+                { setPremiumAmount: premiumAmount }
+            )
         }
         catch (e) {
             console.error("error in GuideWire---->" + e)
@@ -630,11 +618,14 @@ class MainComponent extends Component {
             let separateAddress = workspaceName.split(',');
             let address1 = separateAddress[0].trim();
             let address2 = separateAddress[1].trim();
+            let exposureAmount = filteredWorkSpace.exposureAmount;
             this.setState({
                 selectedOfficeAddress1: address1,
-                selectedOfficeAddress2: address2
+                selectedOfficeAddress2: address2,
+                setExposureAmount: exposureAmount
             })
         }
+        this.guideWireApi();
     }
 
     updateLeaseDuration = async (duration, price) => {
@@ -675,10 +666,24 @@ class MainComponent extends Component {
 
         if (radioValue === '10') {
             if (this.state.selectedRadioValueYes === 0) {
-                let totalAmount = parseInt(this.state.selectedLeasePrice) + parseInt(radioValue)
+                if(this.state.selectedLeaseDuration === '1'){
+                let totalAmount = parseInt(this.state.selectedLeasePrice) + parseInt(this.state.setPremiumAmount)
                 await this.setState({
                     selectedRadioValueYes: totalAmount
                 })
+            }
+            else if(this.state.selectedLeaseDuration === '6'){
+                let totalAmount = parseInt(this.state.selectedLeasePrice) + (parseInt(this.state.setPremiumAmount)*6)
+                await this.setState({
+                    selectedRadioValueYes: totalAmount
+                })
+            }
+            else if(this.state.selectedLeaseDuration === '12'){
+                let totalAmount = parseInt(this.state.selectedLeasePrice) + (parseInt(this.state.setPremiumAmount)*12)
+                await this.setState({
+                    selectedRadioValueYes: totalAmount
+                })
+            }
             }
             await this.setState({
                 yesSelected: true
@@ -701,8 +706,8 @@ class MainComponent extends Component {
 
         this.setState({
             clickCount: 0,
-            // selectedLeaseDuration: 0,
-            // selectedLeasePrice: 0,
+            selectedLeaseDuration: 0,
+            selectedLeasePrice: 0,
             yesSelected: false,
             selectedRadioValueNo: 0,
             selectedRadioValueYes: 0
@@ -784,7 +789,9 @@ class MainComponent extends Component {
                     updateLeaseDuration={(duration, price) => this.updateLeaseDuration(duration, price)}
                     updateRadioState={(radioValue) => this.updateRadioState(radioValue)}
                     updateClickCount={this.updateClickCount}
-                    businessName={this.state.businessName} />
+                    businessName={this.state.businessName}
+                    setPremiumAmount = {this.state.setPremiumAmount}
+                     />
             </>
         )
     }
@@ -799,6 +806,7 @@ class MainComponent extends Component {
                     updateClickCount={this.updateClickCount}
                     yesSelected={this.state.yesSelected}
                     businessName={this.state.businessName}
+                    selectedLeaseDuration = {this.state.selectedLeaseDuration}
                 />
             </>
         )
@@ -853,7 +861,7 @@ class MainComponent extends Component {
                         <SecuredRoute exact path='/workspaces' component={this.Workspaces} />
                         <SecuredRoute path="/workspaces/:workspaceId" component={this.WorkspaceWithId} />
                         <SecuredRoute exact path="/personalinfo" component={this.PersonInformation} />
-                        <Route exact path="/confirmPerson" render={this.ConfirmPersonDetails} />
+                        <SecuredRoute exact path="/confirmPerson" component={this.ConfirmPersonDetails} />
                         <SecuredRoute exact path="/leaseDuration" component={this.LeaseWorkspaceTimeDuration} />
                         <SecuredRoute exact path="/payment" component={this.PaymentComp} />
                         <SecuredRoute exact path="/congratulations" component={this.CongratsComp} />

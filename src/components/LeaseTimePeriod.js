@@ -115,7 +115,7 @@ let AskInsurance = (duration, updateLeaseDuration, price, updateClickCount) => {
 const LeaseTimePeriod = (props) => {
     // const [radioValue, setValue] = useState(0);
     useEffect(() => {
-        if (props.selectedLeaseDuration === '') {
+        if (props.selectedLeaseDuration === 0 || props.selectedLeaseDuration === '') {
             let insurancePart = document.getElementById('insurance');
             insurancePart.style.display = 'none'
             let jumbo = document.getElementById('jumbo');
@@ -242,7 +242,7 @@ const LeaseTimePeriod = (props) => {
                             <Label check>
 
                                 <Input type="radio" name="radio1" id="yes" value="10" onClick={(e) => onChange(e.target.value)} />
-                                    Yes, add policy for $10<sub>/mo</sub>
+                                    Yes, add policy for ${props.setPremiumAmount}<sub>/mo</sub>
 
                             </Label>
                         </div>
