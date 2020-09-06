@@ -115,12 +115,26 @@ let AskInsurance = (duration, updateLeaseDuration, price, updateClickCount) => {
 const LeaseTimePeriod = (props) => {
     // const [radioValue, setValue] = useState(0);
     useEffect(() => {
-        if (props.selectedLeaseDuration === 0 || props.selectedLeaseDuration === '') {
+        if (props.selectedLeaseDuration === 0 ||props.selectedLeaseDuration === '') {
             let insurancePart = document.getElementById('insurance');
             insurancePart.style.display = 'none'
             let jumbo = document.getElementById('jumbo');
             jumbo.style.marginBottom = '7%'
         }
+
+        window.onpopstate = e => {
+            
+            props.updateClickCount();
+            let insurancePart = document.getElementById('insurance');
+            if(insurancePart!==null){
+            insurancePart.style.display = 'none'
+            }
+            let jumbo = document.getElementById('jumbo');
+            if(jumbo!==null){
+            jumbo.style.marginBottom = '7%'
+            }
+        }
+        
 
     });
 

@@ -118,8 +118,8 @@ const Payment = (props) => {
                                         </FormGroup>
                                         <FormGroup row>
                                             <div className="col-sm-8 offset-sm-4 mt-2">
-                                                <b className="lead"><b>Final Price is ${props.yesSelected === true ? props.selectedRadioValueYes : props.selectedLeasePrice}</b><sup>*</sup></b>
-                                                <p>* <small className="text-muted">This is inclusive of workspace lease and insurance for a period of {props.selectedLeaseDuration} {props.selectedLeaseDuration==='1'?'month':'months'}</small></p>
+                                                <b className="lead"><b>Final Price is ${props.yesSelected === true ? props.selectedRadioValueYes : props.selectedLeasePrice}</b><sup>{props.yesSelected === true ?'*':''}</sup></b>
+                                               {props.yesSelected === true?<p>* <small className="text-muted">This is inclusive of workspace lease and insurance for a period of {props.selectedLeaseDuration} {props.selectedLeaseDuration==='1'?'month':'months'}</small></p> : <></> } 
 
                                             </div>
                                         </FormGroup>
