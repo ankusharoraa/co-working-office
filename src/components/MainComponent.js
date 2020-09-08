@@ -851,7 +851,7 @@ class MainComponent extends Component {
                             location={this.state.location}
                             setYear={(year) => this.setYear(year)} />} />
                         <SecuredRoute exact path='/workspaces' component={this.Workspaces} />
-                        <SecuredRoute path="/workspaces/:workspaceId" render={this.WorkspaceWithId} />
+                        <SecuredRoute path="/workspaces/:workspaceId" component={this.WorkspaceWithId} />
                         <SecuredRoute exact path="/personalinfo" component={this.PersonInformation} />
                         <SecuredRoute exact path="/confirmPerson" component={this.ConfirmPersonDetails} />
                         <SecuredRoute exact path="/leaseDuration" component={this.LeaseWorkspaceTimeDuration} />
