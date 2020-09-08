@@ -130,12 +130,12 @@ class MainComponent extends Component {
             })
         }
     }
-
+    // Zip code to city name API
     handleFetch = async (zipCodeUs) => {
         const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
         // const api = '2svOlE4BX5a6nWxivi74yQATVsbMMYM1047v09mfyEDUQRhx5dLyO5xsgxKoOjWH';
         // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'JLDN8htbqjcospkQao41bPYoqal0x5dV59arONOWHzsL46lzUMPvO6bhbSuLi4eu';
+        // const api = 'QH7cG39C1x3eRowRwuqRHXSf0UDvwm46fTKskWeUIqtH123fbd2QEIEUXC0wbr6E';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
         const res = await axios.get(url);
@@ -270,7 +270,7 @@ class MainComponent extends Component {
             setSelectedYear: year
         })
     }
-
+    // Guidewire Api call
     guideWireApi = async () => {
         const proxyurl = "https://corsaccess.herokuapp.com/";
         const url = 'http://direct-digital-gw.uk-e1.cloudhub.io/GWire';
@@ -452,6 +452,7 @@ class MainComponent extends Component {
         }
         return obj;
     }
+    // scanCard API
     GetresultUrls = async (taskId) => {
         let hitCount = 0;
         let resultUrls = ''
@@ -580,16 +581,7 @@ class MainComponent extends Component {
         }
     }
 
-    updatePersonDetails = () => {
-        // this.setState({
-        //     businessName : 'Spotlight',
-        //     personZipCode : '12345',
-        //     personEmail : 'business@spotlight.com',
-        //     personLocation : 'Schenectady, NY, U.S',
-        //     personCity : 'Schenectady',
-        //     personState : 'NY'
-        // })
-    }
+
 
     deletePersonDetails = () => {
         this.setState({
@@ -666,24 +658,24 @@ class MainComponent extends Component {
 
         if (radioValue === '10') {
             if (this.state.selectedRadioValueYes === 0) {
-                if(this.state.selectedLeaseDuration === '1'){
-                let totalAmount = parseInt(this.state.selectedLeasePrice) + parseInt(this.state.setPremiumAmount)
-                await this.setState({
-                    selectedRadioValueYes: totalAmount
-                })
-            }
-            else if(this.state.selectedLeaseDuration === '6'){
-                let totalAmount = parseInt(this.state.selectedLeasePrice) + (parseInt(this.state.setPremiumAmount)*6)
-                await this.setState({
-                    selectedRadioValueYes: totalAmount
-                })
-            }
-            else if(this.state.selectedLeaseDuration === '12'){
-                let totalAmount = parseInt(this.state.selectedLeasePrice) + (parseInt(this.state.setPremiumAmount)*12)
-                await this.setState({
-                    selectedRadioValueYes: totalAmount
-                })
-            }
+                if (this.state.selectedLeaseDuration === '1') {
+                    let totalAmount = parseInt(this.state.selectedLeasePrice) + parseInt(this.state.setPremiumAmount)
+                    await this.setState({
+                        selectedRadioValueYes: totalAmount
+                    })
+                }
+                else if (this.state.selectedLeaseDuration === '6') {
+                    let totalAmount = parseInt(this.state.selectedLeasePrice) + (parseInt(this.state.setPremiumAmount) * 6)
+                    await this.setState({
+                        selectedRadioValueYes: totalAmount
+                    })
+                }
+                else if (this.state.selectedLeaseDuration === '12') {
+                    let totalAmount = parseInt(this.state.selectedLeasePrice) + (parseInt(this.state.setPremiumAmount) * 12)
+                    await this.setState({
+                        selectedRadioValueYes: totalAmount
+                    })
+                }
             }
             await this.setState({
                 yesSelected: true
@@ -790,8 +782,8 @@ class MainComponent extends Component {
                     updateRadioState={(radioValue) => this.updateRadioState(radioValue)}
                     updateClickCount={this.updateClickCount}
                     businessName={this.state.businessName}
-                    setPremiumAmount = {this.state.setPremiumAmount}
-                     />
+                    setPremiumAmount={this.state.setPremiumAmount}
+                />
             </>
         )
     }
@@ -806,7 +798,7 @@ class MainComponent extends Component {
                     updateClickCount={this.updateClickCount}
                     yesSelected={this.state.yesSelected}
                     businessName={this.state.businessName}
-                    selectedLeaseDuration = {this.state.selectedLeaseDuration}
+                    selectedLeaseDuration={this.state.selectedLeaseDuration}
                 />
             </>
         )
@@ -859,7 +851,7 @@ class MainComponent extends Component {
                             location={this.state.location}
                             setYear={(year) => this.setYear(year)} />} />
                         <SecuredRoute exact path='/workspaces' component={this.Workspaces} />
-                        <SecuredRoute path="/workspaces/:workspaceId" component={this.WorkspaceWithId} />
+                        <SecuredRoute path="/workspaces/:workspaceId" render={this.WorkspaceWithId} />
                         <SecuredRoute exact path="/personalinfo" component={this.PersonInformation} />
                         <SecuredRoute exact path="/confirmPerson" component={this.ConfirmPersonDetails} />
                         <SecuredRoute exact path="/leaseDuration" component={this.LeaseWorkspaceTimeDuration} />

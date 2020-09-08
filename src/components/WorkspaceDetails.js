@@ -1,9 +1,13 @@
-import React from 'react';
-import { UncontrolledCarousel, Progress, Card } from 'reactstrap';
+import React, { useState } from 'react';
+import { UncontrolledCarousel, Progress, Card, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
 const WorkspaceDetails = (props) => {
+    const [popState, setPopState] = useState(false);
+    let togglePopUp = () => setPopState(!popState);
+
+
 
     const selectedWorkspace = props.workspace.workImages
     let details = props.workspace.details
@@ -93,18 +97,21 @@ const WorkspaceDetails = (props) => {
                         <div className="row">
                             <div className="col-sm-12">
 
-                                <p style={{ textAlign: 'center' }}><mark><em>Compilant with <strong>COVID</strong> safety norms</em></mark></p>
+                                <p style={{ textAlign: 'center' }}><mark><em>Compliant with <strong>COVID</strong> safety norms</em></mark></p>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-sm-12 col-12">
-                                <p id="special"><em>Contact us <a href='#special'>here</a> to enquire about special facilities</em></p>
+                                <p id="special"><em>Contact us <a href='#contactJohnDoe' id='contactJohn' onClick={togglePopUp}>here</a> to enquire about special facilities</em></p>
                                 <Link style={{ textDecoration: "none" }} to="/personalinfo"><button onClick={props.getSelectedWorkspaceId} className="btn btn-block btn-primary mt-2">Lease This Workspace</button></Link>
                             </div>
                         </div>
                     </Card>
 
-
+                    <Popover placement="top-start" isOpen={popState} toggle={togglePopUp} target="contactJohn">
+                        <PopoverHeader className = "bg-dark text-white">John Doe</PopoverHeader>
+                        <PopoverBody className = "bg-light"><a href="tel:+91987654321">987654321</a></PopoverBody>
+                    </Popover>
                 </div>
             </div>
 
