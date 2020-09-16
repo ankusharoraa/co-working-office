@@ -110,7 +110,7 @@ const Payment = (props) => {
 
                                             <Label htmlFor="cvv" className="col-sm-4 col-form-label form-control-label required">CVV</Label>
                                             <div className="col-sm-8">
-                                                <Input className="cvvPass" type="number" pattern="[0-9]*" inputmode="numeric" name="cvv" id="cvv"
+                                                <Input className="cvvPass" type="number" pattern="[0-9]*" inputMode="numeric" name="cvv" id="cvv"
                                                 />
                                             </div>
                                             {/* <FormFeedback>{errors.zipCode}</FormFeedback> */}

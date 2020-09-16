@@ -71,7 +71,7 @@ class MainComponent extends Component {
             selectedOfficeAddress1: '',
             selectedOfficeAddress2: '',
             setExposureAmount: '',
-            setPremiumAmount: ''
+            setPremiumAmount: 20
 
         }
     }
@@ -135,7 +135,7 @@ class MainComponent extends Component {
         const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
         // const api = '2svOlE4BX5a6nWxivi74yQATVsbMMYM1047v09mfyEDUQRhx5dLyO5xsgxKoOjWH';
         // const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'QH7cG39C1x3eRowRwuqRHXSf0UDvwm46fTKskWeUIqtH123fbd2QEIEUXC0wbr6E';
+        // const api = 'inHTf3va4QCIsHqaeoFNQuxXIViIWpyjqZd68zeW5K5xmGQhxnbyuQvPagxV9uSA';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
         const res = await axios.get(url);
@@ -358,15 +358,19 @@ class MainComponent extends Component {
             }
         }
         try {
-            let res = await trackPromise(axios.post(proxyurl + url, reqBody, { headers: headers }))
+            let res = await axios.post(proxyurl + url, reqBody, { headers: headers })
             console.log(JSON.stringify(res.data.output.response.premium));
-            let premiumWithUsd = res.data.output.response.premium;
-            let separate = premiumWithUsd.split('.');
-            let premiumAmount = separate[0];
-            console.log(`premium amount is ---> ${premiumAmount}`);
-            this.setState(
-                { setPremiumAmount: premiumAmount }
-            )
+            if (res.data.output.response.premium) {
+                let premiumWithUsd = res.data.output.response.premium;
+                let separate = premiumWithUsd.split('.');
+                let premiumAmount = separate[0];
+                console.log(`premium amount is ---> ${premiumAmount}`);
+
+                this.setState(
+                    { setPremiumAmount: premiumAmount }
+                )
+            }
+            console.log(`Response is --> ${res}`)
         }
         catch (e) {
             console.error("error in GuideWire---->" + e)

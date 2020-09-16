@@ -6,7 +6,7 @@ export default function Footer(props){
 
 return(
     <div className = "footer">
-        <p>© Capgemini <img src = {logo} alt = "Cg logo" style = {{height : '20px', width : '20px'}}></img> {year}. All rights reserved</p>
+        <p>© Capgemini <img src = {logo} alt = "Cg logo" style = {{height : '20px', width : '20px'}}></img> {year}. All rights reserved.</p>
     </div>
 )
 }
