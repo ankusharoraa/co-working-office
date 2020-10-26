@@ -19,7 +19,7 @@ export default class Landing extends Component {
 
     }
 
-    validate = (zipCode, setDate, people, location) => {
+    validate = (zipCode, setDate, people, location,yyyy) => {
 
         const errors = {
             zipCode: '',
@@ -44,6 +44,12 @@ export default class Landing extends Component {
 
         if (setDate === '') {
             errors.setDate = "Please select the setDate"
+        }
+        else if(setDate){
+            let verifyYear = setDate.split('-');
+            if(verifyYear[0]<yyyy || verifyYear[0]>(yyyy+1)){
+                errors.setDate = "Please check the year entered, it must be the present or next year."
+            }
         }
 
         if (people === '0' || people === 0 || people === '') {
@@ -129,7 +135,14 @@ export default class Landing extends Component {
             });
     }
     render() {
-        const errors = this.validate(this.props.zipCode, this.props.setDate, this.props.people, this.props.location);
+        
+    
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0');;; //January is 0!
+        let yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        const errors = this.validate(this.props.zipCode, this.props.setDate, this.props.people, this.props.location,yyyy);
         let isDisabled
         if (this.props.isVerified === false) {
             isDisabled = true;
@@ -138,11 +151,6 @@ export default class Landing extends Component {
         else {
             isDisabled = Object.keys(errors).some(x => errors[x]);
         }
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0');;; //January is 0!
-        let yyyy = today.getFullYear();
-        today = yyyy + '-' + mm + '-' + dd;
         return (
             <>
 
@@ -187,7 +195,7 @@ export default class Landing extends Component {
                                         <FormGroup row>
 
                                             <div className="col-sm-9 col-12 mt-2">
-                                                <Input type="date" id="setDate" name="setDate" min={today}
+                                                <Input type="date" id="setDate" name="setDate" min={today} max="2021-12-31"
                                                     value={this.props.setDate}
                                                     valid={errors.setDate === ''}
                                                     invalid={errors.setDate !== ''}
