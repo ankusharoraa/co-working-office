@@ -24,7 +24,7 @@
     linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ),url("./images/coworking3.jpg");
+    ),url("./images/coWorking3.jpg");
   background-size: cover; 
   background-position: center center;
   background-repeat: no-repeat;
@@ -107,7 +107,7 @@ input[type="text"],input[type="date"],input[type="password"],input[type="email"]
     linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ),url("./images/coworking3.jpg");
+    ),url("./images/coWorking3.jpg");
   overflow: auto;
   background-size: cover; 
   background-position: center center;
