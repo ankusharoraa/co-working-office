@@ -5,13 +5,14 @@ import {
     Form, FormGroup, Input, Label, Popover, PopoverHeader
 } from 'reactstrap';
 
+
 export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isNavOpen: false,
             isModelOpen: false,
-            popState: false
+            popState: false,
         }
     }
     togglePopup = () => {
@@ -37,6 +38,24 @@ export default class Header extends Component {
 
 
     }
+    componentDidMount = () => {
+        this.setState({
+            popState: true
+        })
+
+        setTimeout(async () => {
+            return (
+                <Popover target="switch123">
+                    {  this.setState({
+                        popState: false
+                    })}
+                </Popover>
+
+            )
+        }, 3000)
+
+
+    }
     render() {
         return (
             <>
@@ -53,18 +72,18 @@ export default class Header extends Component {
                         <Collapse isOpen={this.state.isNavOpen} navbar>
 
                             <Nav className="ml-auto" navbar>
-                            <Popover placement="bottom" isOpen={this.state.popState} toggle={this.togglePopup} target="check123">
-                                        <PopoverHeader className="bg-dark text-white">Please use the switch button to change the server.</PopoverHeader>
-                                    </Popover>
+                                <Popover placement="bottom" isOpen={this.state.popState} toggle={this.togglePopup} target="switch123">
+                                    <PopoverHeader className="bg-dark text-white">Please use this switch button to change the server.</PopoverHeader>
+                                </Popover>
                                 <NavItem>
                                     {this.props.toggleButton === false ?
-                                        <b style={{ fontSize: '21px',color : 'brown' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b> :
-                                        <b className='lead' style = {{fontSize : '21px'}} id="check123" onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b>}
-                                  
+                                        <b style={{ fontSize: '16px', color: 'black' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b> :
+                                        <b className='lead' style={{ fontSize: '16px' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b>}
+
                                 </NavItem>
                                 <NavItem>
                                     <div className='col-sm-12'>
-                                        <label className="switch">
+                                        <label id='switch123' className="switch">
                                             <input type="checkbox" name='toggleButton' onChange={(e) => this.props.handInputChange(e)} />
                                             <span className="slider round"></span>
                                         </label>
@@ -72,8 +91,8 @@ export default class Header extends Component {
                                 </NavItem>
                                 <NavItem>
                                     {this.props.toggleButton ?
-                                        <b style={{ fontSize: '21px',color : 'brown' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b> :
-                                        <b className='lead' style = {{fontSize : '21px'}} id="check123" onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b>}
+                                        <b style={{ fontSize: '16px', color: 'black' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b> :
+                                        <b className='lead' style={{ fontSize: '16px' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b>}
 
                                 </NavItem>
                                 <NavItem>
