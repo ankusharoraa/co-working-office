@@ -148,9 +148,9 @@ input[type="text"],input[type="date"],input[type="password"],input[type="email"]
   color: wheat;
   text-align: center;
   background-color: #081132;
-  padding: 10px 0px 1px 0px;
-  height: 50px;
+  height: 52px;
   bottom: 0;
+padding-top: 10px;
 
 }
 
@@ -340,11 +340,11 @@ input::-webkit-inner-spin-button {
   bottom: 4px;
   background-color: white;
   -webkit-transition: .4s;
-  transition: .4s;
+  transition: .6s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  /* background-color: #2196F3; */
 }
 
 input:focus + .slider {

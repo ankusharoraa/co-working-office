@@ -45,18 +45,23 @@ export default class Header extends Component {
                         <NavbarToggler onClick={() => this.toggleNav()} />
                         <NavbarBrand className="mr-auto ml-sm-0" href="/">
                             <img src="/assets/images/logo.jpg" height="50" width="100" style={{ borderRadius: "80px" }} alt="logo" />
-                            <span className="navbar-brand mb-0 lead ml-sm-2 ml-2">Co-Office Space ({this.props.toggleButton ?
-                                <b id="check123" onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b> :
-                                <b id="check123" onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b>})
+                            <span className="navbar-brand mb-0 lead ml-sm-2 ml-2">Co-Office Space
                                 </span>
-                            <Popover placement="bottom" isOpen={this.state.popState} toggle={this.togglePopup} target="check123">
-                                <PopoverHeader className="bg-dark text-white">Please use the switch button to change the server.</PopoverHeader>
-                            </Popover>
+
                         </NavbarBrand>
 
                         <Collapse isOpen={this.state.isNavOpen} navbar>
 
                             <Nav className="ml-auto" navbar>
+                            <Popover placement="bottom" isOpen={this.state.popState} toggle={this.togglePopup} target="check123">
+                                        <PopoverHeader className="bg-dark text-white">Please use the switch button to change the server.</PopoverHeader>
+                                    </Popover>
+                                <NavItem>
+                                    {this.props.toggleButton === false ?
+                                        <b style={{ fontSize: '21px',color : 'brown' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b> :
+                                        <b className='lead' style = {{fontSize : '21px'}} id="check123" onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b>}
+                                  
+                                </NavItem>
                                 <NavItem>
                                     <div className='col-sm-12'>
                                         <label className="switch">
@@ -64,6 +69,12 @@ export default class Header extends Component {
                                             <span className="slider round"></span>
                                         </label>
                                     </div>
+                                </NavItem>
+                                <NavItem>
+                                    {this.props.toggleButton ?
+                                        <b style={{ fontSize: '21px',color : 'brown' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b> :
+                                        <b className='lead' style = {{fontSize : '21px'}} id="check123" onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b>}
+
                                 </NavItem>
                                 <NavItem>
                                     <div className='col-sm-12'>
