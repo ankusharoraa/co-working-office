@@ -106,21 +106,21 @@ const Workspace = (props) => {
                         <input type="range" id="price" name="price" min="800" max="5000" defaultValue="800" step="5" onChange={outputValue} />
                         <output className="ml-1" name="ageOutputName" id="ageOutputId">$5000</output>
                     </div>
-        
-            </div>
-            <div className="row d-flex justify-content-center">
 
-
-                {slider ? filter : Work}
-                <div className="col-sm-12 col-12">
-                    {(filter.length === 0 && slider) ? <p style={{ marginBottom: '25%', marginTop: '20%' }} className="lead text-center">There are no properties in this price range, please change the slider range to get the properties</p> : <></>}
                 </div>
+                <div className="row d-flex justify-content-center">
 
+
+                    {slider ? filter : Work}
+                    <div className="col-sm-12 col-12">
+                        {(filter.length === 0 && slider) ? <p style={{ marginBottom: '25%', marginTop: '20%' }} className="lead text-center">There are no properties in this price range, please change the slider range to get the properties</p> : <></>}
+                    </div>
+
+                </div>
             </div>
-        </div>
         </>
     )
 }
 
 
-export default Workspace
+export default React.memo(Workspace); 

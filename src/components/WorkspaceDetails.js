@@ -109,8 +109,8 @@ const WorkspaceDetails = (props) => {
                     </Card>
 
                     <Popover placement="top-start" isOpen={popState} toggle={togglePopUp} target="contactJohn">
-                        <PopoverHeader className = "bg-dark text-white">John Doe</PopoverHeader>
-                        <PopoverBody className = "bg-light"><a href="tel:+91987654321">987654321</a></PopoverBody>
+                        <PopoverHeader className="bg-dark text-white">John Doe</PopoverHeader>
+                        <PopoverBody className="bg-light"><a href="tel:+91987654321">987654321</a></PopoverBody>
                     </Popover>
                 </div>
             </div>
@@ -120,4 +120,4 @@ const WorkspaceDetails = (props) => {
     )
 }
 
-export default WorkspaceDetails;
+export default React.memo(WorkspaceDetails);

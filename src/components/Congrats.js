@@ -55,4 +55,4 @@ const Congrats = (props) => {
     )
 }
 
-export default Congrats
+export default React.memo(Congrats); 

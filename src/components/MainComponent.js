@@ -71,7 +71,8 @@ class MainComponent extends Component {
             selectedOfficeAddress1: '',
             selectedOfficeAddress2: '',
             setExposureAmount: '',
-            setPremiumAmount: 20
+            setPremiumAmount: 20,
+            toggleButton : false
 
         }
     }
@@ -132,14 +133,14 @@ class MainComponent extends Component {
     }
     // Zip code to city name API
     handleFetch = async (zipCodeUs) => {
-        const api = 'js-tBUE5ohdSBKXX9aeg6K9RYpb0uRCDB8TODbJSrHdwz6XNbAAtZuvnoByS6OfaElq';
-        // const api = '2svOlE4BX5a6nWxivi74yQATVsbMMYM1047v09mfyEDUQRhx5dLyO5xsgxKoOjWH';
-        // const proxyurl = "https://corsaccess.herokuapp.com/";
+        const api = 'kZ6ioctBoNgngUK7ex2ZzHtjkQ5Ji8970a5A1soKvOTmB7VUVNl5FJYXut1Gq6h2';
+        // const api = 'SmmXWcALEZhiih3ciuQeSbk6sZCxRXP62BvdDdmJmEjVsIOR05KDg9mnUtGSWDnX';
+        const proxyurl = "https://corsaccess.herokuapp.com/";
         // const api = 'inHTf3va4QCIsHqaeoFNQuxXIViIWpyjqZd68zeW5K5xmGQhxnbyuQvPagxV9uSA';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-        const res = await axios.get(url);
-        // const res = await axios.get(`${proxyurl}${url}`);
+        // const res = await axios.get(url);
+        const res = await axios.get(`${proxyurl}${url}`);
         let city = res.data.city;
         let locState = res.data.state
         if (city && locState !== undefined && this.state.zipCode >= 5) {
@@ -838,7 +839,7 @@ class MainComponent extends Component {
             <>
                 <Loader promiseTracker={usePromiseTracker} color={'#3d5e61'} background={'rgba(255,255,255,.5)'} />
                 <Router history={history}>
-                    <Header />
+                    <Header toggleButton = {this.state.toggleButton} handInputChange = {(e)=>this.handInputChange(e)} />
                     <Switch>
                         <Route exact path='/' render={() => <Landing key={'landingComp'}
 

@@ -247,4 +247,4 @@ const PersonalInfo = (props) => {
     )
 }
 
-export default PersonalInfo
+export default React.memo(PersonalInfo); 

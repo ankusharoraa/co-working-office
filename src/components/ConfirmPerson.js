@@ -35,7 +35,7 @@ const Validate = (personName, personAddress, personPhone, businessName) => {
 }
 
 
-export default function ConfirmPerson(props) {
+function ConfirmPerson(props) {
     const errors = Validate(props.personName, props.personAddress, props.personPhone, props.businessName);
     let isDisabled
     isDisabled = true;
@@ -208,3 +208,4 @@ export default function ConfirmPerson(props) {
         </>
     )
 }
+export default React.memo(ConfirmPerson)

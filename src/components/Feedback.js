@@ -58,4 +58,4 @@ const FeedbackComp = (props) => {
         </>
     )
 }
-export default FeedbackComp;
+export default React.memo(FeedbackComp);

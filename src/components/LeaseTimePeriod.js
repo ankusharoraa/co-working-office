@@ -288,4 +288,4 @@ const LeaseTimePeriod = (props) => {
     )
 }
 
-export default LeaseTimePeriod
+export default React.memo(LeaseTimePeriod); 

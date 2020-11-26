@@ -118,7 +118,7 @@ export const WORKSPACEINFO =
             id: 3,
             name: '145, Liberty Plaza',
             zipCode: '',
-            image: '/assets/images/LibertyPlaza.jpeg',
+            image: '/assets/images/LibertyPlaza.jpg',
             category: 'Prime',
             exposureAmount: '25000',
             price: '1100',
@@ -137,7 +137,7 @@ export const WORKSPACEINFO =
                 '24- hours access'
             ],
             workImages: [{
-                src: '/assets/images/LibertyPlaza.jpeg',
+                src: '/assets/images/LibertyPlaza.jpg',
                 altText: '',
                 caption: 'Liberty Plaza'
             },
@@ -156,7 +156,7 @@ export const WORKSPACEINFO =
             id: 4,
             name: '502, Greenwich St',
             zipCode: '10007',
-            image: '/assets/images/LibertyPlaza.jpeg',
+            image: '/assets/images/LibertyPlaza.jpg',
             category: 'Prime',
             exposureAmount: '30000',
             price: '1800',
@@ -175,7 +175,7 @@ export const WORKSPACEINFO =
                 '24- hours access'
             ],
             workImages: [{
-                src: '/assets/images/LibertyPlaza.jpeg',
+                src: '/assets/images/LibertyPlaza.jpg',
                 altText: '',
                 caption: '502, Greenwich St'
             },
@@ -422,7 +422,7 @@ export const WORKSPACEINFO =
             id: 11,
             name: '630, Sacramento St',
             zipCode: '94111',
-            image: '/assets/images/LibertyPlaza.jpeg',
+            image: '/assets/images/LibertyPlaza.jpg',
             category: 'Prime',
             exposureAmount: '30000',
             price: '2000',
@@ -441,7 +441,7 @@ export const WORKSPACEINFO =
                 '24- hours access'
             ],
             workImages: [{
-                src: '/assets/images/LibertyPlaza.jpeg',
+                src: '/assets/images/LibertyPlaza.jpg',
                 altText: '',
                 caption: '630, Sacramento St'
             },
@@ -460,7 +460,7 @@ export const WORKSPACEINFO =
             id: 12,
             name: '75, Monroe St',
             zipCode: '60603',
-            image: '/assets/images/LibertyPlaza.jpeg',
+            image: '/assets/images/LibertyPlaza.jpg',
             category: 'Prime',
             exposureAmount: '15000',
             price: '1100',
@@ -479,7 +479,7 @@ export const WORKSPACEINFO =
                 '24- hours access'
             ],
             workImages: [{
-                src: '/assets/images/LibertyPlaza.jpeg',
+                src: '/assets/images/LibertyPlaza.jpg',
                 altText: '',
                 caption: '75, Monroe St'
             },
