@@ -38,24 +38,24 @@ export default class Header extends Component {
 
 
     }
-    componentDidMount = () => {
-        this.setState({
-            popState: true
-        })
+    // componentDidMount = () => {
+    //     this.setState({
+    //         popState: true
+    //     })
 
-        setTimeout(async () => {
-            return (
-                <Popover target="switch123">
-                    {  this.setState({
-                        popState: false
-                    })}
-                </Popover>
+    //     setTimeout(async () => {
+    //         return (
+    //             <Popover target="switch123">
+    //                 {  this.setState({
+    //                     popState: false
+    //                 })}
+    //             </Popover>
 
-            )
-        }, 3000)
+    //         )
+    //     }, 3000)
 
 
-    }
+    // }
     render() {
         return (
             <>
@@ -72,29 +72,7 @@ export default class Header extends Component {
                         <Collapse isOpen={this.state.isNavOpen} navbar>
 
                             <Nav className="ml-auto" navbar>
-                                <Popover placement="bottom" isOpen={this.state.popState} toggle={this.togglePopup} target="switch123">
-                                    <PopoverHeader className="bg-dark text-white">Please use this switch button to change the server.</PopoverHeader>
-                                </Popover>
-                                <NavItem>
-                                    {this.props.toggleButton === false ?
-                                        <b style={{ fontSize: '16px', color: 'black' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b> :
-                                        <b className='lead' style={{ fontSize: '16px' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b>}
 
-                                </NavItem>
-                                <NavItem>
-                                    <div className='col-sm-12'>
-                                        <label id='switch123' className="switch">
-                                            <input type="checkbox" name='toggleButton' onChange={(e) => this.props.handInputChange(e)} />
-                                            <span className="slider round"></span>
-                                        </label>
-                                    </div>
-                                </NavItem>
-                                <NavItem>
-                                    {this.props.toggleButton ?
-                                        <b style={{ fontSize: '16px', color: 'black' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b> :
-                                        <b className='lead' style={{ fontSize: '16px' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b>}
-
-                                </NavItem>
                                 <NavItem>
                                     <div className='col-sm-12'>
                                         <Button outline onClick={this.toggleModal}><span className="fa fa-sign-in fa-lg"></span>Login</Button>
@@ -113,6 +91,7 @@ export default class Header extends Component {
                             Login
                     </ModalHeader>
                         <ModalBody>
+
                             <Form onSubmit={this.handleLogin}>
                                 <FormGroup>
                                     <Label htmlFor="username">Username</Label>
@@ -130,6 +109,26 @@ export default class Header extends Component {
                                             innerRef={(input) => this.remember = input} />
                                     Remember me
                                 </Label>
+                                </FormGroup>
+                                <FormGroup row className = 'mt-3'>
+                                    <Popover placement="bottom" isOpen={this.state.popState} toggle={this.togglePopup} target="switch123">
+                                        <PopoverHeader className="bg-dark text-white">Please use this switch button to change the server.</PopoverHeader>
+                                    </Popover>
+                                            <div className='col-sm-1'> {this.props.toggleButton === false ?
+                                                <b style={{ fontSize: '16px', color: 'black' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b> :
+                                                <b className='lead' style={{ fontSize: '16px' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>OPIN</b>}
+                                            </div>
+                                            <div className='col-sm-1'>
+                                                <label id='switch123' className="switch">
+                                                    <input type="checkbox" name='toggleButton' onChange={(e) => this.props.handInputChange(e)} />
+                                                    <span className="slider round"></span>
+                                                </label>
+                                            </div>
+                                            <div className='col-sm-1'>
+                                                {this.props.toggleButton ?
+                                                    <b style={{ fontSize: '16px', color: 'black', marginLeft : '15px' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b> :
+                                                    <b className='lead' style={{ fontSize: '16px', marginLeft : '15px' }} onMouseOver={this.togglePopup} onMouseLeave={this.togglePopup}>Mulesoft</b>}
+                                            </div>
                                 </FormGroup>
                                 <Button type="submit" value="submit" color="primary">Login</Button>
                             </Form>

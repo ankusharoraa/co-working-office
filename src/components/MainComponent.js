@@ -133,14 +133,14 @@ class MainComponent extends Component {
     }
     // Zip code to city name API
     handleFetch = async (zipCodeUs) => {
-        const api = 'kZ6ioctBoNgngUK7ex2ZzHtjkQ5Ji8970a5A1soKvOTmB7VUVNl5FJYXut1Gq6h2';
-        // const api = 'SmmXWcALEZhiih3ciuQeSbk6sZCxRXP62BvdDdmJmEjVsIOR05KDg9mnUtGSWDnX';
-        const proxyurl = "https://corsaccess.herokuapp.com/";
+        // const api = 'kZ6ioctBoNgngUK7ex2ZzHtjkQ5Ji8970a5A1soKvOTmB7VUVNl5FJYXut1Gq6h2';
+        const api = 'js-o4ad93mChVEuAf7Ctkdsh6WmigzKakC6LfE26TEcJDcoB2Lv96j0l2htRd8TJfzf';
+        // const proxyurl = "https://corsaccess.herokuapp.com/";
         // const api = 'inHTf3va4QCIsHqaeoFNQuxXIViIWpyjqZd68zeW5K5xmGQhxnbyuQvPagxV9uSA';
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-        // const res = await axios.get(url);
-        const res = await axios.get(`${proxyurl}${url}`);
+        const res = await axios.get(url);
+        // const res = await axios.get(`${proxyurl}${url}`);
         let city = res.data.city;
         let locState = res.data.state
         if (city && locState !== undefined && this.state.zipCode >= 5) {
