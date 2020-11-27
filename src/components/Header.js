@@ -13,15 +13,17 @@ export default class Header extends Component {
             isNavOpen: false,
             isModelOpen: false,
             popState: false,
+            checkBoxValue : false
         }
     }
     togglePopup = () => {
         this.setState({
             popState: !this.state.popState
         })
+        
     }
     toggleModal = () => {
-        this.setState({ isModelOpen: !this.state.isModelOpen })
+        this.setState({ isModelOpen: !this.state.isModelOpen,})
     }
     toggleNav = () => {
         this.setState({ isNavOpen: !this.state.isNavOpen })
@@ -120,7 +122,7 @@ export default class Header extends Component {
                                             </div>
                                             <div className='col-sm-1'>
                                                 <label id='switch123' className="switch">
-                                                    <input type="checkbox" name='toggleButton' onChange={(e) => this.props.handInputChange(e)} />
+                                                    <input type="checkbox" name='toggleButton' checked = {this.props.toggleButton} onChange={(e) => this.props.handInputChange(e)} />
                                                     <span className="slider round"></span>
                                                 </label>
                                             </div>
