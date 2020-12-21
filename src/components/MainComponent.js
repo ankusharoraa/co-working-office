@@ -133,14 +133,13 @@ class MainComponent extends Component {
     }
     // Zip code to city name API
     handleFetch = async (zipCodeUs) => {
-        const api = 'G7jys38dLRLY72TrkG7SSpEhsJY0m50NmUb4UqlaCNVaaY0UnavkxPEAYxXsATZH';
-        // const api = 'js-o4ad93mChVEuAf7Ctkdsh6WmigzKakC6LfE26TEcJDcoB2Lv96j0l2htRd8TJfzf';
-        const proxyurl = "https://corsaccess.herokuapp.com/";
-        // const api = 'inHTf3va4QCIsHqaeoFNQuxXIViIWpyjqZd68zeW5K5xmGQhxnbyuQvPagxV9uSA';
+        // const api = 'VcJKrRgNrSEEe8VrWPYHfqcCxjWZ2yfmJAMdAb8VsDZo9RLUv8JlldsiriSqx06p';
+        const api = 'js-o4ad93mChVEuAf7Ctkdsh6WmigzKakC6LfE26TEcJDcoB2Lv96j0l2htRd8TJfzf';
+        // const proxyurl = "https://corsaccess.herokuapp.com/";
         let formatZip = zipCodeUs.slice(0, 5);
         let url = `https://www.zipcodeapi.com/rest/${api}/info.json/${formatZip}/degrees`
-        // const res = await axios.get(url);
-        const res = await axios.get(`${proxyurl}${url}`);
+        const res = await axios.get(url);
+        // const res = await axios.get(`${proxyurl}${url}`);
         let city = res.data.city;
         let locState = res.data.state
         if (city && locState !== undefined && this.state.zipCode >= 5) {
@@ -274,7 +273,7 @@ class MainComponent extends Component {
     // Guidewire Api call
     guideWireApi = async () => {
         const proxyurl = "https://corsaccess.herokuapp.com/";
-        const url = 'http://direct-digital-gw.uk-e1.cloudhub.io/GWire';
+        const url = 'http://direct-digital-gw-app.uk-e1.cloudhub.io/GWire';
         const opinUrl = 'https://api.dev.open-ins-platform-cg.in/quotation-api/v1/quote/gen-liability'
         const headers = {
             'Content-Type': 'application/json',
@@ -286,12 +285,10 @@ class MainComponent extends Component {
             "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
             "X-Requested-With": "XMLHttpRequest"
         }
-        let requestBodyVal;
-        requestBodyVal = this.state.toggleButton ? 'input' : 'GenLiabInsQuotationRequest'
-        console.log(requestBodyVal)
+
         const reqBody = {
 
-            [requestBodyVal]: {
+            "GenLiabInsQuotationRequest": {
                 "orderKeys": ["policy"],
                 "policy": {
                     "yearBusinessStarted": this.state.setSelectedYear,
@@ -369,17 +366,31 @@ class MainComponent extends Component {
                 await axios.post(proxyurl + opinUrl, reqBody, { headers: headers })
             // console.log(JSON.stringify(res.data.output.response.premium));
             console.log(res)
-            if (res.data.output.response.premium) {
-                let premiumWithUsd = res.data.output.response.premium;
-                let separate = premiumWithUsd.split('.');
-                let premiumAmount = separate[0];
-                console.log(`premium amount is ---> ${premiumAmount}`);
+            // if (this.state.toggleButton) {
+            //     if (res.data.output.response.premium) {
+            //         let premiumWithUsd = res.data.output.response.premium;
+            //         let separate = premiumWithUsd.split('.');
+            //         let premiumAmount = separate[0];
+            //         console.log(`premium amount is ---> ${premiumAmount}`);
 
-                this.setState(
-                    { setPremiumAmount: premiumAmount }
-                )
-            }
-            console.log(`Response is --> ${res}`)
+            //         this.setState(
+            //             { setPremiumAmount: premiumAmount }
+            //         )
+            //     }
+            //     console.log(`Response is --> ${res}`)
+            // }
+            // else {
+                if (res.data.GenLiabInsQuotationResponse.quotation.premium) {
+                    let premiumWithUsd = res.data.GenLiabInsQuotationResponse.quotation.premium;
+                    let separate = premiumWithUsd.split('.');
+                    let premiumAmount = separate[0];
+                    this.setState(
+                        { setPremiumAmount: premiumAmount }
+                    )
+
+                    console.log(res.data.GenLiabInsQuotationResponse.quotation.premium)
+                }
+            // }
         }
         catch (e) {
             console.error("error in GuideWire---->" + e)

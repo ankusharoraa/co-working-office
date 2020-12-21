@@ -156,14 +156,14 @@ export default class Landing extends Component {
 
                 <div className="container-fluid main p-0">
                     <div className="row row-content mx-0">
-                        <div className="col-sm-6 wrappertxt d-none d-sm-block">
+                        <div className="col-lg-6 wrappertxt d-none d-lg-block">
                             <h1 className="ml16" id="title">Co-Working Office Space</h1>
                             <p className="ml3" id="para">With all the buzz around coworking spaces, we decided to provide you with a primer. We cover the coworking basics as well as implications for the traditional office and facility managers.</p>
                         </div>
-                        <div className = "col-12 d-sm-none d-block">
-                        <h2 id="titleMob" className="ml16Mob col-12 ml-2 d-sm-none">Co-Working Space</h2>
+                        <div className = "col-12 d-lg-none d-block">
+                        <h2 id="titleMob" className="ml16Mob col-12 ml-2 d-lg-none">Co-Working Space</h2>
                         </div>
-                        <div className="col-sm-4 offset-sm-1 py-5 mt-4 mr-5 wrapper col-12">
+                        <div className="col-lg-4 offset-lg-1 py-5 mt-4 mr-5 wrapper col-12">
                             <Card>
 
                                 <CardBody>
@@ -171,7 +171,7 @@ export default class Landing extends Component {
                                     <Form onSubmit={this.handleSubmit} key={'landing'}>
                                         <FormGroup row>
 
-                                            <div className="col-sm-5 mt-2">
+                                            <div className="col-lg-5 col-12 mt-2">
                                                 <Input type="text" name="zipCode"
                                                     placeholder="Zip Code" value={this.props.zipCode}
                                                     valid={errors.zipCode === ''}
@@ -181,7 +181,7 @@ export default class Landing extends Component {
 
                                                 <FormFeedback>{errors.zipCode}</FormFeedback>
                                             </div>
-                                            <div className="col-sm-7 mt-2">
+                                            <div className="col-lg-7 col-12 mt-2">
                                                 <Input name="location"
                                                     placeholder="Enter 5 or 9-digit Zip Code"
                                                     valid={errors.location === ''}
@@ -194,7 +194,7 @@ export default class Landing extends Component {
                                         <CardTitle>When do you want to move in?</CardTitle>
                                         <FormGroup row>
 
-                                            <div className="col-sm-9 col-12 mt-2">
+                                            <div className="col-lg-9 col-12 mt-2">
                                                 <Input type="date" id="setDate" name="setDate" min={today} max="2021-12-31"
                                                     value={this.props.setDate}
                                                     valid={errors.setDate === ''}
@@ -205,9 +205,9 @@ export default class Landing extends Component {
                                             </div>
                                         </FormGroup>
                                         <CardTitle>How many people do you want to accommodate?</CardTitle>
-                                        <div className="form-inline  d-sm-block d-none">
+                                        <div className="form-inline  d-lg-block d-none">
                                             <FormGroup row>
-                                                <div className="col-sm-12 mt-2">
+                                                <div className="col-lg-12 mt-2">
 
                                                     <button style={{ height: '40px', width: '40px', borderRadius: '50px' }} className="btn btn-primary" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
 
@@ -229,7 +229,7 @@ export default class Landing extends Component {
                                             </FormGroup>
                                         </div>
 
-                                        <div className="row form-inline col-12 mt-2 d-sm-none">
+                                        <div className="row form-inline col-12 mt-2 d-lg-none">
 
                                             <button style={{ height: '40px', width: '40px', borderRadius: '50px' }} className="btn btn-danger" onClick={this.props.decrease}><i className="fa fa-minus" aria-hidden="true"></i></button>
 
@@ -247,7 +247,7 @@ export default class Landing extends Component {
                                             <FormFeedback>{errors.people}</FormFeedback>
                                         </div>
                                         <FormGroup row>
-                                            <div className="col-sm-12 col-12 mt-3">
+                                            <div className="col-lg-12 col-12 mt-3">
                                                 <ReCAPTCHA style = {{overflow : 'hidden'}}
                                                     sitekey="6Lf4QrIZAAAAADu8cXAyrlUNdTlQ4wasosFATzmY"
                                                     theme="dark"
@@ -258,7 +258,7 @@ export default class Landing extends Component {
                                         </FormGroup>
 
                                         <FormGroup row>
-                                            <div className="col-sm-12 col-12">
+                                            <div className="col-lg-12 col-12">
                                                 <Button className="btn btn-block" disabled={isDisabled} type="submit" onClick={this.props.toggleWorkspace} color="btn btn-primary">
                                                     Find Workspace <i className="fa fa-arrow-right" aria-hidden="true"></i></Button>
 

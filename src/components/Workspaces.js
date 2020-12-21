@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Progress, CardImg, Card, CardTitle, CardBody, CardText, CardHeader } from 'reactstrap';
 import '../App.css'
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ function RenderWorkspace({ workObj, zipCode, cityName }) {
                 <CardHeader>
                     <CardTitle>{workObj.name}</CardTitle>
                 </CardHeader>
-                <CardImg top height="375px" src={workObj.image} alt={workObj.name} />
+                <CardImg top loading="lazy" height="375px" src={workObj.image} alt={workObj.name} />
 
 
                 <CardBody>
@@ -40,6 +40,24 @@ const Workspace = (props) => {
     //         </div>
     //     )
     // })
+    useEffect(() => {
+        let target = []
+        target = document.getElementsByClassName('card-img-top');
+        console.log(target);
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const img = entry.target
+                    img.classList.add('fade')
+                    console.log(entry);
+                    observer.unobserve(entry.target);
+                }
+            })
+        })
+        for (let i = 0; i < target.length; i++) {
+            observer.observe(target[i])
+        }
+    })
     let [slider, setSlider] = useState(false)
     let newFilter = []
 
@@ -123,4 +141,4 @@ const Workspace = (props) => {
 }
 
 
-export default React.memo(Workspace); 
+export default React.memo(Workspace)
